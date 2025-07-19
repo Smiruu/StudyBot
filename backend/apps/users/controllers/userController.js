@@ -59,9 +59,39 @@ class UserController {
       
     }catch (error) {
       console.error("Error logging in user:", error);
-      return res.status(500).json({ message: "Login failed." });  
+      return res.status(500).json({ message: "Login failed.", error });  
   }
 };
+
+  static userSendResetPassword = async (req, res) => {
+    const {email} = req.body;
+    try{
+      await UserService.userSendResetPassword(email);
+      res.status(200).json({ message: "Password reset email sent successfully." });
+    }catch(error){
+      console.error("Error sending password reset email:", error);
+      return res.status(500).json({ message: "Failed to send password reset email." }); 
+    }
+  }
+
+  static userResetPassword = async (req, res) => {
+    const { token, newPassword } = req.body;
+
+    try {
+      const user = await UserService.userResetPassword(token, newPassword);
+      res.status(200).json({
+        message: "Password reset successfully.",
+        user: {
+          _id: user._id,
+          email: user.email,
+          name: user.name,
+        }
+      });
+    } catch (error) {
+      console.error("Error resetting password:", error);
+      return res.status(500).json({ message: "Failed to reset password." });
+    }
+  }
 }
 
 

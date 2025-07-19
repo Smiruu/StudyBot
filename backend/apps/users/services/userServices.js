@@ -1,9 +1,10 @@
 import { generateTokenAndSetCookie } from "../../../utils/generateTokenAndSetCookie.js";
 import { generateVerificationToken } from "../../../utils/generateVerification.js";
-import { sendVerificationEmail } from "../../../utils/sendEmail.js";
+import { sendPasswordResetEmail, sendVerificationEmail } from "../../../utils/sendEmail.js";
 import { User } from "../models/userModel.js";
 import bcrypt from "bcryptjs";
-
+import dotenv from "dotenv";
+dotenv.config();
 class UserService {
   static async registerUser(userData, res) {
     console.log("Registering user:", userData);
@@ -62,10 +63,45 @@ class UserService {
     if (!isPasswordValid){
       throw new Error("Invalid password.");
     }
-    if (user.verificationToken) {
+    if (user.isVerified === false) {
       throw new Error("Email not verified. Please check your email for verification.");
     }
     generateTokenAndSetCookie(user, res);
+    return user;
+  }
+
+  static async userSendResetPassword(email){
+
+    const user = await User.findOne({email})
+
+    if (!user) {
+      throw new Error("User not found with this email.");
+    }
+    
+    const resetPasswordToken = generateVerificationToken();
+    user.resetPasswordToken = resetPasswordToken;
+    user.resetPasswordExpire = Date.now() + 15 * 60 * 1000
+    await user.save();
+
+    const resetURL = `${process.env.CLIENT_URL}/reset-password/${resetPasswordToken}`;
+
+    await sendPasswordResetEmail(email, resetURL);
+    return;
+  }
+
+  static async userResetPassword(token, newPassword) {
+    const user = await User.findOne({
+      resetPasswordToken: token,
+      resetPasswordExpire: { $gt: Date.now() }, // Check if token is still valid
+    });
+    if (!user) {
+      throw new Error("Invalid or expired password reset token.");
+    }
+    const hashedPassword = await bcrypt.hash(newPassword, 10);
+    user.password = hashedPassword;
+    user.resetPasswordToken = undefined; // Clear the reset token 
+    user.resetPasswordExpire = undefined; // Clear the expiration date
+    await user.save();
     return user;
   }
 }

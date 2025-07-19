@@ -7,6 +7,8 @@ router.post("/register", userController.userRegister);
 router.post("/verify", userController.verifyEmail);
 router.post("/login", userController.userLogin)
 
+router.post("/send-reset", userController.userSendResetPassword);
+router.post("/reset-password", userController.userResetPassword);
 
 
 export default router;
