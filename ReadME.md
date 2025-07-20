@@ -4,9 +4,6 @@
 ![AI Model](https://img.shields.io/badge/AI-DeepSeek_R1_0528-blue)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
-<div align="center">
-  <img src="https://i.imgur.com/JQ7X9zP.png" alt="StudyBot Screenshot" width="80%">
-</div>
 
 ## Features
 
