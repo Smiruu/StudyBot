@@ -1,6 +1,6 @@
+import { token } from "morgan";
 import UserService from "../services/userServices.js";
-import bcrypt from "bcryptjs";
-import { sendVerificationEmail } from "../../../utils/sendEmail.js";
+
 
 class UserController {
     static userRegister = async (req, res) => {
@@ -53,13 +53,14 @@ class UserController {
           _id: user._id,
           email: user.email,
           name: user.name,
+          token: user.token,
         }
       });
       
       
     }catch (error) {
       console.error("Error logging in user:", error);
-      return res.status(500).json({ message: "Login failed.", error });  
+      return res.status(500).json({ message: "Login failed.", error: error });  
   }
 };
 

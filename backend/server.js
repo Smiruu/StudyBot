@@ -5,6 +5,7 @@ import helmet from "helmet"
 import morgan from "morgan"
 import cors from "cors"
 import userRoutes from './apps/users/routes/userRoutes.js'; 
+import flashcardRoutes from './apps/flashcards/routes/flashcardRoutes.js';
 import { connectDb } from "./utils/connectDb.js"
 import cookieParser from "cookie-parser"
 
@@ -23,6 +24,7 @@ app.use(morgan("dev")) //logs the requests in the console
 connectDb(); // Connect to the database
 
 app.use('/api/users', userRoutes )
+app.use('/api/flashcards', flashcardRoutes)
 
 app.listen(PORT, () => {
     console.log("Server started on port "+PORT)
