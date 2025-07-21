@@ -54,6 +54,7 @@ class UserService {
 }
 
   static async userLogin(email,password, res){
+
     const user = await User.findOne({email})
     if (!user){
       throw new Error("User not found with this email.");

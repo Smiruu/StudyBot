@@ -59,6 +59,10 @@ async extractTextFromPDF(pdfBuffer) {
             count
         });
 
+        if (!flashcards || flashcards.length === 0) {
+            throw new Error("AI did not return any flashcards. Please try again.");
+        }
+        
          const group = await FlashcardGroup.create({
             name: topic || 'Untitled Group',
             description: `Flashcards generated for ${topic || 'general topic'}`,
@@ -85,15 +89,37 @@ async extractTextFromPDF(pdfBuffer) {
         return {group, flashcards: saveFlashcards};
     }
 
-    // async getUserFlashcards(userId) {
-    //     if (!userId) throw new Error("User ID is required to retrieve flashcards.");
+    // List flashcards created by a user
+    async listUserFlashcards(userId) {
+        if (!userId) throw new Error("User ID is required to list flashcards.");
 
-    //     const flashcards = await Flashcard.find({ createdBy: userId })
-    //         .select('question answer topic difficulty createdAt')
-    //         .sort({ createdAt: -1 });
+        const listOfFlashcards = await FlashcardGroup.find({ createdBy: userId })
+            .select('name description createdAt flashcards')
+            .sort({ createdAt: -1 });
 
-    //     return flashcards;
-    // }
+        return listOfFlashcards;
+    }
+
+    // List flashcards by group (used when viewing a specific group)
+    async listGroupFlashcards(groupId) {
+        if (!groupId) throw new Error("Group ID is required to list flashcards.");
+
+        const flashcards = await Flashcard.find({ group: groupId })
+            .select('question answer topic difficulty createdAt')
+            .populate('group', 'name description createdBy createdAt')
+            .sort({ createdAt: -1 });
+
+        return flashcards;
+    }
+
+    async deleteGroupAndFlashcards(groupId) {
+        if (!groupId) throw new Error("Group ID is required to delete flashcards.");
+
+        const group = await FlashcardGroup.findByIdAndDelete(groupId);
+        if (!group) throw new Error("Flashcard group not found.");
+        await Flashcard.deleteMany({ group: groupId });
+        return;
+    }
 }
 
 export default new flashcardServices();

@@ -23,15 +23,6 @@ const flashcardSchema = new mongoose.Schema({
     ref: 'FlashcardGroup',
     required: true,
   },
-  createdAt: {
-    type: Date,
-    default: Date.now,  
-  },
-  createdBy: {
-    type: mongoose.Schema.Types.ObjectId,
-    ref: 'User',
-    required: true
-  },
 });
 
 const flashcardGroupSchema = new mongoose.Schema({
