@@ -17,7 +17,10 @@ const PORT = process.env.PORT;
 
 app.use(express.json()) // To convert data to json to send to client
 app.use(cookieParser());
-app.use(cors())//cors headers to communicate with client in the web
+app.use(cors({
+    origin: "http://localhost:3000",
+    credentials: true
+}))//cors headers to communicate with client in the web
 app.use(helmet()); //This is a security middleware that can help protect the app
 app.use(morgan("dev")) //logs the requests in the console
 

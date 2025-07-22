@@ -5,36 +5,23 @@ import { loginUser } from "../axios/studybotAPI";
 
 const LoginScreen = () => {
   const navigate = useNavigate();
-
-  const [formData, setFormData] = useState({
-    email: "",
-    password: "",
-  });
+  const [email,setEmail] = useState("");
+  const [password,setPassword] = useState("");
 
   const [error, setError] = useState("");
 
-  const handleChange = (e) => {
-    setFormData((prev) => ({
-      ...prev,
-      [e.target.name]: e.target.value,
-    }));
-  };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     setError("");
 
     try {
-      const res = await loginUser({
-        email: formData.email,
-        password: formData.password,
-      });
+      const res = await loginUser(
+        email,
+        password
+      );
 
-      const { token, user } = res.data;
-
-      localStorage.setItem("token", token);
-      localStorage.setItem("user", JSON.stringify(user));
-
+      console.log(res)
       navigate("/dashboard");
     } catch (err) {
       console.error("Login failed:", err);
@@ -57,8 +44,8 @@ const LoginScreen = () => {
           <input
             type="email"
             name="email"
-            value={formData.email}
-            onChange={handleChange}
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
             placeholder="you@example.com"
             className="login-input"
             required
@@ -70,8 +57,8 @@ const LoginScreen = () => {
           <input
             type="password"
             name="password"
-            value={formData.password}
-            onChange={handleChange}
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
             placeholder="••••••••"
             className="login-input"
             required

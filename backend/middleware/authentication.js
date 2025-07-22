@@ -3,7 +3,7 @@ import {User} from '../apps/users/models/userModel.js';
 
 export const authenticateUser = async (req, res, next) => {
     try{
-        const token = req.cookies.token;
+        const token = req.token;
         if (!token) {
             return res.status(401).json({ message: "Unauthorized access. No token provided." });
         }

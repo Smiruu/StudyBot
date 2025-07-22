@@ -1,12 +1,25 @@
 import axios from 'axios';
 
 const API = axios.create({
-  baseURL: 'http://localhost:5000/api',
+  baseURL: 'http://localhost:5000/api/users',
 });
 
 export const registerUser = (data) => API.post('/register', data);
 export const verifyEmail = (data) => API.post('/verify', data);
-export const loginUser = (data) => API.post('/users/login', data);
+export const loginUser = async (email, password) => {
+  try {
+    const response = await API.post('/login', {
+      email,
+      password,
+    });
+    console.log(response)
+
+    const data = await response.json();
+    console.log('Login successful', data);
+  } catch (error) {
+    console.error('Login failed', error);
+  }
+};
 export const sendResetPassword = (data) => API.post('/send-reset', data);
 export const resetPassword = (data) => API.post('/reset-password', data);
 
