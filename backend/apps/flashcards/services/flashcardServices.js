@@ -1,4 +1,4 @@
-import AIConnector from "../../../utils/aiConnector.js";
+import generateFlashcard from "./generateFlashcard.js"
 import pdf from "pdf-parse";
 import { Flashcard, FlashcardGroup }  from "../models/flashcardModel.js";
 
@@ -52,7 +52,7 @@ async extractTextFromPDF(pdfBuffer) {
 
        
 
-        const flashcards = await AIConnector.generateFlashcards({
+        const flashcards = await generateFlashcard.generateFlashcards({
             inputType: inputType === 'pdf' ? 'notes' : inputType,
             content,
             difficulty,

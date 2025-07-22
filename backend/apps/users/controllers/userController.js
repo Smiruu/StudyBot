@@ -1,8 +1,10 @@
-import { token } from "morgan";
+
 import UserService from "../services/userServices.js";
 
 
+
 class UserController {
+
     static userRegister = async (req, res) => {
     const { email, password, name } = req.body;
     try {

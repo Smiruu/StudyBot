@@ -19,6 +19,7 @@ class flashcardController {
         options.pdfBuffer = req.file.buffer;
       }
 
+      console.log(options)
       const flashcards = await flashcardServices.createFlashcards(options);
 
       res.status(200).json({
