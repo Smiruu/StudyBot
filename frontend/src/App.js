@@ -1,14 +1,15 @@
 // src/App.js
 import React from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-
-import HomeScreen from "./screens/HomeScreen";
-import LoginScreen from "./screens/LoginScreen";
-import RegisterScreen from "./screens/RegisterScreen";
-import DashboardScreen from "./screens/DashboardScreen";
+import { AuthProvider } from "./store/userAuth";
+import HomeScreen from "./screens/HomeScreen/HomeScreen";
+import LoginScreen from "./screens/AuthenticationScreens/LoginScreen";
+import RegisterScreen from "./screens/AuthenticationScreens/RegisterScreen";
+import DashboardScreen from "./screens/HomeScreen/DashboardScreen";
 
 function App() {
   return (
+    <AuthProvider>
       <Router>
         <Routes>
           <Route path="/" element={<HomeScreen />} />
@@ -17,6 +18,7 @@ function App() {
           <Route path="/dashboard" element={<DashboardScreen />} />
         </Routes>
       </Router>
+      </AuthProvider>
   );
 }
 

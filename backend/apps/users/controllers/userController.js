@@ -99,6 +99,7 @@ class UserController {
       return res.status(500).json({ message: "Failed to reset password." });
     }
   }
+
 }
 
 

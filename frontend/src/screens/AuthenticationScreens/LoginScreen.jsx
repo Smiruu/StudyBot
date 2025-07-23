@@ -1,34 +1,22 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import "../screens/css/LoginScreen.css";
-import { loginUser } from "../axios/studybotAPI";
+import "./css/LoginScreen.css";
+import { useAuth } from "../../store/userAuth";
 
 const LoginScreen = () => {
-  const navigate = useNavigate();
   const [email,setEmail] = useState("");
   const [password,setPassword] = useState("");
+  const {login, isLoading, error, isAuthenticated} = useAuth();
 
-  const [error, setError] = useState("");
+  const navigate = useNavigate();
 
-
-  const handleSubmit = async (e) => {
+  const handleSubmit = (e) => {
     e.preventDefault();
-    setError("");
+    login(email, password);
+  };
 
-    try {
-      const res = await loginUser(
-        email,
-        password
-      );
-
-      console.log(res)
-      navigate("/dashboard");
-    } catch (err) {
-      console.error("Login failed:", err);
-      setError(
-        err.response?.data?.message || "Login failed. Please try again."
-      );
-    }
+  if (isAuthenticated) {
+    navigate('/dashboard')
   };
 
   return (
@@ -65,9 +53,9 @@ const LoginScreen = () => {
           />
         </div>
 
-        <button type="submit" className="login-button">
-          Login
-        </button>
+        <button disabled={isLoading}>
+        {isLoading ? 'Logging in...' : 'Login'}
+      </button>
       </form>
 
       <p className="login-footer">

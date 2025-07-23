@@ -1,9 +1,24 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import "../screens/css/DashboardScreen.css";
+import "./css/DashboardScreen.css";
+import {useAuth} from "../../store/userAuth.js"
+import { useNavigate } from "react-router-dom";
 
 const DashboardScreen = () => {
-  const user = JSON.parse(localStorage.getItem("user")) || { name: "User" };
+  const {user, isAuthenticated, logout} = useAuth();
+  const navigate = useNavigate();
+  
+  if(!isAuthenticated){
+    navigate("/login")
+    return null
+  }
+
+  const handleLogout = ()=>{
+    logout();
+    navigate("/login")
+  }
+    
+  
 
   return (
     <div className="dashboard-container">
@@ -36,6 +51,10 @@ const DashboardScreen = () => {
           <Link to="/profile" className="button btn-gray">
             Edit Profile
           </Link>
+          <button onClick={handleLogout}>
+            Logout
+          </button>
+
         </div>
       </div>
     </div>
