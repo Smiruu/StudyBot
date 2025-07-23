@@ -18,7 +18,7 @@ const PORT = process.env.PORT;
 app.use(express.json()) // To convert data to json to send to client
 app.use(cookieParser());
 app.use(cors({
-    origin: "http://localhost:3000",
+    origin: "http://localhost:3000" || "vercel",
     credentials: true
 }))//cors headers to communicate with client in the web
 app.use(helmet()); //This is a security middleware that can help protect the app
