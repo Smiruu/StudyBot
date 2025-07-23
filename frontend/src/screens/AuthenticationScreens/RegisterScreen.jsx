@@ -22,7 +22,7 @@ const RegisterForm = () => {
   });
 
   if (isAuthenticated) {
-    navigate('/dashboard');
+    navigate('/verify');
   }
 
   const handleChange = (e) => {
