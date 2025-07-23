@@ -67,7 +67,8 @@ class UserService {
     if (user.isVerified === false) {
       throw new Error("Email not verified. Please check your email for verification.");
     }
-    generateTokenAndSetCookie(user, res);
+    const token = generateTokenAndSetCookie(user, res);
+    user.token = token;
     return user;
   }
 

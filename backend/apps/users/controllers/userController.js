@@ -66,6 +66,10 @@ class UserController {
   }
 };
 
+   static userLogout = async (req,res) => {
+    res.clearCookie("token")
+    res.status(200).json({ success:true, message:"Logged out successfully"});
+};
   static userSendResetPassword = async (req, res) => {
     const {email} = req.body;
     try{
@@ -95,6 +99,7 @@ class UserController {
       return res.status(500).json({ message: "Failed to reset password." });
     }
   }
+
 }
 
 
