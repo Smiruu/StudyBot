@@ -62,7 +62,7 @@ class UserController {
       
     }catch (error) {
       console.error("Error logging in user:", error);
-      return res.status(500).json({ message: "Login failed.", error: error });  
+      return res.status(500).json({ message: error.message, error: error.message });  
   }
 };
 

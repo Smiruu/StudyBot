@@ -53,7 +53,7 @@ class UserService {
     return await user.save();
 }
 
-  static async userLogin(email,password, res){
+ static async userLogin(email,password, res){
 
     const user = await User.findOne({email})
     if (!user){
@@ -64,9 +64,9 @@ class UserService {
     if (!isPasswordValid){
       throw new Error("Invalid password.");
     }
-    if (user.isVerified === false) {
-      throw new Error("Email not verified. Please check your email for verification.");
-    }
+    if (user.verificationToken) {
+  throw new Error("Email not verified. Please check your email for verification.");
+}
     const token = generateTokenAndSetCookie(user, res);
     user.token = token;
     return user;

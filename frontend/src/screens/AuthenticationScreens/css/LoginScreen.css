@@ -72,3 +72,9 @@
 .login-link:hover {
   text-decoration: underline;
 }
+
+.login-error-text {
+  color: #ff3333;
+  font-size: 0.8rem;
+  margin-top: 0.25rem;
+}

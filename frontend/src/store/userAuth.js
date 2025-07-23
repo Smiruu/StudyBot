@@ -29,6 +29,21 @@ export const AuthProvider = ({children}) =>{
   const[isLoading, setIsLoading] = useState(false);
   const[error, setError] = useState(null);
   
+  const register = async (name, email, password) => {
+    setIsLoading(true);
+    setError(null);
+    try {
+      const response = await API.post('/register', {name, email, password});
+      setToken(response.data.user.token);
+      setUser(response.data.user);
+      setIsAuthenticated(true)
+    } catch (err) {
+      setError(err.response?.data?.message || 'Registration Failed');
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
   //Login API call
   const login = async (email,password) => {
     setIsLoading(true);
@@ -61,6 +76,7 @@ export const AuthProvider = ({children}) =>{
     isAuthenticated,
     isLoading,
     error,
+    register,
     login,
     logout,
   };
