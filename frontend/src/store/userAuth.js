@@ -25,20 +25,48 @@ it in your application.
 export const AuthProvider = ({children}) =>{
   //useState Hooks:
   //initial state:
-  const[user, setUser] = useState(null);
-  const[accessToken, setToken] = useState(null);
-  const[isAuthenticated, setIsAuthenticated] = useState(false);
-  const[isLoading, setIsLoading] = useState(false);
-  const[error, setError] = useState(null);
+    const [user, setUser] = useState(() => {
+    const storedUser = localStorage.getItem('user');
+    return storedUser ? JSON.parse(storedUser) : null;
+  });
   
+  const [accessToken, setToken] = useState(() => {
+    return localStorage.getItem('accessToken') || null;
+  });
+  
+  const [isAuthenticated, setIsAuthenticated] = useState(() => {
+    return localStorage.getItem('isAuthenticated') === 'true';
+  });
+  
+  const [isLoading, setIsLoading] = useState(false);
+  const [error, setError] = useState(null);
+
+  // Helper function to update auth state and localStorage
+  const updateAuth = (userData, token, authStatus) => {
+    setUser(userData);
+    setToken(token);
+    setIsAuthenticated(authStatus);
+    
+    if (authStatus && userData && token) {
+      localStorage.setItem('user', JSON.stringify({ id: userData.id,
+  name: userData.name,
+  email: userData.email
+}));
+      localStorage.setItem('accessToken', token);
+      localStorage.setItem('isAuthenticated', 'true');
+    } else {
+      localStorage.removeItem('user');
+      localStorage.removeItem('accessToken');
+      localStorage.removeItem('isAuthenticated');
+    }
+  };
+
   const register = async (name, email, password) => {
     setIsLoading(true);
     setError(null);
     try {
-      const response = await API.post('/register', {name, email, password});
-      setToken(response.data.user.token);
-      setUser(response.data.user);
-   
+      const response = await API.post('/register', { name, email, password });
+      updateAuth(response.data.user, response.data.user.token, true);
     } catch (err) {
       setError(err.response?.data?.message || 'Registration Failed');
     } finally {
@@ -47,41 +75,38 @@ export const AuthProvider = ({children}) =>{
   };
 
   const verify = async (token) => {
-    setIsLoading(true)
-    setError(null)
-    try {
-      await API.post('/verify', {token});
-      setIsAuthenticated(true);
-      
-    } catch (err) {
-      setError(err.response?.data?.error || 'Verification Failed')
-    }
-  }
-
-  //Login API call
-  const login = async (email,password) => {
     setIsLoading(true);
     setError(null);
-
     try {
-      const response = await API.post('/login', {email,password});
-      setToken(response.data.user.token);
-      setUser(response.data.user);
-      setIsAuthenticated(true);
-
+      await API.post('/verify', { token });
+      updateAuth(user, accessToken, true); // Keep existing user/token
     } catch (err) {
-      setError(err.response?.data?.message || 'Login Failed')
-    } finally { //"finally" this is even if errors occur this will run
+      setError(err.response?.data?.error || 'Verification Failed');
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
+  const login = async (email, password) => {
+    setIsLoading(true);
+    setError(null);
+    try {
+      const response = await API.post('/login', { email, password });
+      updateAuth(response.data.user, response.data.user.token, true);
+    } catch (err) {
+      setError(err.response?.data?.message || 'Login Failed');
+    } finally {
       setIsLoading(false);
     }
   };
 
   const logout = async () => {
-    await API.post('/logout')
-
-    setToken(null);
-    setUser(null);
-    setIsAuthenticated(false);
+    try {
+      await API.post('/logout');
+      updateAuth(null, null, false);
+    } catch (err) {
+      setError(err.response?.data?.message || 'Logout Failed');
+    }
   };
  
   const value = {
