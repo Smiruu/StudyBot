@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 import "./css/LoginScreen.css"; // Reusing the same CSS file
 import { useAuth } from "../../store/userAuth";
 
-const RegisterForm = () => {
+const RegisterScreen = () => {
   const { register, isAuthenticated, error, isLoading } = useAuth();
   const navigate = useNavigate();
 
@@ -20,10 +20,6 @@ const RegisterForm = () => {
     password: "",
     confirmPassword: ""
   });
-
-  if (isAuthenticated) {
-    navigate('/verify');
-  }
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -72,6 +68,7 @@ const RegisterForm = () => {
     if (validateForm()) {
       const { name, email, password } = formData;
       await register(name, email, password);
+      navigate('/verify')
     }
   };
 
@@ -158,4 +155,4 @@ const RegisterForm = () => {
   );
 };
 
-export default RegisterForm;
+export default RegisterScreen;

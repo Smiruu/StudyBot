@@ -6,6 +6,7 @@ import HomeScreen from "./screens/HomeScreen/HomeScreen";
 import LoginScreen from "./screens/AuthenticationScreens/LoginScreen";
 import RegisterScreen from "./screens/AuthenticationScreens/RegisterScreen";
 import DashboardScreen from "./screens/HomeScreen/DashboardScreen";
+import VerifyScreen from "./screens/AuthenticationScreens/VerifyScreen";
 
 function App() {
   return (
@@ -15,6 +16,7 @@ function App() {
           <Route path="/" element={<HomeScreen />} />
           <Route path="/login" element={<LoginScreen />} />
           <Route path="/register" element={<RegisterScreen />} />
+          <Route path="/verify" element={<VerifyScreen />} />
           <Route path="/dashboard" element={<DashboardScreen />} />
         </Routes>
       </Router>

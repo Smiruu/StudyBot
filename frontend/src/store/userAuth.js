@@ -24,7 +24,7 @@ export const AuthProvider = ({children}) =>{
   //useState Hooks:
   //initial state:
   const[user, setUser] = useState(null);
-  const[token, setToken] = useState(null);
+  const[accessToken, setToken] = useState(null);
   const[isAuthenticated, setIsAuthenticated] = useState(false);
   const[isLoading, setIsLoading] = useState(false);
   const[error, setError] = useState(null);
@@ -36,13 +36,25 @@ export const AuthProvider = ({children}) =>{
       const response = await API.post('/register', {name, email, password});
       setToken(response.data.user.token);
       setUser(response.data.user);
-      setIsAuthenticated(true)
+   
     } catch (err) {
       setError(err.response?.data?.message || 'Registration Failed');
     } finally {
       setIsLoading(false);
     }
   };
+
+  const verify = async (token) => {
+    setIsLoading(true)
+    setError(null)
+    try {
+      await API.post('/verify', {token});
+      setIsAuthenticated(true);
+      
+    } catch (err) {
+      setError(err.response?.data?.error || 'Verification Failed')
+    }
+  }
 
   //Login API call
   const login = async (email,password) => {
@@ -72,11 +84,12 @@ export const AuthProvider = ({children}) =>{
  
   const value = {
     user,
-    token,
+    accessToken,
     isAuthenticated,
     isLoading,
     error,
     register,
+    verify,
     login,
     logout,
   };
