@@ -1,6 +1,5 @@
 import axios from 'axios';
 import {createContext, useContext, useState} from 'react'
-import { useNavigate } from 'react-router-dom';
 
   
 const API = axios.create({
@@ -48,7 +47,7 @@ export const AuthProvider = ({children}) =>{
     setIsAuthenticated(authStatus);
     
     if (authStatus && userData && token) {
-      localStorage.setItem('user', JSON.stringify({ id: userData.id,
+      localStorage.setItem('user', JSON.stringify({ id: userData._id,
   name: userData.name,
   email: userData.email
 }));

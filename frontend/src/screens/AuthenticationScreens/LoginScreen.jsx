@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import "./css/LoginScreen.css";
-import { useAuth } from "../../store/userAuth";
+import { useAuth } from "../../hooks/AuthHooks/userAuth";
 
 const LoginScreen = () => {
   const [email,setEmail] = useState("");

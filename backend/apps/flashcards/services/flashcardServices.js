@@ -86,7 +86,7 @@ async extractTextFromPDF(pdfBuffer) {
             $push: { flashcards: { $each: saveFlashcards.map(f => f._id) } }
         });
         
-        return {group, flashcards: saveFlashcards};
+        return {group};
     }
 
     // List flashcards created by a user

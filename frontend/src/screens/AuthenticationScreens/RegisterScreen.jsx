@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import "./css/LoginScreen.css"; // Reusing the same CSS file
-import { useAuth } from "../../store/userAuth";
+import { useAuth } from "../../hooks/AuthHooks/userAuth";
 
 const RegisterScreen = () => {
   const { register, error, isLoading } = useAuth();

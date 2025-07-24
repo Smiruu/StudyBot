@@ -1,12 +1,12 @@
 import React, { useState } from 'react';
-import { useAuth } from "../../store/userAuth.js";
+import { useAuth } from "../../hooks/AuthHooks/userAuth.js";
 import { useNavigate } from "react-router-dom";
 import './css/VerifyScreen.css';
 
 function VerifyScreen() {
     const [digits, setDigits] = useState(['', '', '', '', '']);
     const [err, setError] = useState('');
-    const { verify, isLoading, error, isAuthenticated, user } = useAuth();
+    const { verify, isLoading, error, isAuthenticated } = useAuth();
     const navigate = useNavigate();
 
     const handleDigitChange = (index, value) => {
@@ -33,7 +33,6 @@ function VerifyScreen() {
         }
         try {
             await verify(verificationCode);
-            // or wherever you want to redirect after verification
         } catch (error) {
             setError("Invalid Code")
         }
