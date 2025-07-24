@@ -6,9 +6,11 @@ import { authenticateUser } from "../../../middleware/authentication.js";
 const router = express.Router();
 const upload = multer({ storage: multer.memoryStorage() });
 
-router.post("/create", upload.single("pdf"),authenticateUser, flashcardController.createFlashcards);
-router.get("/userFlashcards", authenticateUser, flashcardController.listUserFlashcards);
-router.get("/userFlashcards/flashcards", authenticateUser, flashcardController.listGroupFlashcards);
+router.use(authenticateUser)
 
-router.delete("/userFlashcards/delete",authenticateUser, flashcardController.deleteGroupAndFlashcards);
+router.post("/create", upload.single("pdf"), flashcardController.createFlashcards);
+router.get("/userFlashcards",  flashcardController.listUserFlashcards);
+router.get("/userFlashcards/flashcards",  flashcardController.listGroupFlashcards);
+
+router.delete("/userFlashcards/delete", flashcardController.deleteGroupAndFlashcards);
 export default router;

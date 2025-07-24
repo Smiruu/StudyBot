@@ -6,7 +6,7 @@ import './css/VerifyScreen.css';
 function VerifyScreen() {
     const [digits, setDigits] = useState(['', '', '', '', '']);
     const [err, setError] = useState('');
-    const { verify, isLoading, error } = useAuth();
+    const { verify, isLoading, error, isAuthenticated, user } = useAuth();
     const navigate = useNavigate();
 
     const handleDigitChange = (index, value) => {
@@ -31,14 +31,17 @@ function VerifyScreen() {
             setError('Please enter a 6-digit code');
             return;
         }
-        
         try {
             await verify(verificationCode);
-            navigate('/dashboard'); // or wherever you want to redirect after verification
-        } catch (err) {
+            // or wherever you want to redirect after verification
+        } catch (error) {
             setError("Invalid Code")
         }
     };
+
+    if(isAuthenticated){
+        navigate("/login")
+    }
 
     const handleResendCode = () => {
         console.log('Resend code requested');
@@ -53,6 +56,7 @@ function VerifyScreen() {
                 We've sent a 5-digit code to your email
             </p>
             
+            {error && <p className="verification-error">{error}</p>}
             {err && <p className="verification-error">{err}</p>}
             
             <form className="verification-form" onSubmit={handleSubmit}>

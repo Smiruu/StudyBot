@@ -4,7 +4,7 @@ import "./css/LoginScreen.css"; // Reusing the same CSS file
 import { useAuth } from "../../store/userAuth";
 
 const RegisterScreen = () => {
-  const { register, isAuthenticated, error, isLoading } = useAuth();
+  const { register, error, isLoading } = useAuth();
   const navigate = useNavigate();
 
   const [formData, setFormData] = useState({
