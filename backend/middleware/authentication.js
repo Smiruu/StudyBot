@@ -5,6 +5,7 @@ export const authenticateUser = async (req, res, next) => {
     try{
         const authHeader = req.headers.authorization;
         
+        
         if (!authHeader || !authHeader.startsWith('Bearer ')) {
             return res.status(401).json({ message: "Unauthorized access. No token provided." });
         }
