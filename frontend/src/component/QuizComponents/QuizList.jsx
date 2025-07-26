@@ -35,7 +35,7 @@ function QuizList() {
           </div>
         ))
       )}
-      ;
+      
     </div>
   );
 }

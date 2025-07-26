@@ -1,12 +1,12 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import './css/QuizScreen.css';
-import QuizList from '../../component/QuizComponents/QuizList';
-import CreateQuiz from '../../component/QuizComponents/CreateQuiz'; // Import your CreateQuiz component
+import './css/QuizComponent.css';
+import QuizList from './QuizList';
+import CreateQuiz from './CreateQuiz'; // Import your CreateQuiz component
 
-const QuizScreen = () => {
+const QuizComponent = () => {
   const [showModal, setShowModal] = useState(false);
-  const navigate = useNavigate();
+
 
   const handleCreateQuiz = () => {
     setShowModal(true); // Show modal instead of navigating
@@ -39,4 +39,4 @@ const QuizScreen = () => {
   );
 };
 
-export default QuizScreen;
+export default QuizComponent;

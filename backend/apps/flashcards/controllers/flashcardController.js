@@ -96,7 +96,7 @@ class flashcardController {
     }
 }
     async deleteGroupAndFlashcards(req, res) {
-    const groupId = req.body.groupId;
+    const groupId = req.params.groupId;
 
     try{
         await flashcardServices.deleteGroupAndFlashcards(groupId);

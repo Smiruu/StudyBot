@@ -1,8 +1,9 @@
-import React from "react";
+import { useState }from "react";
 import { Link } from "react-router-dom";
 import "./css/DashboardScreen.css";
 import {useAuth} from "../../hooks/AuthHooks/userAuth.js"
 import { useNavigate } from "react-router-dom";
+import QuizComponent from "../../component/QuizComponents/QuizComponent.jsx";
 
 const DashboardScreen = () => {
   const {user, isAuthenticated, logout} = useAuth();
@@ -17,8 +18,6 @@ const DashboardScreen = () => {
     logout();
     navigate("/login")
   }
-    
-  
 
   return (
     <div className="dashboard-container">
@@ -45,9 +44,6 @@ const DashboardScreen = () => {
           <Link to="/courses" className="button btn-green">
             Go to Courses
           </Link>
-          <Link to="/quizzes" className="button btn-blue">
-            Take a Quiz
-          </Link>
           <Link to="/profile" className="button btn-gray">
             Edit Profile
           </Link>
@@ -56,8 +52,12 @@ const DashboardScreen = () => {
           </button>
 
         </div>
-      </div>
+        
     </div>
+    <QuizComponent />
+    </div>
+     
+  
   );
 };
 
