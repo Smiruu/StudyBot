@@ -29,7 +29,7 @@ function QuizList() {
           <div
             key={quiz.id}
             className="quiz-card"
-            onClick={() => handleQuizClick(quiz.id)}
+            onClick={() => handleQuizClick(quiz._id)}
           >
             <h2 className="quiz-name">{quiz.name}</h2>
           </div>

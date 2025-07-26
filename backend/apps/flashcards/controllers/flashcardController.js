@@ -69,7 +69,7 @@ class flashcardController {
   }
 
   async listGroupFlashcards(req, res) {
-    const groupId = req.body.groupId;
+    const groupId = req.params.groupId;
 
     try {
         const listOfFlashcards = await flashcardServices.listGroupFlashcards(groupId);

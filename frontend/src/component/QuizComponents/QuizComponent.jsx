@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+
 import './css/QuizComponent.css';
 import QuizList from './QuizList';
 import CreateQuiz from './CreateQuiz'; // Import your CreateQuiz component

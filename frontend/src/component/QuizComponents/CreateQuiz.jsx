@@ -45,7 +45,9 @@ function CreateQuiz({ onClose }) {
       pdfFile // This will be null if not using PDF form
     );
     console.log('Flashcards created:', result);
-    onClose();
+    if(result){
+      onClose()
+    }
   };
 
   const resetForms = () => {

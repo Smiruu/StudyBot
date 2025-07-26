@@ -7,6 +7,7 @@ import LoginScreen from "./screens/AuthenticationScreens/LoginScreen";
 import RegisterScreen from "./screens/AuthenticationScreens/RegisterScreen";
 import DashboardScreen from "./screens/HomeScreen/DashboardScreen";
 import VerifyScreen from "./screens/AuthenticationScreens/VerifyScreen";
+import FlashcardScreen from "./screens/QuizScreen/FlashcardsScreen";
 
 function App() {
   return (
@@ -18,6 +19,7 @@ function App() {
           <Route path="/register" element={<RegisterScreen />} />
           <Route path="/verify" element={<VerifyScreen />} />
           <Route path="/dashboard" element={<DashboardScreen />} />
+          <Route path="/quiz/:groupId" element={<FlashcardScreen />}/>
           
         </Routes>
       </Router>

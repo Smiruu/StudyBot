@@ -55,7 +55,7 @@ const NotesForm = ({ formData, handleInputChange, handleSubmit, loading, error }
           required
         />
       </div>
-      {error && <p className="error">{error}</p>}
+      {error && <p className="error">{"1 minute per request. Thank You!"}</p>}
       <div className="form-actions">
         <button 
           type="submit" 
