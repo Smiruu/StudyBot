@@ -4,7 +4,7 @@ const FlashcardScreen = () => {
     const {groupId } = useParams();
     
     return(
-        <div>Hello</div>
+        <div></div>
     )
 }
 

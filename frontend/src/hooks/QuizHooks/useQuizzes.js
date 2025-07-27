@@ -71,5 +71,9 @@ export const useQuizzes = () => {
     }
   }, []);
 
+  const fetchFlashcards = async () => {
+    
+  }
+
   return { quizzes, loading, error, fetchQuizzesByGroup, createFlashcards };
 };
