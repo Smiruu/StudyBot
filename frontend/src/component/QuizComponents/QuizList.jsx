@@ -9,7 +9,7 @@ function QuizList() {
 
   useEffect(() => {
     fetchQuizzesByGroup();
-  }, [fetchQuizzesByGroup]);
+  },[fetchQuizzesByGroup]);
 
   const handleQuizClick = (quizId) => {
     navigate(`/quiz/${quizId}`);

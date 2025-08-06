@@ -11,6 +11,7 @@ import FlashcardScreen from "./screens/QuizScreen/FlashcardsScreen";
 
 function App() {
   return (
+    
     <AuthProvider>
       <Router>
         <Routes>
