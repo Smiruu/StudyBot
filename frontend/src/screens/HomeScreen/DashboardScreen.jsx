@@ -26,18 +26,7 @@ const DashboardScreen = () => {
         <p className="dashboard-subtitle">This is your StudyBot Dashboard</p>
 
         <div className="dashboard-stats">
-          <div className="stat-box" style={{ backgroundColor: "#dbeafe" }}>
-            <h2 className="stat-title text-blue-700">3</h2>
-            <p className="stat-sub text-blue-900">Active Courses</p>
-          </div>
-          <div className="stat-box" style={{ backgroundColor: "#d1fae5" }}>
-            <h2 className="stat-title text-green-700">7</h2>
-            <p className="stat-sub text-green-900">Quizzes Taken</p>
-          </div>
-          <div className="stat-box" style={{ backgroundColor: "#fef9c3" }}>
-            <h2 className="stat-title text-yellow-700">92%</h2>
-            <p className="stat-sub text-yellow-900">Average Score</p>
-          </div>
+
         </div>
 
         <div className="buttons-group">
