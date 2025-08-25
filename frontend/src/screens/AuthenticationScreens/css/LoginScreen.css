@@ -318,7 +318,7 @@ background-color: #2d2638;
 /* --- Tablet Screens (≥768px and <1024px) --- */
 @media (max-width: 1023px) {
   .login-background {
-    background: none; /* remove outer background */
+    background: none;
     padding: 0;
   }
 
