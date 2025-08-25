@@ -3,6 +3,12 @@ import { useNavigate } from "react-router-dom";
 import "./css/RegisterScreen.css";
 import { useAuth } from "../../hooks/AuthHooks/userAuth";
 
+const images = [
+  "https://images.unsplash.com/photo-1552845108-5f775a2ccb9b?fm=jpg&q=60&w=3000&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8Ymx1ZSUyMG1vdW50YWlufGVufDB8fDB8fHww",
+  "https://img.freepik.com/premium-photo/sunrise-uttarakhand-india-from-top-mount-chandrashila_1048944-25804373.jpg?semt=ais_hybrid&w=740&q=80",
+  "https://images.unsplash.com/photo-1530273883449-aae8b023c196?fm=jpg&q=60&w=3000&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8M3x8Ymx1ZSUyMG1vdW50YWlufGVufDB8fDB8fHww"
+];
+
 const RegisterScreen = () => {
   const { register, error, isLoading } = useAuth();
   const navigate = useNavigate();
@@ -71,6 +77,16 @@ const RegisterScreen = () => {
       navigate('/verify')
     }
   };
+
+    // This for the carousel ahihi
+    const [current, setCurrent] = useState(0);
+  
+    useEffect(() => {
+      const interval = setInterval(() => {
+        setCurrent((prev) => (prev + 1) % images.length);
+      }, 4000); // change pictures every 4 seconds
+      return () => clearInterval(interval);
+    }, []);
 
   return (
     <div className="login-container">
