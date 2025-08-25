@@ -4,9 +4,9 @@ import "./css/LoginScreen.css";
 import { useAuth } from "../../hooks/AuthHooks/userAuth";
 
 const images = [
-  "https://png.pngtree.com/background/20250121/original/pngtree-mountains-in-a-morning-fog-layers-simple-light-blue-tones-white-picture-image_15801279.jpg",
-  "https://preview.redd.it/usagi-is-not-even-fat-v0-5211hb4qecxe1.png?width=640&crop=smart&auto=webp&s=b8603d8de0049ae5cfbd40ed5991f50b0f348f0f",
-  "https://www.joytify.com/blog/en-us/wp-content/uploads/2025/08/Seed-ZZZ-Build-Guide.jpg"
+  "https://images.unsplash.com/photo-1552845108-5f775a2ccb9b?fm=jpg&q=60&w=3000&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8Ymx1ZSUyMG1vdW50YWlufGVufDB8fDB8fHww",
+  "https://img.freepik.com/premium-photo/sunrise-uttarakhand-india-from-top-mount-chandrashila_1048944-25804373.jpg?semt=ais_hybrid&w=740&q=80",
+  "https://images.unsplash.com/photo-1530273883449-aae8b023c196?fm=jpg&q=60&w=3000&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8M3x8Ymx1ZSUyMG1vdW50YWlufGVufDB8fDB8fHww"
 ];
 
 const LoginScreen = () => {
@@ -51,9 +51,9 @@ const LoginScreen = () => {
 
                 {/* Overlay content */}
                 <div className="carousel-overlay">
-                  <h2>Welcome to StudyBot</h2>
-                  <p>Boost your learning with AI-powered tools</p>
-                  <button className="carousel-btn">Get Started</button>
+                  <h2 className="overlay-title">StudyBot</h2>
+                  <button className="carousel-btn">← Back to Website</button>
+                  <p className="overlay-subtitle">Boost your learning with AI-powered tools</p>
                 </div>
 
                 <div className="carousel-indicators">
@@ -70,17 +70,14 @@ const LoginScreen = () => {
           </div>
           
         <div className="login-right-container">
+
           <div className="login-container">
+               <div className="login-line1"></div>
             <h2 className="login-title">Welcome Back</h2>
             <p className="login-subtitle">Login to your account</p>
-                        <p p className="login-footer">
-              Don't have an account?{" "}
-              <a href="/register" className="login-link">
-                Register here
-              </a>
-            </p>
 
             {error && <p className="login-error">{error}</p>}
+
 
             <form onSubmit={handleSubmit} className="login-form">
               <div className="login-form-group">
@@ -90,10 +87,11 @@ const LoginScreen = () => {
                   name="email"
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
-                  placeholder="you@example.com"
+                  placeholder="yourname@example.com"
+                  autoComplete="off"
                   className="login-input"
                   required
-                />
+                ></input>
               </div>
 
               <div className="login-form-group">
@@ -112,8 +110,15 @@ const LoginScreen = () => {
               <button className="login-button" disabled={isLoading}>
               {isLoading ? 'Logging in...' : 'Login'}
             </button>
+                          <p p className="login-footer">
+              Don't have an account?{" "}
+              <a href="/register" className="login-link">
+                Register here
+              </a>
+            </p>
             </form>
-            
+           <div className="login-line2"></div>
+
           </div>
           </div>
       </div>
