@@ -1,22 +1,163 @@
+.login-background {
+  background-color: #676278;
+  min-height: 100vh;
+  /* justify-content: center;
+  align-items: center; */
+  /* padding-left: 4rem;
+  padding-right: 4rem; */
+  padding-top: 8rem;
+  padding-bottom: 6rem;
+}
+
+.split-screen {
+  display: flex;
+  height: 75vh;
+  overflow: hidden;
+  padding: 1rem;
+  background-color: #2d2638;
+  border-radius: 1rem;
+  margin-left: 16rem;
+  margin-right: 16rem;
+  box-shadow: 2px 8px 18px 4px rgba(0,0,0,0.5);
+  -webkit-box-shadow: 2px 8px 18px 4px rgba(0,0,0,0.5);
+  -moz-box-shadow: 2px 8px 18px 4px rgba(0,0,0,0.5);
+}
+
+.login-left-container {
+  flex: 1;
+  background-color: #2d2638; /* forest green */
+  color: white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+}
+
+.login-image-container {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  border-radius: 1rem;
+}
+
+.carousel-image {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  top: 0;
+  left: 0;
+  opacity: 0;
+  transition: opacity 1s ease-in-out;
+}
+
+.carousel-image.active {
+  opacity: 1;
+  z-index: 1;
+}
+
+.carousel-overlay {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%); 
+  text-align: center;
+  color: green;
+  z-index: 2; 
+  padding: 1rem 2rem;
+}
+
+.carousel-overlay h2 {
+  font-size: 2rem;
+  margin-bottom: 0.5rem;
+}
+
+.carousel-overlay p {
+  font-size: 1.2rem;
+  margin-bottom: 1rem;
+}
+
+.carousel-btn {
+  background: #1e40af;
+  color: white;
+  border: none;
+  padding: 0.75rem 1.5rem;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 1rem;
+  transition: background 0.3s ease;
+}
+
+.carousel-btn:hover {
+  background: #15317a;
+}
+
+.carousel-indicators {
+  position: absolute;
+  bottom: 15px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  gap: 8px;
+  z-index: 3; /* so it stays on top of the images */
+}
+
+.indicator {
+  width: 20px;
+  height: 6px;
+  background-color: rgba(255, 255, 255, 0.6);
+  border-radius: 3px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.indicator.active {
+  background-color: #ffffff;
+}
+
+.login-image-container img {
+width: 100%;
+height: 100%;
+object-fit: cover;
+display: block;
+border-radius: 1rem;
+}
+
+.login-right-container {
+flex: 1;
+display: flex;
+/* align-items: center;
+justify-content: center; */
+padding: .2rem;
+margin-left: 1rem;
+background-color: #2d2638;
+}
+
 .login-container {
-  max-width: 400px;
-  margin: 50px auto;
-  padding: 2rem;
-  background-color: white;
+  /* max-width: 90rem !important; */
+  width: 42rem;
+  max-height: auto;
+  padding: 1rem;
   border-radius: 8px;
-  box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.1);
+  /* align-items: center;
+  justify-content: center; */
+  padding-left: 5rem;
+  padding-right: 5rem;
+  padding-top: 6.5rem;
 }
 
 .login-title {
   text-align: center;
-  font-size: 24px;
+  font-size: 3rem;
+  color: white;
   font-weight: bold;
 }
 
 .login-subtitle {
   text-align: center;
-  font-size: 14px;
-  color: gray;
+  font-size: 2rem;
+  color: white;
   margin-bottom: 1rem;
 }
 
@@ -30,6 +171,7 @@
 .login-form {
   display: flex;
   flex-direction: column;
+  color: white;
 }
 
 .login-form-group {
@@ -46,8 +188,7 @@
 
 .login-button {
   padding: 0.75rem;
-  background-color: #0d4812; /* forest green */
-  color: white;
+  background-color: #0d4812; 
   border: none;
   border-radius: 6px;
   font-size: 16px;
@@ -62,10 +203,11 @@
   text-align: center;
   margin-top: 1rem;
   font-size: 14px;
+  color: white;
 }
 
 .login-link {
-  color: #1e40af; /* blue-600 */
+  color: #1e40af; 
   text-decoration: none;
 }
 
