@@ -89,84 +89,126 @@ const RegisterScreen = () => {
     }, []);
 
   return (
-    <div className="login-container">
-      <h2 className="login-title">Create Account</h2>
-      <p className="login-subtitle">Join us today</p>
+    <div className="register-background">
+      <div className="register-split-screen">
+            <div className="register-left-container">
+              <div className="register-image-container">
+                {images.map((img, index) => (
+                  <img
+                    key={index}
+                    src={img}
+                    alt={`slide-${index}`}
+                    className={`carousel-image ${index === current ? "active" : ""}`}
+                  />
+                ))}
 
-      {error && <p className="login-error">{error}</p>}
+                {/* Overlay content */}
+                <div className="carousel-overlay">
+                  <h2 className="overlay-title">StudyBot</h2>
+                  <button className="carousel-btn" onClick={() => navigate('/')}>← Back to Website</button>
+                  <p className="overlay-subtitle">Boost your learning with AI-powered tools</p>
+                </div>
 
-      <form onSubmit={handleSubmit} className="login-form">
-        <div className="login-form-group">
-          <label>Full Name</label>
-          <input
-            type="text"
-            name="name"
-            value={formData.name}
-            onChange={handleChange}
-            placeholder="Jane Doe"
-            className="login-input"
-          />
-          {validationError.name && (
-            <p className="login-error-text">{validationError.name}</p>
-          )}
+                <div className="carousel-indicators">
+                  {images.map((_, index) => (
+                    <span
+                      key={index}
+                      className={`indicator ${index === current ? "active" : ""}`}
+                      onClick={() => setCurrent(index)}  // clickable to jump to that image
+                    ></span>
+                  ))}
+                </div>
+
+              </div>
+          </div>
+
+          <div className="register-right-container">
+
+          <div className="register-container">
+            <div className="register-line1"></div>
+            <h2 className="register-title">Create Account</h2>
+            <p className="register-subtitle">Join us today</p>
+
+            {error && <p className="register-error">{error}</p>}
+
+            <form onSubmit={handleSubmit} className="login-form">
+              <div className="register-form-group">
+                <label>Full Name</label>
+                <input
+                  type="text"
+                  name="name"
+                  value={formData.name}
+                  onChange={handleChange}
+                  placeholder="Jane Doe"
+                  className="register-input"
+                />
+                {validationError.name && (
+                  <p className="register-error-text">{validationError.name}</p>
+                )}
+              </div>
+
+              <div className="register-form-group">
+                <label>Email</label>
+                <input
+                  type="email"
+                  name="email"
+                  value={formData.email}
+                  onChange={handleChange}
+                  placeholder="user@example.com"
+                  className="register-input"
+                />
+                {validationError.email && (
+                  <p className="register-error-text">{validationError.email}</p>
+                )}
+              </div>
+
+              <div className="register-form-group">
+                <label>Password</label>
+                <input
+                  type="password"
+                  name="password"
+                  value={formData.password}
+                  onChange={handleChange}
+                  placeholder="••••••••"
+                  className="register-input"
+                />
+                {validationError.password && (
+                  <p className="register-error-text">{validationError.password}</p>
+                )}
+              </div>
+
+              <div className="register-form-group">
+                <label>Confirm Password</label>
+                <input
+                  type="password"
+                  name="confirmPassword"
+                  value={formData.confirmPassword}
+                  onChange={handleChange}
+                  placeholder="••••••••"
+                  className="register-input"
+                />
+                {validationError.confirmPassword && (
+                  <p className="register-error-text">{validationError.confirmPassword}</p>
+                )}
+              </div>
+
+              <button type="submit" disabled={isLoading} className="register-button">
+                {isLoading ? 'Creating account...' : 'Register'}
+              </button>
+            </form>
+
+            <p className="register-footer">
+              Already have an account?{" "}
+              <a href="/login" className="register-link">
+                Login here
+              </a>
+            </p>
+
+            <div className="register-line2"></div>
+
+          </div>
         </div>
-
-        <div className="login-form-group">
-          <label>Email</label>
-          <input
-            type="email"
-            name="email"
-            value={formData.email}
-            onChange={handleChange}
-            placeholder="user@example.com"
-            className="login-input"
-          />
-          {validationError.email && (
-            <p className="login-error-text">{validationError.email}</p>
-          )}
-        </div>
-
-        <div className="login-form-group">
-          <label>Password</label>
-          <input
-            type="password"
-            name="password"
-            value={formData.password}
-            onChange={handleChange}
-            placeholder="••••••••"
-            className="login-input"
-          />
-          {validationError.password && (
-            <p className="login-error-text">{validationError.password}</p>
-          )}
-        </div>
-
-        <div className="login-form-group">
-          <label>Confirm Password</label>
-          <input
-            type="password"
-            name="confirmPassword"
-            value={formData.confirmPassword}
-            onChange={handleChange}
-            placeholder="••••••••"
-            className="login-input"
-          />
-          {validationError.confirmPassword && (
-            <p className="login-error-text">{validationError.confirmPassword}</p>
-          )}
-        </div>
-
-        <button type="submit" disabled={isLoading} className="login-button">
-          {isLoading ? 'Creating account...' : 'Register'}
-        </button>
-      </form>
-
-      <p className="login-footer">
-        Already have an account?{" "}
-        <a href="/login" className="login-link">
-          Login here
-        </a>
-      </p>
+    </div>
     </div>
   );
 };

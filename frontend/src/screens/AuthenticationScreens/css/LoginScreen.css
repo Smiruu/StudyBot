@@ -179,7 +179,7 @@ background-color: #2d2638;
   border-radius: 8px;
   /* align-items: center;
   justify-content: center; */
-  padding-left: 5rem;
+  padding-left: 6rem;
   padding-right: 5rem;
   padding-top: 3.3rem;
   font-family: "Ubuntu", sans-serif;
@@ -210,7 +210,7 @@ background-color: #2d2638;
   font-size: 14px;
   color: white;
   font-weight: 400;
-  margin-top: 1.5rem;
+  margin-top: 2rem;
 }
 
 .login-link {

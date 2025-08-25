@@ -52,7 +52,7 @@ const LoginScreen = () => {
                 {/* Overlay content */}
                 <div className="carousel-overlay">
                   <h2 className="overlay-title">StudyBot</h2>
-                  <button className="carousel-btn">← Back to Website</button>
+                  <button className="carousel-btn" onClick={() => navigate('/')}>← Back to Website</button>
                   <p className="overlay-subtitle">Boost your learning with AI-powered tools</p>
                 </div>
 
