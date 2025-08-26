@@ -87,8 +87,8 @@ const LoginScreen = () => {
                   name="email"
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
-                  placeholder="yourname@example.com"
-                  autoComplete="off"
+                  placeholder="studybot@example.com"
+                  autoComplete="on"
                   className="login-input"
                   required
                 ></input>

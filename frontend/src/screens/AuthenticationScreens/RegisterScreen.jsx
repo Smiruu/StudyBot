@@ -139,7 +139,8 @@ const RegisterScreen = () => {
                   name="name"
                   value={formData.name}
                   onChange={handleChange}
-                  placeholder="Jane Doe"
+                  autoComplete="off"
+                  placeholder="Doc McStuffins"
                   className="register-input"
                 />
                 {validationError.name && (
@@ -155,6 +156,7 @@ const RegisterScreen = () => {
                   value={formData.email}
                   onChange={handleChange}
                   placeholder="user@example.com"
+                  autoComplete="off"
                   className="register-input"
                 />
                 {validationError.email && (

@@ -162,7 +162,7 @@ background-color: #2d2638;
 .register-line1{
   height: 1px;
   background-color: #cccccc34;
-  margin-bottom: 2rem;
+  margin-bottom: 1rem;
 }
 
 .register-line2{
@@ -302,7 +302,7 @@ background-color: #2d2638;
 .register-error-text {
   color: #ff3333;
   font-size: 0.8rem;
-  margin-top: 0.25rem;
+  margin-top: -0.1rem;
 }
 
 /* For the Responsiveness pls work omg */

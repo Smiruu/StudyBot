@@ -318,7 +318,7 @@ background-color: #2d2638;
 /* --- Tablet Screens (≥768px and <1024px) --- */
 @media (max-width: 1023px) {
   .login-background {
-    background: none;
+    background: none !important; /* remove outer background */
     padding: 0;
   }
 
@@ -333,6 +333,13 @@ background-color: #2d2638;
 
   .login-left-container {
     display: none; /* hide carousel */
+  }
+
+  /* Hide overlay and indicators */
+  .carousel-overlay,
+  .carousel-overlay h2,
+  .carousel-indicators {
+    display: none !important;
   }
 
   .login-right-container {
@@ -356,7 +363,7 @@ background-color: #2d2638;
 /* --- Mobile Screens (<768px) --- */
 @media (max-width: 767px) {
   .login-background {
-    background: none; /* remove outer background */
+    background: none;
     padding: 0;
   }
 
@@ -370,7 +377,13 @@ background-color: #2d2638;
   }
 
   .login-left-container {
-    display: none; /* hide carousel */
+    display: none;
+  }
+
+  /* Hide overlay and indicators */
+  .carousel-overlay,
+  .carousel-indicators {
+    display: none !important;
   }
 
   .login-right-container {
@@ -386,7 +399,7 @@ background-color: #2d2638;
 
   .login-container {
     width: 100%;
-    max-width: 95%; /* tighter padding on mobile */
+    max-width: 95%;
     padding: 1.5rem;
   }
 }
