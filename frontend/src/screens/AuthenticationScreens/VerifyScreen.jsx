@@ -49,6 +49,7 @@ function VerifyScreen() {
     };
 
     return (
+        <div className="verification-background">
         <div className="verification-container">
             <h2 className="verification-title">Verify Your Account</h2>
             <p className="verification-subtitle">
@@ -96,6 +97,7 @@ function VerifyScreen() {
                     Resend Code
                 </button>
             </div>
+        </div>
         </div>
     );
 }

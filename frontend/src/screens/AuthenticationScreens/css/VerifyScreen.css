@@ -1,6 +1,11 @@
+.verification-background {
+    background-color: #676278;
+    height: 100vh;
+}
+
 .verification-container {
     max-width: 400px;
-    margin: 50px auto;
+    margin: 0px auto;
     padding: 2rem;
     background-color: white;
     border-radius: 8px;
