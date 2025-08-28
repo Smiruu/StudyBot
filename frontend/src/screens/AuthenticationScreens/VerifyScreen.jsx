@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { useAuth } from "../../hooks/AuthHooks/userAuth.js";
 import { useNavigate } from "react-router-dom";
+import { MdSystemSecurityUpdateGood } from "react-icons/md";
 import './css/VerifyScreen.css';
 
 function VerifyScreen() {
@@ -50,53 +51,61 @@ function VerifyScreen() {
 
     return (
         <div className="verification-background">
-        <div className="verification-container">
-            <h2 className="verification-title">Verify Your Account</h2>
-            <p className="verification-subtitle">
-                We've sent a 5-digit code to your email
-            </p>
-            
-            {error && <p className="verification-error">{error}</p>}
-            {err && <p className="verification-error">{err}</p>}
-            
-            <form className="verification-form" onSubmit={handleSubmit}>
-                <div className="verification-form-group">
-                    <label>Verification Code</label>
-                    <div className="verification-code-inputs">
-                        {digits.map((digit, index) => (
-                            <input
-                                id={`digit-${index}`}
-                                key={index}
-                                type="text"
-                                maxLength="1"
-                                value={digit}
-                                onChange={(e) => handleDigitChange(index, e.target.value)}
-                                className="verification-digit"
-                                disabled={isLoading}
-                            />
-                        ))}
-                    </div>
+        <div className="verification-containerbg">
+            <div className="verification-container">
+                <div className='verify-btn-container'>
+                <button className="verify-btn" onClick={() => navigate('/register')}>← Register</button>
                 </div>
+                <div className="verify-icon-container">
+                    <MdSystemSecurityUpdateGood className='verify-icon' />
+                </div>
+                <h2 className="verification-title">Verify Your Account</h2>
+                <p className="verification-subtitle">
+                    We've sent a 5-digit code to your email
+                </p>
                 
-                <button 
-                    type="submit" 
-                    className="verification-button"
-                    disabled={isLoading}
-                >
-                    {isLoading ? 'Verifying...' : 'Verify'}
-                </button>
-            </form>
-            
-            <div className="verification-footer">
-                <p>Didn't receive a code?</p>
-                <button 
-                    onClick={handleResendCode}
-                    className="verification-resend"
-                    disabled={isLoading}
-                >
-                    Resend Code
-                </button>
-            </div>
+                {error && <p className="verification-error">{error}</p>}
+                {err && <p className="verification-error">{err}</p>}
+                
+                <form className="verification-form" onSubmit={handleSubmit}>
+                    <div className="verification-form-group">
+                        {/* <label>Verification Code</label> */}
+                        <div className="verification-code-inputs">
+                            {digits.map((digit, index) => (
+                                <input
+                                    id={`digit-${index}`}
+                                    key={index}
+                                    type="text"
+                                    maxLength="1"
+                                    value={digit}
+                                    onChange={(e) => handleDigitChange(index, e.target.value)}
+                                    className="verification-digit"
+                                    disabled={isLoading}
+                                />
+                            ))}
+                        </div>
+                    </div>
+                    
+                    <button 
+                        type="submit" 
+                        className="verification-button"
+                        disabled={isLoading}
+                    >
+                        {isLoading ? 'Verifying...' : 'Verify'}
+                    </button>
+                </form>
+                
+                <div className="verification-footer">
+                    <p>Didn't receive a code?</p>
+                    <button 
+                        onClick={handleResendCode}
+                        className="verification-resend"
+                        disabled={isLoading}
+                    >
+                        Resend Code
+                    </button>
+                </div>
+        </div>
         </div>
         </div>
     );
