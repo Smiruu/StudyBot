@@ -5,7 +5,7 @@ const API = axios.create({ baseURL: "http://localhost:5000/api/flashcards" });
 
 export const useQuizzes = () => {
   const [quizzes, setQuizzes] = useState([]);
-  const [flashcards, setFlashcards] = useState([])
+  const [flashcards, setFlashcards] = useState([]);
   const [loading, setIsLoading] = useState(false);
   const [error, setError] = useState(null);
 
@@ -42,9 +42,7 @@ export const useQuizzes = () => {
 
       return response.data;
     } catch (err) {
-      setError(
-        "Failed to create flashcards.Try again after 1 minute"
-      );
+      setError("Failed to create flashcards.Try again after 1 minute");
       return null;
     } finally {
       setIsLoading(false);
@@ -70,52 +68,78 @@ export const useQuizzes = () => {
     } finally {
       setIsLoading(false);
     }
-  }, [setIsLoading,setError,setQuizzes]);
+  }, []);
 
- const fetchFlashcards = useCallback(async (groupId) => {
-        setIsLoading(true); // Set loading to true when starting fetch
-        setError(null);     // Clear any previous errors
+  const fetchFlashcards = useCallback(
+    async (groupId) => {
+      setIsLoading(true); // Set loading to true when starting fetch
+      setError(null); // Clear any previous errors
 
-        try {
-            const token = localStorage.getItem("accessToken");
+      try {
+        const token = localStorage.getItem("accessToken");
 
-            if (!groupId) {
-                setError("Group ID is missing.");
-                setIsLoading(false);
-                return;
-            }
-            if (!token) {
-                setError("Authentication token is missing. Please log in.");
-                setIsLoading(false);
-                return;
-            }
-
-            const response = await API.get(`/userFlashcards/${groupId}`, {
-                headers: {
-                    Authorization: `Bearer ${token}`,
-                },
-            });
-
-            // IMPORTANT: Reverted to response.data.data based on your initial code.
-            // If your API directly returns the array as response.data, change this back to response.data
-            setFlashcards(response.data.data); 
-
-        } catch (err) {
-            console.error("Failed to fetch flashcards:", err);
-            // More robust error message extraction
-            setError(err.response?.data?.message || err.message || "An unknown error occurred while fetching flashcards.");
-        } finally {
-            setIsLoading(false); // Always set loading to false when done
+        if (!groupId) {
+          setError("Group ID is missing.");
+          setIsLoading(false);
+          return;
         }
-    }, [setIsLoading, setError, setFlashcards]);
-  return { 
-    quizzes, 
-    flashcards,
-    loading, 
-    error, 
-    fetchQuizzesByGroup, 
-    createFlashcards,
-    fetchFlashcards
+        if (!token) {
+          setError("Authentication token is missing. Please log in.");
+          setIsLoading(false);
+          return;
+        }
 
+        const response = await API.get(`/userFlashcards/${groupId}`, {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        });
+
+        // IMPORTANT: Reverted to response.data.data based on your initial code.
+        // If your API directly returns the array as response.data, change this back to response.data
+        setFlashcards(response.data.data);
+      } catch (err) {
+        console.error("Failed to fetch flashcards:", err);
+        // More robust error message extraction
+        setError(
+          err.response?.data?.message ||
+            err.message ||
+            "An unknown error occurred while fetching flashcards."
+        );
+      } finally {
+        setIsLoading(false); // Always set loading to false when done
+      }
+    },
+    [setIsLoading, setError, setFlashcards]
+  );
+
+  const deleteFlashcards = async (groupId) => {
+    setIsLoading(true);
+
+    try {
+      const token = localStorage.getItem("accessToken");
+      console.log(token);
+      await API.delete(`/userFlashcards/${groupId}`, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
+
+      fetchQuizzesByGroup();
+    } catch (err) {
+      setError(err.response?.data?.message);
+    } finally {
+      setIsLoading(false);
+    }
+  };
+  return {
+    quizzes,
+    flashcards,
+    loading,
+    error,
+    deleteFlashcards,
+    fetchQuizzesByGroup,
+    createFlashcards,
+    fetchFlashcards,
   };
 };

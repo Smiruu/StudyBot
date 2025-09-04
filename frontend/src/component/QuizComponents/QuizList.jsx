@@ -4,7 +4,7 @@ import "./css/QuizList.css";
 import { useQuizzes } from "../../hooks/QuizHooks/useQuizzes";
 
 function QuizList() {
-  const { quizzes, isLoading, error, fetchQuizzesByGroup } = useQuizzes();
+  const { quizzes, isLoading, error, fetchQuizzesByGroup, deleteFlashcards } = useQuizzes();
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -26,13 +26,21 @@ function QuizList() {
         <div className="empty-quizzes-message">No Quizzes yet</div>
       ) : (
         quizzes.map((quiz) => (
+          <>
           <div
             key={quiz.id}
             className="quiz-card"
             onClick={() => handleQuizClick(quiz._id)}
           >
             <h2 className="quiz-name">{quiz.name}</h2>
+           
           </div>
+           <button
+            onClick={() => deleteFlashcards(quiz._id)}
+            >
+              delete
+            </button>
+          </>
         ))
       )}
       
