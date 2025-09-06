@@ -107,13 +107,24 @@ export const AuthProvider = ({children}) =>{
       setError(err.response?.data?.message || 'Logout Failed');
     }
   };
- 
+
+
+  const sendReset = async (email) => {
+    try {
+      await API.post('/send-reset', {email});
+
+    } catch (err) {
+      setError(err?.response?.data?.message || "Failed to reset password")
+    }
+    
+  }
   const value = {
     user,
     accessToken,
     isAuthenticated,
     isLoading,
     error,
+    sendReset,
     register,
     verify,
     login,
