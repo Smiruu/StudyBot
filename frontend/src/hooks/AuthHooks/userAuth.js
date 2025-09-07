@@ -118,6 +118,17 @@ export const AuthProvider = ({children}) =>{
     }
     
   }
+
+  const resetPass = async (token, newPassword) => {
+    setIsLoading(true)
+    try {
+      await API.post("/reset-password", {token, newPassword});
+    } catch (error) {
+      setError(err?.response?.data?.message || "Failed to reset password")
+    } finally {
+      setIsLoading(false)
+    }
+  }
   const value = {
     user,
     accessToken,

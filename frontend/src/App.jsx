@@ -21,7 +21,7 @@ function App() {
           <Route path="/verify" element={<VerifyScreen />} />
           <Route path="/dashboard" element={<DashboardScreen />} />
           <Route path="/quiz/:groupId" element={<FlashcardScreen />}/>
-          
+          <Route path="/resetpass/:token"/>
         </Routes>
       </Router>
       </AuthProvider>
