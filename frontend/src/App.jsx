@@ -8,6 +8,7 @@ import RegisterScreen from "./screens/AuthenticationScreens/RegisterScreen";
 import DashboardScreen from "./screens/HomeScreen/DashboardScreen";
 import VerifyScreen from "./screens/AuthenticationScreens/VerifyScreen";
 import FlashcardScreen from "./screens/QuizScreen/FlashcardsScreen";
+import ForgotPassword from "./screens/AuthenticationScreens/ForgotPassword";
 
 function App() {
   return (
@@ -21,6 +22,7 @@ function App() {
           <Route path="/verify" element={<VerifyScreen />} />
           <Route path="/dashboard" element={<DashboardScreen />} />
           <Route path="/quiz/:groupId" element={<FlashcardScreen />}/>
+          <Route path="/resetpass" element={<ForgotPassword/>}/>
           <Route path="/resetpass/:token"/>
         </Routes>
       </Router>

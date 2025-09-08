@@ -123,7 +123,7 @@ export const AuthProvider = ({children}) =>{
     setIsLoading(true)
     try {
       await API.post("/reset-password", {token, newPassword});
-    } catch (error) {
+    } catch (err) {
       setError(err?.response?.data?.message || "Failed to reset password")
     } finally {
       setIsLoading(false)
