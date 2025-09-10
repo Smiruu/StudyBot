@@ -27,7 +27,7 @@
 **Frontend:**
 - React.js
 - Redux Toolkit
-- Tailwind CSS
+- React Bootstrap
 
 **Backend:**
 - Node.js
