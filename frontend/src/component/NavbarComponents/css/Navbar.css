@@ -1,0 +1,19 @@
+.navbar-container{
+    background-color: #2d2638;
+    height: fit-content;
+}
+
+.navbar-logo{
+    width: 3rem;
+    height: auto;
+}
+
+.logo{
+    width: 3rem;
+    height: auto;
+}
+
+.navbar-auth{
+    color: white;
+
+}
