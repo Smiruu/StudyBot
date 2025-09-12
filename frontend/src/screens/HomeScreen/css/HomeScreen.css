@@ -1,5 +1,23 @@
 .section1{
     height: 83vh;
     background-color: #676278;
-    /* background-image: url("https://www.emilystudies.co.uk/wp-content/uploads/2019/04/ghjkl.jpg"); */
+    /* background-image: url("https://www.emilystudies.co.uk/wp-content/uploads/2019/04/ghjkl.jpg");
+    background-repeat: no-repeat;
+    background-size: cover; */
+}
+
+.section1-text{
+    padding-top: 3.6rem;
+    text-align: center;
+    font-family: "Ubuntu", sans-serif;
+    font-weight: 700;
+    font-size: 2.8rem;
+    color: white;
+}
+.section1-text2{
+    text-align: center;
+    color: white;
+    font-family: "Ubuntu", sans-serif;
+    font-weight: 300;
+    font-size: 1.3rem;
 }

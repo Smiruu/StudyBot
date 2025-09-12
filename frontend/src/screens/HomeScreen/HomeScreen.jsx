@@ -8,13 +8,16 @@ const HomeScreen = () => {
     <>
     <Navbar /><div>
       <section className="section1">
-        <div>
-          <h1>Welcome to StudyBot </h1>
-          <button>get started</button>
-          <h1>feature1</h1>
-          <h1>feature2</h1>
-          <h1>feature3</h1>
-          <h1>feature4</h1> 
+          <div>
+            <h1 className="section1-text">Welcome to StudyBot </h1>
+            <p className="section1-text2">Study smarter with AI tools that simplify learning and keep you on track.</p>
+            <button className="section1-button">get started</button>
+            <div className="section1-carousel">
+            <h1>feature1</h1>
+            <h1>feature2</h1>
+            <h1>feature3</h1>
+            <h1>feature4</h1> 
+          </div>
           {/* carousel features that are interactive like buttons */}
         </div>
       </section>
