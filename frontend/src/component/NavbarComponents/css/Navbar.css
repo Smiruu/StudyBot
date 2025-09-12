@@ -1,19 +1,55 @@
 .navbar-container{
     background-color: #2d2638;
-    height: fit-content;
+    height: 4rem;
+    display: flex;
+    padding: .5rem;
 }
 
 .navbar-logo{
-    width: 3rem;
-    height: auto;
-}
-
-.logo{
-    width: 3rem;
-    height: auto;
+    color: white;
+    font-family: "Ubuntu", sans-serif;
+    font-weight: 700;
+    font-size: 1.5rem;
+    padding-left: .5rem;
+    padding-top: .5rem;
+    flex: 1;
 }
 
 .navbar-auth{
-    color: white;
+    display: flex;
+    justify-content: right !important;
+    flex: 1;
+}
 
+.navbar-login{
+    font-family: "Ubuntu", sans-serif;
+    font-weight: 500;
+    font-size: 1.1rem;
+    color: white;
+    margin: .4rem;
+    padding: .3rem .5rem .2rem .8rem;
+    transition: ease-in-out 0.3s;
+}
+
+.navbar-login:hover{
+    color: rgb(102, 222, 252);
+}
+
+.navbar-register{
+    background-color: #6e54b5;
+    border-radius: 1rem;
+    color: white;
+    font-family: "Ubuntu", sans-serif;
+    font-weight: 500;
+    font-size: 1.1rem;
+    margin: .4rem;
+    padding: .2rem .8rem .2rem .8rem;
+    transition: ease-in-out 0.3s;
+
+}
+
+.navbar-register:hover{
+    background-color: rgb(102, 222, 252);
+    color: black;
+    transition: ease-in-out 0.3s;
 }

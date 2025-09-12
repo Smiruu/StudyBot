@@ -1,16 +1,20 @@
 import React from 'react'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import "./css/Navbar.css";
-import StudyLogo from "./Logo.png";
+
+
 
 function Navbar() {
+  const navigate = useNavigate()
+  
   return (
     <div className='navbar-container'>
-      <div className="navbar-logo">
-       <image src={StudyLogo} className='logo' />
+      <div className="navbar-logo" onClick={ () => navigate('/')}>
+       StudyBot
       </div>
       <div className="navbar-auth">
-      <Link to="/login">Login</Link> | <Link to="/register">Register</Link>
+      <p className="navbar-login">Log In</p>
+      <button className='navbar-register' onClick={() => navigate('/login')}>Get Started</button>
       </div>
     </div>
   )
