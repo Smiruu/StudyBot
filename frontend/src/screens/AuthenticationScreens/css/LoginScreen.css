@@ -2,7 +2,6 @@
   display: flex;
   justify-content: center;
   padding: 6rem 0 6rem 0;
-  box-sizing: border-box;
 }
 
 .split-screen {
@@ -28,6 +27,7 @@
   justify-content: center;
   align-items: center;
   position: relative;
+  min-width: 400px; 
 }
 
 .login-image-container {
@@ -82,16 +82,14 @@
   color: white;
   border: none;
   padding: 0.6rem 1.2rem;
-  border-radius: 6px;
+  border-radius: 1rem;
   cursor: pointer;
   font-size: 1rem;
-  transition: background 0.3s ease;
-  pointer-events: auto;
-  font-family: "Ubuntu", sans-serif;
   font-weight: 700;
-  font-style: bold;
-  border-radius: 1rem;
-  transition: ease-in-out 0.3s;
+  font-family: "Ubuntu", sans-serif;
+  transition: background 0.3s ease, color 0.3s ease;
+  pointer-events: auto;
+  white-space: nowrap;
 }
 
 .carousel-overlay .carousel-btn:hover {
@@ -324,6 +322,7 @@ background-color: #2d2638;
     width: 100%;
     flex: none;
     min-height: 300px;
+    min-width: 100px; 
   }
 
   .login-container {
@@ -371,11 +370,11 @@ background-color: #2d2638;
     bottom: 30px;
   }
 
-  .carousel-btn {
-    padding: 0.4rem 0.9rem;
+  .carousel-overlay .carousel-btn {
     font-size: 0.9rem;
-    top: 10px;
-    right: 10px;
+    padding: 0.5rem 1rem;
+    top: 20px;
+    right: 20px;
   }
 
   .login-container {
@@ -403,6 +402,13 @@ background-color: #2d2638;
     padding: 0.5rem 0rem;
   }
 
+  .carousel-overlay .carousel-btn {
+    font-size: 0.8rem;
+    padding: 0.4rem 0.8rem;
+    top: 25px;
+    right: 25px;
+  }
+  
   .split-screen {
     flex-direction: column;
     margin: 0.5rem;
