@@ -1,9 +1,12 @@
 .login-background {
-  padding-top: 8rem;
-  padding-bottom: 6rem;
+  display: flex;
+  justify-content: center;
+  padding: 8rem 0 6rem 0;
+  box-sizing: border-box;
 }
 
 .split-screen {
+  margin: auto 0;
   display: flex;
   height: auto;
   min-height: 75vh;
@@ -11,8 +14,7 @@
   padding: 1rem;
   background-color: #2d2638;
   border-radius: 1rem;
-  margin-left: 16rem;
-  margin-right: 16rem;
+  min-width: 80vw;
   box-shadow: 2px 8px 18px 4px rgba(0,0,0,0.5);
   -webkit-box-shadow: 2px 8px 18px 4px rgba(27, 23, 23, 0.5);
   -moz-box-shadow: 2px 8px 18px 4px rgba(0,0,0,0.5);
