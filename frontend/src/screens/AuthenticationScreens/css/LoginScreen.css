@@ -1,17 +1,12 @@
 .login-background {
-  background-color: #676278;
-  height: 100vh;
-  /* justify-content: center;
-  align-items: center; */
-  /* padding-left: 4rem;
-  padding-right: 4rem; */
   padding-top: 8rem;
   padding-bottom: 6rem;
 }
 
 .split-screen {
   display: flex;
-  height: 75vh max-content;
+  height: auto;
+  min-height: 75vh;
   overflow: hidden;
   padding: 1rem;
   background-color: #2d2638;
@@ -304,4 +299,119 @@ background-color: #2d2638;
   color: #ff3333;
   font-size: 0.8rem;
   margin-top: 0.25rem;
+}
+
+/* Responsive Layouts */
+@media (max-width: 1024px) {
+  .split-screen {
+    margin-left: 4rem;
+    margin-right: 4rem;
+    flex-direction: column;
+    height: auto;
+  }
+
+
+  .login-left-container,
+  .login-right-container {
+    width: 100%;
+    flex: none;
+    min-height: 300px;
+  }
+
+  .login-container {
+    width: 100%;
+    padding-left: 2rem;
+    padding-right: 2rem;
+  }
+
+  .carousel-overlay h2 {
+    font-size: 1.8rem;
+  }
+
+  .carousel-overlay p {
+    font-size: 1.4rem;
+  }
+
+  .login-title {
+    font-size: 2.5rem;
+  }
+
+  .login-subtitle {
+    font-size: 1.2rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .split-screen {
+    margin: 1rem;
+    padding: 0.5rem;
+  }
+
+  .login-background {
+    padding-top: 4rem;
+    padding-bottom: 3rem;
+  }
+
+  .carousel-overlay p {
+    font-size: 1.1rem;
+    bottom: 30px;
+  }
+
+  .carousel-btn {
+    padding: 0.4rem 0.9rem;
+    font-size: 0.9rem;
+    top: 10px;
+    right: 10px;
+  }
+
+  .login-container {
+    padding: 1rem;
+  }
+
+  .login-input {
+    padding: 0.6rem;
+    font-size: 15px;
+  }
+
+  .login-button {
+    font-size: 1rem;
+  }
+}
+
+@media (max-width: 576px) {
+  .login-image-container {
+    display: block !important;
+    height: 300px;
+    background: black; /* for visibility */
+  }
+
+  .login-background {
+    padding: 0.5rem 0rem;
+  }
+
+  .split-screen {
+    flex-direction: column;
+    margin: 0.5rem;
+  }
+
+  .login-container {
+    padding: 1rem;
+    width: 100%;
+  }
+
+  .login-title {
+    font-size: 2rem;
+  }
+
+  .login-subtitle {
+    font-size: 1rem;
+  }
+
+  .login-button {
+    font-size: 0.95rem;
+  }
+
+  .login-footer {
+    font-size: 13px;
+  }
 }
