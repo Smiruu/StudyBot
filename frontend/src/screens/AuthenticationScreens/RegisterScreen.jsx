@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import "./css/RegisterScreen.css";
 import { useAuth } from "../../hooks/AuthHooks/userAuth";
 
@@ -201,9 +201,9 @@ const RegisterScreen = () => {
 
             <p className="register-footer">
               Already have an account?{" "}
-              <a href="/login" className="register-link">
+              <Link to="/login" className="login-link">
                 Login here
-              </a>
+              </Link>
             </p>
 
             <div className="register-line2"></div>
