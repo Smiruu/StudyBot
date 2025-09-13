@@ -303,6 +303,12 @@ background-color: #2d2638;
 
 /* Responsive Layouts */
 @media (max-width: 1024px) {
+  .login-image-container {
+    display: block !important;
+    height: 300px;
+    background: black; /* for visibility */
+  }
+
   .split-screen {
     margin-left: 4rem;
     margin-right: 4rem;
@@ -345,6 +351,12 @@ background-color: #2d2638;
   .split-screen {
     margin: 1rem;
     padding: 0.5rem;
+  }
+
+  .login-image-container {
+    display: block !important;
+    height: 300px;
+    background: black; /* for visibility */
   }
 
   .login-background {
