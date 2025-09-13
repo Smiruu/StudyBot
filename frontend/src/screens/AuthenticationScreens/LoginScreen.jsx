@@ -72,7 +72,7 @@ const LoginScreen = () => {
         <div className="login-right-container">
 
           <div className="login-container">
-               <div className="login-line1"></div>
+               <div className="login-line1 mb-28"></div>
             <h2 className="login-title">Welcome Back</h2>
             <p className="login-subtitle">Login to your account</p>
 

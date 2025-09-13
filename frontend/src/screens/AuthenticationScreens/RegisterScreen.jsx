@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import "./css/RegisterScreen.css";
+import "./css/LoginScreen.css";
 import { useAuth } from "../../hooks/AuthHooks/userAuth";
 
 const images = [
@@ -89,10 +90,10 @@ const RegisterScreen = () => {
     }, []);
 
   return (
-    <div className="register-background">
-      <div className="register-split-screen">
-            <div className="register-left-container">
-              <div className="register-image-container">
+    <div className="login-background">
+      <div className="split-screen">
+          <div className="login-left-container">
+              <div className="login-image-container">
                 {images.map((img, index) => (
                   <img
                     key={index}
@@ -122,17 +123,17 @@ const RegisterScreen = () => {
               </div>
           </div>
 
-          <div className="register-right-container">
+          <div className="login-right-container">
 
-          <div className="register-container">
-            <div className="register-line1"></div>
-            <h2 className="register-title">Create Account</h2>
-            <p className="register-subtitle">Join us today</p>
+          <div className="login-container">
+            <div className="login-line1 mb-1"></div>
+            <h2 className="login-title">Create Account</h2>
+            <p className="login-subtitle">Join us today</p>
 
-            {error && <p className="register-error">{error}</p>}
+            {error && <p className="login-error">{error}</p>}
 
             <form onSubmit={handleSubmit} className="login-form">
-              <div className="register-form-group">
+              <div className="login-form-group">
                 <label>Full Name</label>
                 <input
                   type="text"
@@ -141,14 +142,14 @@ const RegisterScreen = () => {
                   onChange={handleChange}
                   autoComplete="off"
                   placeholder="Doc McStuffins"
-                  className="register-input"
+                  className="login-input"
                 />
                 {validationError.name && (
-                  <p className="register-error-text">{validationError.name}</p>
+                  <p className="login-error-text">{validationError.name}</p>
                 )}
               </div>
 
-              <div className="register-form-group">
+              <div className="login-form-group">
                 <label>Email</label>
                 <input
                   type="email"
@@ -157,14 +158,14 @@ const RegisterScreen = () => {
                   onChange={handleChange}
                   placeholder="user@example.com"
                   autoComplete="off"
-                  className="register-input"
+                  className="login-input"
                 />
                 {validationError.email && (
-                  <p className="register-error-text">{validationError.email}</p>
+                  <p className="login-error-text">{validationError.email}</p>
                 )}
               </div>
 
-              <div className="register-form-group">
+              <div className="login-form-group">
                 <label>Password</label>
                 <input
                   type="password"
@@ -172,14 +173,14 @@ const RegisterScreen = () => {
                   value={formData.password}
                   onChange={handleChange}
                   placeholder="••••••••"
-                  className="register-input"
+                  className="login-input"
                 />
                 {validationError.password && (
-                  <p className="register-error-text">{validationError.password}</p>
+                  <p className="login-error-text">{validationError.password}</p>
                 )}
               </div>
 
-              <div className="register-form-group">
+              <div className="login-form-group">
                 <label>Confirm Password</label>
                 <input
                   type="password"
@@ -187,26 +188,24 @@ const RegisterScreen = () => {
                   value={formData.confirmPassword}
                   onChange={handleChange}
                   placeholder="••••••••"
-                  className="register-input"
+                  className="login-input"
                 />
                 {validationError.confirmPassword && (
-                  <p className="register-error-text">{validationError.confirmPassword}</p>
+                  <p className="login-error-text">{validationError.confirmPassword}</p>
                 )}
               </div>
 
-              <button type="submit" disabled={isLoading} className="register-button">
+              <button type="submit" disabled={isLoading} className="login-button">
                 {isLoading ? 'Creating account...' : 'Register'}
               </button>
             </form>
 
-            <p className="register-footer">
+            <p className="login-footer">
               Already have an account?{" "}
               <Link to="/login" className="login-link">
                 Login here
               </Link>
             </p>
-
-            <div className="register-line2"></div>
 
           </div>
         </div>
