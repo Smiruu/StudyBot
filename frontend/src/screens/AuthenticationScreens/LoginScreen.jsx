@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from 'react-router-dom'
 import "./css/LoginScreen.css";
 import { useAuth } from "../../hooks/AuthHooks/userAuth";
 
@@ -72,7 +72,7 @@ const LoginScreen = () => {
         <div className="login-right-container">
 
           <div className="login-container">
-               <div className="login-line1"></div>
+               <div className="login-line1 mb-28"></div>
             <h2 className="login-title">Welcome Back</h2>
             <p className="login-subtitle">Login to your account</p>
 
@@ -112,9 +112,9 @@ const LoginScreen = () => {
             </button>
                           <p p className="login-footer">
               Don't have an account?{" "}
-              <a href="/register" className="login-link">
+              <Link to="/register" className="login-link">
                 Register here
-              </a>
+              </Link>
             </p>
             </form>
            <div className="login-line2"></div>

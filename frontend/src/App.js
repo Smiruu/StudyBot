@@ -1,4 +1,3 @@
-// src/App.js
 import React from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import { AuthProvider } from "./hooks/AuthHooks/userAuth";
@@ -9,6 +8,7 @@ import DashboardScreen from "./screens/HomeScreen/DashboardScreen";
 import VerifyScreen from "./screens/AuthenticationScreens/VerifyScreen";
 import FlashcardScreen from "./screens/QuizScreen/FlashcardsScreen";
 import ForgotPassword from "./screens/AuthenticationScreens/ForgotPassword";
+import "./App.css";
 
 function App() {
   return (
