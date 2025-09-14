@@ -1,10 +1,10 @@
-import { useState } from 'react';
+import { use, useState } from 'react';
 import { useQuizzes } from '../../hooks/QuizHooks/useQuizzes';
 import './css/CreateQuiz.css';
 import TopicForm  from './TopicForm';
 import NotesForm from './NotesForm';
 import PDFForm from './PDFForm'
-
+import { useAuth } from '../../hooks/AuthHooks/userAuth';
 
 function CreateQuiz({ onClose }) {
   const [showTopicForm, setShowTopicForm] = useState(false);
@@ -18,7 +18,9 @@ function CreateQuiz({ onClose }) {
     difficulty: 'medium',
     count: 5
   });
-  const {createFlashcards, loading, error} = useQuizzes();
+
+  const  { user, accessToken} = useAuth();
+  const {createFlashcards, loading, error, fetchQuizzesByGroup} = useQuizzes();
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
@@ -42,10 +44,13 @@ function CreateQuiz({ onClose }) {
         difficulty: formData.difficulty,
         count: formData.count
       },
-      pdfFile // This will be null if not using PDF form
+      pdfFile, // This will be null if not using PDF form
+      user,
+      accessToken
     );
     console.log('Flashcards created:', result);
     if(result){
+
       onClose()
     }
   };

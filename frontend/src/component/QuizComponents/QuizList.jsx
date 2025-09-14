@@ -2,13 +2,15 @@ import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import "./css/QuizList.css";
 import { useQuizzes } from "../../hooks/QuizHooks/useQuizzes";
+import { useAuth } from "../../hooks/AuthHooks/userAuth.js";
 
 function QuizList() {
   const { quizzes, isLoading, error, fetchQuizzesByGroup, deleteFlashcards } = useQuizzes();
+  const {user, accessToken } = useAuth();
   const navigate = useNavigate();
 
   useEffect(() => {
-    fetchQuizzesByGroup();
+    fetchQuizzesByGroup( user, accessToken);
   },[fetchQuizzesByGroup]);
 
   const handleQuizClick = (quizId) => {

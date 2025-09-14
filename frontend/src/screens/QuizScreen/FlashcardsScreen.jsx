@@ -3,15 +3,16 @@ import React, { useEffect } from "react";
 import { useQuizzes } from "../../hooks/QuizHooks/useQuizzes";
 import Flashcard from "../../component/QuizComponents/Flashcard"; // This is your individual card component
 import "./css/FlashcardScreen.css";
+import { useAuth } from "../../hooks/AuthHooks/userAuth";
 
 const FlashcardScreen = () => {
   const { groupId } = useParams();
   const { flashcards, fetchFlashcards, loading, error } = useQuizzes();
-
+  const { accessToken } = useAuth();
   useEffect(() => {
     const fetchData = async () => {
       if (groupId) {
-        await fetchFlashcards(groupId);
+        await fetchFlashcards(groupId, accessToken);
       }
     };
     fetchData();

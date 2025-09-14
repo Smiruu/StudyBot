@@ -1,5 +1,5 @@
 
-import { generateTokensAndSetCookies } from "../../../utils/generateTokenAndSetCookie.js";
+import { generateTokensAndSetCookies, generateAccess} from "../../../utils/generateTokenAndSetCookie.js";
 import UserService from "../services/userServices.js";
 
 
@@ -104,6 +104,25 @@ class UserController {
     }
   }
 
+static userRefresh = async (req, res) => {
+  try {
+    const token = req.cookies["refreshToken"];
+
+
+    if (!token) {
+      return res.status(401).json({ message: "No refresh token found in cookies" });
+    }
+
+    const accessToken = generateAccess(token);
+
+
+    const user = await UserService.userRefresh(accessToken);
+    return res.status(200).json({ user, accessToken });
+  } catch (error) {
+    console.error("Refresh error:", error.message);
+    return res.status(401).json({ message: "Invalid or expired refresh token" });
+  }
+};
 }
 
 

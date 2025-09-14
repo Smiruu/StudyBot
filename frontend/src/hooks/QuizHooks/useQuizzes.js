@@ -9,15 +9,14 @@ export const useQuizzes = () => {
   const [loading, setIsLoading] = useState(false);
   const [error, setError] = useState(null);
 
-  const createFlashcards = async (flashcardData, file = null) => {
+  const createFlashcards = async (flashcardData, file = null, user, accessToken) => {
     // Cooldown timer implementation
 
     setIsLoading(true);
     setError(null);
 
     try {
-      const user = JSON.parse(localStorage.getItem("user"));
-      const token = localStorage.getItem("accessToken");
+
       const formData = new FormData();
 
       // Append all regular fields
@@ -33,7 +32,7 @@ export const useQuizzes = () => {
 
       const response = await API.post("/create", formData, {
         headers: {
-          Authorization: `Bearer ${token}`,
+          Authorization: `Bearer ${accessToken}`,
           "Content-Type": "multipart/form-data",
         },
       });
@@ -49,15 +48,14 @@ export const useQuizzes = () => {
     }
   };
 
-  const fetchQuizzesByGroup = useCallback(async () => {
+  const fetchQuizzesByGroup = useCallback(async (user, accessToken) => {
     setIsLoading(true);
 
     try {
-      const user = JSON.parse(localStorage.getItem("user"));
-      const token = localStorage.getItem("accessToken");
+
       const response = await API.get("/userFlashcards", {
         headers: {
-          Authorization: `Bearer ${token}`,
+          Authorization: `Bearer ${accessToken}`,
         },
         userId: user.id,
       });
@@ -71,19 +69,19 @@ export const useQuizzes = () => {
   }, []);
 
   const fetchFlashcards = useCallback(
-    async (groupId) => {
+    async (groupId, accessToken) => {
       setIsLoading(true); // Set loading to true when starting fetch
       setError(null); // Clear any previous errors
-
+      console.log(accessToken)
       try {
-        const token = localStorage.getItem("accessToken");
+        
 
         if (!groupId) {
           setError("Group ID is missing.");
           setIsLoading(false);
           return;
         }
-        if (!token) {
+        if (!accessToken) {
           setError("Authentication token is missing. Please log in.");
           setIsLoading(false);
           return;
@@ -91,7 +89,7 @@ export const useQuizzes = () => {
 
         const response = await API.get(`/userFlashcards/${groupId}`, {
           headers: {
-            Authorization: `Bearer ${token}`,
+            Authorization: `Bearer ${accessToken}`,
           },
         });
 

@@ -1,22 +1,27 @@
 
 import { Link } from "react-router-dom";
+import { useEffect } from "react";
 import "./css/DashboardScreen.css";
 import {useAuth} from "../../hooks/AuthHooks/userAuth.js"
 import { useNavigate } from "react-router-dom";
 import QuizComponent from "../../component/QuizComponents/QuizComponent.jsx";
 
 const DashboardScreen = () => {
-  const {user, isAuthenticated, logout} = useAuth();
+  const { user, isAuthenticated, logout, isLoading } = useAuth();
   const navigate = useNavigate();
-  
-  if(!isAuthenticated){
-    navigate("/login")
-    return null
+
+
+  const handleLogout = () => {
+    logout();
+    navigate("/login");
+  };
+
+  if (isLoading) {
+    return <div className="loading">Loading...</div>; // or a spinner
   }
 
-  const handleLogout = ()=>{
-    logout();
-    navigate("/login")
+  if (!isAuthenticated || !user) {
+    return null; // don’t render until navigate kicks in
   }
 
   return (
@@ -25,9 +30,7 @@ const DashboardScreen = () => {
         <h1 className="dashboard-title">Welcome back, {user.name}!</h1>
         <p className="dashboard-subtitle">This is your StudyBot Dashboard</p>
 
-        <div className="dashboard-stats">
-
-        </div>
+        <div className="dashboard-stats"></div>
 
         <div className="buttons-group">
           <Link to="/courses" className="button btn-green">
@@ -36,17 +39,11 @@ const DashboardScreen = () => {
           <Link to="/profile" className="button btn-gray">
             Edit Profile
           </Link>
-          <button onClick={handleLogout}>
-            Logout
-          </button>
-
+          <button onClick={handleLogout}>Logout</button>
         </div>
-        
+      </div>
+      <QuizComponent />
     </div>
-    <QuizComponent />
-    </div>
-     
-  
   );
 };
 

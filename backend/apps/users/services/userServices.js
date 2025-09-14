@@ -4,6 +4,7 @@ import { sendPasswordResetEmail, sendVerificationEmail } from "../../../utils/se
 import { User } from "../models/userModel.js";
 import bcrypt from "bcryptjs";
 import dotenv from "dotenv";
+import jwt from "jsonwebtoken";
 dotenv.config();
 class UserService {
   static async registerUser(userData, res) {
@@ -106,6 +107,21 @@ class UserService {
     await user.save();
     return user;
   }
+
+  static async userRefresh(accessToken) {
+
+  const decoded = jwt.decode(accessToken); // <- decode, not verify
+  if (!decoded?.id) {
+    throw new Error("Invalid access token.");
+  }
+
+  const user = await User.findById(decoded.id).select("-password");
+  if (!user) {
+    throw new Error("User not found.");
+  }
+
+  return user;
+}
 }
 
 
