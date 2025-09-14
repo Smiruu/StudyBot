@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
+import { BsEyeSlash, BsEyeFill } from 'react-icons/bs';
 import "./css/LoginScreen.css";
 import { useAuth } from "../../hooks/AuthHooks/userAuth";
 
@@ -11,6 +12,8 @@ const images = [
 
 const RegisterScreen = () => {
   const { register, error, isLoading } = useAuth();
+  const [showPassword, setShowPassword] = useState(false);
+  const [showConfirmPassword, setShowConfirmPassword] = useState(false);
   const navigate = useNavigate();
 
   const [formData, setFormData] = useState({
@@ -165,34 +168,52 @@ const RegisterScreen = () => {
               </div>
 
               <div className="login-form-group">
-                <label>Password</label>
+              <label>Password</label>
+              <div className="password-input-container">
                 <input
-                  type="password"
+                  type={showPassword ? "text" : "password"}
                   name="password"
                   value={formData.password}
                   onChange={handleChange}
                   placeholder="••••••••"
                   className="login-input"
                 />
-                {validationError.password && (
-                  <p className="login-error-text">{validationError.password}</p>
-                )}
+                <button
+                  type="button"
+                  className="toggle-password-btn"
+                  onClick={() => setShowPassword((prev) => !prev)}
+                >
+                  {showPassword ? <BsEyeSlash /> : <BsEyeFill />}
+                </button>
               </div>
+              {validationError.password && (
+                <p className="login-error-text">{validationError.password}</p>
+              )}
+            </div>
 
-              <div className="login-form-group">
-                <label>Confirm Password</label>
+            <div className="login-form-group">
+              <label>Confirm Password</label>
+              <div className="password-input-container">
                 <input
-                  type="password"
+                  type={showConfirmPassword ? "text" : "password"}
                   name="confirmPassword"
                   value={formData.confirmPassword}
                   onChange={handleChange}
                   placeholder="••••••••"
                   className="login-input"
                 />
-                {validationError.confirmPassword && (
-                  <p className="login-error-text">{validationError.confirmPassword}</p>
-                )}
+                <button
+                  type="button"
+                  className="toggle-password-btn"
+                  onClick={() => setShowConfirmPassword((prev) => !prev)}
+                >
+                  {showConfirmPassword ? <BsEyeSlash /> : <BsEyeFill />}
+                </button>
               </div>
+              {validationError.confirmPassword && (
+                <p className="login-error-text">{validationError.confirmPassword}</p>
+              )}
+            </div>
 
               <button type="submit" disabled={isLoading} className="login-button">
                 {isLoading ? 'Creating account...' : 'Register'}

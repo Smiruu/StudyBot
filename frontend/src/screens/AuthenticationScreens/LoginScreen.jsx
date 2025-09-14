@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { Link, useNavigate } from 'react-router-dom'
 import "./css/LoginScreen.css";
+import { BsEyeSlash, BsEyeFill } from 'react-icons/bs';
 import { useAuth } from "../../hooks/AuthHooks/userAuth";
 
 const images = [
@@ -13,6 +14,7 @@ const LoginScreen = () => {
   const [email,setEmail] = useState("");
   const [password,setPassword] = useState("");
   const {login, isLoading, error, isAuthenticated} = useAuth();
+  const [showPassword, setShowPassword] = useState(false);
       
   const navigate = useNavigate();
 
@@ -96,15 +98,24 @@ const LoginScreen = () => {
 
               <div className="login-form-group">
                 <label>Password</label>
-                <input
-                  type="password"
-                  name="password"
-                  value={password}
-                  onChange={(e) => setPassword(e.target.value)}
-                  placeholder="••••••••"
-                  className="login-input"
-                  required
-                />
+                <div className="password-input-container">
+                  <input
+                    type={showPassword ? "text" : "password"}
+                    name="password"
+                    value={password}
+                    onChange={(e) => setPassword(e.target.value)}
+                    placeholder="••••••••"
+                    className="login-input"
+                    required
+                  />
+                  <button
+                    type="button"
+                    className="toggle-password-btn"
+                    onClick={() => setShowPassword((prev) => !prev)}
+                  >
+                    {showPassword ? <BsEyeSlash /> : <BsEyeFill />}
+                  </button>
+                </div>
               </div>
 
               <button className="login-button" disabled={isLoading}>

@@ -1,23 +1,22 @@
 .verification-background {
-  background-color: #676278;
   height: 100vh;
-  width: 100vw;
+  min-height: 100vh;
+  width: 100%;
   display: flex;
   align-items: center;
   justify-content: center;
+  overflow: hidden;
+  padding: 2rem 1rem;
 }
 
-.verification-containerbg{
-  background-color: #676278;
-}
 
 .verification-container {
-  max-width: 30rem;
+  min-width: 30rem;
+  width: 100%;
   height: auto;
   margin: auto 0;
   display: flex;
   flex-direction: column;
-  overflow: hidden;
   padding: 3rem;
   background-color: #2d2638;
   border-radius: 1rem;
@@ -179,4 +178,95 @@
   text-decoration: underline;
   color: rgb(102, 222, 252);
   transition: ease-in-out 0.3s;
+}
+
+@media (max-width: 1024px) {
+  .verification-containerbg {
+    margin-left: 3rem;
+    margin-right: 3rem;
+    flex-direction: column;
+    min-width: auto;
+  }
+
+  .verification-container {
+    padding: 1.5rem;
+  }
+
+  .verification-title {
+    font-size: 2rem;
+  }
+
+  .verification-subtitle {
+    font-size: 0.95rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .verification-containerbg {
+    margin: 1rem;
+    padding: 0.5rem;
+    flex: none;
+  }
+
+  .verification-background {
+    padding-top: 4rem;
+    padding-bottom: 3rem;
+  }
+
+  .verification-container {
+    padding: 1rem;
+  }
+
+  .verification-title {
+    font-size: 1.8rem;
+  }
+
+  .verification-subtitle {
+    font-size: 0.9rem;
+  }
+
+  .verification-digit {
+    width: 45px;
+    height: 55px;
+    font-size: 18px;
+  }
+}
+
+@media (max-width: 576px) {
+  .verification-background {
+    padding: 0.5rem 0;
+  }
+
+  .verification-containerbg {
+    flex-direction: column;
+    margin: 0.5rem;
+    min-width: auto;
+  }
+
+  .verification-container {
+    padding: 1rem;
+    width: 100%;
+  }
+
+  .verification-title {
+    font-size: 1.6rem;
+  }
+
+  .verification-subtitle {
+    font-size: 0.85rem;
+  }
+
+  .verification-digit {
+    width: 40px;
+    height: 50px;
+    font-size: 16px;
+  }
+
+  .verification-button {
+    font-size: 0.95rem;
+  }
+
+  .verification-footer {
+    font-size: 13px;
+  }
 }

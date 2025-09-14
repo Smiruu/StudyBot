@@ -271,6 +271,33 @@ padding: .2rem;
   transition: ease-in-out 0.3s;
 }
 
+.password-input-container {
+  position: relative;
+}
+
+.password-input-container .login-input {
+  width: 100%;
+  padding-right: 2.5rem; 
+}
+
+.toggle-password-btn {
+  position: absolute;
+  right: 0.75rem;
+  top: 50%;
+  transform: translateY(-50%);
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-size: 1.1rem;
+  color: white;
+    transition: ease-in-out 0.2s;
+}
+
+.toggle-password-btn:hover {
+  color: rgb(102, 222, 252);
+  transition: ease-in-out 0.2s;
+}
+
 .login-button {
   padding: 0.75rem;
   background-color: #6e54b5; 
