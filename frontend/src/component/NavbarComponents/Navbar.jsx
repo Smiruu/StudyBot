@@ -25,7 +25,7 @@ function Navbar() {
         StudyBot
       </div>
       <div className="navbar-auth">
-        <p className="navbar-login" onClick={() => navigate('/login')}>Log In</p>
+        <button className="navbar-login" onClick={() => navigate('/login')}>Log In</button>
         <button className='navbar-register' onClick={() => navigate('/register')}>Get Started</button>
       </div>
     </div>
