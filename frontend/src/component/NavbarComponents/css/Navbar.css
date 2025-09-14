@@ -3,6 +3,7 @@
     height: 4rem;
     display: flex;
     padding: .5rem; 
+    z-index: 50;
 }
 
 .navbar-logo{
