@@ -1,9 +1,18 @@
 .navbar-container{
-    background-color: #2d2638;
-    height: 4rem;
+    height: 0rem;
     display: flex;
-    padding: .5rem; 
+    padding: 0.5rem;
     z-index: 50;
+    transition: 0.3s ease-in-out;
+    position: fixed;
+    top: 0;
+    width: 100%;
+}
+
+.navbar-scrolled {
+    height: 5rem;
+    background-color: #2d2638;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
 }
 
 .navbar-logo{
@@ -27,9 +36,9 @@
     font-size: 1.1rem;
 }
 
-.navbar-login{
-    margin: .4rem;
-    padding: .3rem .5rem .2rem .8rem;
+.navbar-login {
+    margin: 0.6rem 0.4rem; /* increase top/bottom margin */
+    padding: 0.6rem 0.8rem;
     cursor: pointer;
     transition: ease-in-out 0.3s;
 }
@@ -39,19 +48,25 @@
     transition: ease-in-out 0.3s;
 }
 
-.navbar-register{
-    background-color: #6e54b5;
+.navbar-register {
+    background-color: transparent;
+    color: white;
     border-radius: 1rem;
-    margin: .4rem;
-    padding: .2rem .8rem .2rem .8rem;
+    margin: 0.6rem 0.4rem;
+    padding: 0.6rem 1rem; 
     transition: ease-in-out 0.3s;
-
 }
 
-.navbar-register:hover{
+/* When scrolled */
+.navbar-scrolled .navbar-register {
+    background-color: #6e54b5;
+    border: none;
+    color: white;
+}
+
+.navbar-scrolled .navbar-register:hover {
     background-color: rgb(102, 222, 252);
     color: black;
-    transition: ease-in-out 0.3s;
 }
 
 @media (max-width: 576px) {

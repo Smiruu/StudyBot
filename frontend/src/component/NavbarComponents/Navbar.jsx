@@ -1,20 +1,32 @@
-import React from 'react'
-import { Link, useNavigate } from 'react-router-dom'
+import React, { useEffect, useState } from 'react'
+import { useNavigate } from 'react-router-dom'
 import "./css/Navbar.css";
-
-
 
 function Navbar() {
   const navigate = useNavigate()
-  
+  const [scrolled, setScrolled] = useState(false)
+
+  useEffect(() => {
+    const handleScroll = () => {
+      if (window.scrollY > 10) {
+        setScrolled(true)
+      } else {
+        setScrolled(false)
+      }
+    }
+
+    window.addEventListener('scroll', handleScroll)
+    return () => window.removeEventListener('scroll', handleScroll)
+  }, [])
+
   return (
-    <div className='navbar-container'>
-      <div className="navbar-logo" onClick={ () => navigate('/')}>
-       StudyBot
+    <div className={`navbar-container ${scrolled ? 'navbar-scrolled' : ''}`}>
+      <div className="navbar-logo" onClick={() => navigate('/')}>
+        StudyBot
       </div>
       <div className="navbar-auth">
-      <p className="navbar-login" onClick={() => navigate('/login')}>Log In</p>
-      <button className='navbar-register' onClick={() => navigate('/register')}>Get Started</button>
+        <p className="navbar-login" onClick={() => navigate('/login')}>Log In</p>
+        <button className='navbar-register' onClick={() => navigate('/register')}>Get Started</button>
       </div>
     </div>
   )
