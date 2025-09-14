@@ -23,7 +23,7 @@ function App() {
           <Route path="/dashboard" element={<DashboardScreen />} />
           <Route path="/quiz/:groupId" element={<FlashcardScreen />}/>
           <Route path="/resetpass" element={<ForgotPassword/>}/>
-          <Route path="/resetpass/:token"/>
+          <Route path="/reset-password/:token"/>
         </Routes>
       </Router>
       </AuthProvider>
