@@ -21,7 +21,6 @@
 
 .login-left-container {
   flex: 1;
-  background-color: #2d2638; /* forest green */
   color: white;
   display: flex;
   justify-content: center;
@@ -147,11 +146,9 @@ border-radius: 1rem;
 .login-right-container {
 flex: 1;
 display: flex;
-/* align-items: center;
-justify-content: center; */
+align-items: center;
+justify-content: center;
 padding: .2rem;
-/* margin-left: .5rem; */
-background-color: #2d2638;
 }
 
 .login-line1{
