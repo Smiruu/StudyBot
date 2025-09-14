@@ -1,4 +1,5 @@
 
+import { generateTokensAndSetCookies } from "../../../utils/generateTokenAndSetCookie.js";
 import UserService from "../services/userServices.js";
 
 
@@ -30,8 +31,10 @@ class UserController {
 
     try{
         const user = await UserService.verifyUserEmail(token);
+        const { accessToken} = generateTokensAndSetCookies(user,res)
         res.status(200).json({
             message: "Email verified successfully.",
+            accessToken,
             user: {
                 ...user._doc,
                 password: undefined, // Exclude password from response
@@ -48,14 +51,15 @@ class UserController {
     const {email, password} = req.body;
     try {
       const user = await UserService.userLogin(email,password,res);
+      const { accessToken} = generateTokensAndSetCookies(user,res)
 
       res.status(200).json({
         message: "User logged in successfully.",
+        accessToken,
         user: {
           _id: user._id,
           email: user.email,
           name: user.name,
-          token: user.token,
         }
       });
       
@@ -67,7 +71,7 @@ class UserController {
 };
 
    static userLogout = async (req,res) => {
-    res.clearCookie("token")
+    res.clearCookie("refreshToken")
     res.status(200).json({ success:true, message:"Logged out successfully"});
 };
   static userSendResetPassword = async (req, res) => {

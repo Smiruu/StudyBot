@@ -1,4 +1,4 @@
-import { generateTokenAndSetCookie } from "../../../utils/generateTokenAndSetCookie.js";
+import { generateTokensAndSetCookies } from "../../../utils/generateTokenAndSetCookie.js";
 import { generateVerificationToken } from "../../../utils/generateVerification.js";
 import { sendPasswordResetEmail, sendVerificationEmail } from "../../../utils/sendEmail.js";
 import { User } from "../models/userModel.js";
@@ -7,7 +7,7 @@ import dotenv from "dotenv";
 dotenv.config();
 class UserService {
   static async registerUser(userData, res) {
-    console.log("Registering user:", userData);
+   
     const existingUser = await User.findOne({ email: userData.email });
     if (existingUser) { 
       console.log("User already exists:", userData.email);
@@ -23,7 +23,7 @@ class UserService {
       verificationTokenExpire: Date.now() + 24 * 60 * 60 * 1000, // Token valid for 24 hours
     });
 
-    generateTokenAndSetCookie(newUser, res);
+
 
     await newUser.save();
     return newUser;
@@ -49,6 +49,7 @@ class UserService {
     user.isVerified = true;
     user.verificationToken = undefined; // Clear the verification token
     user.verificationTokenExpire = undefined; // Clear the expiration date
+    
 
     return await user.save();
 }
@@ -67,8 +68,7 @@ class UserService {
     if (user.verificationToken) {
   throw new Error("Email not verified. Please check your email for verification.");
 }
-    const token = generateTokenAndSetCookie(user, res);
-    user.token = token;
+
     return user;
   }
 
