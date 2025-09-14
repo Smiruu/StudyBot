@@ -24,6 +24,13 @@ function VerifyScreen() {
         }
     };
 
+        const handleKeyDown = (e, index) => {
+    if (e.key === "Backspace" && !digits[index] && index > 0) {
+        document.getElementById(`digit-${index - 1}`).focus();
+    }
+    }; //  if i backspace it automatically goes to the previous digit box
+
+
     const handleSubmit = async (e) => {
         e.preventDefault();
         const verificationCode = digits.join('');
@@ -79,6 +86,7 @@ function VerifyScreen() {
                                     maxLength="1"
                                     value={digit}
                                     onChange={(e) => handleDigitChange(index, e.target.value)}
+                                    onKeyDown={(e) => handleKeyDown(e, index)} //  if i backspace it automatically goes to the previous digit box
                                     className="verification-digit"
                                     disabled={isLoading}
                                 />
