@@ -13,7 +13,6 @@ const images = [
 const RegisterScreen = () => {
   const { register, error, isLoading } = useAuth();
   const [showPassword, setShowPassword] = useState(false);
-  const [showConfirmPassword, setShowConfirmPassword] = useState(false);
   const navigate = useNavigate();
 
   const [formData, setFormData] = useState({
@@ -195,7 +194,7 @@ const RegisterScreen = () => {
               <label>Confirm Password</label>
               <div className="password-input-container">
                 <input
-                  type={showConfirmPassword ? "text" : "password"}
+                  type={showPassword ? "text" : "password"}
                   name="confirmPassword"
                   value={formData.confirmPassword}
                   onChange={handleChange}
@@ -205,9 +204,9 @@ const RegisterScreen = () => {
                 <button
                   type="button"
                   className="toggle-password-btn"
-                  onClick={() => setShowConfirmPassword((prev) => !prev)}
+                  onClick={() => setShowPassword((prev) => !prev)}
                 >
-                  {showConfirmPassword ? <BsEyeSlash /> : <BsEyeFill />}
+                  {showPassword ? <BsEyeSlash /> : <BsEyeFill />}
                 </button>
               </div>
               {validationError.confirmPassword && (
