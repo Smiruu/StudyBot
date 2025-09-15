@@ -160,7 +160,7 @@ padding: .2rem;
 .login-line2{
   height: 1px;
   background-color: #cccccc34;
-  margin-top: 5rem;
+  /* margin-top: 1.5rem; */
 }
 
 .login-container {

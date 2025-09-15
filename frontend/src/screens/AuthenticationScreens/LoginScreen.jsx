@@ -133,7 +133,7 @@ const LoginScreen = () => {
               </Link>
             </p>
             </form>
-           <div className="login-line2"></div>
+           <div className="login-line2 mt-20"></div>
 
           </div>
           </div>

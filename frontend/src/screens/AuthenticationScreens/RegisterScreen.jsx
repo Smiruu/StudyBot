@@ -226,6 +226,8 @@ const RegisterScreen = () => {
               </Link>
             </p>
 
+        <div className="login-line2 mt-6"></div>
+
           </div>
         </div>
     </div>
