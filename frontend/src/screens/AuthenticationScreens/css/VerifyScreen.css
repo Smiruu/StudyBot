@@ -1,12 +1,16 @@
 .verification-background {
-  height: 100vh;
+  height: auto;
   min-height: 100vh;
   width: 100%;
+  min-width: 0;
+  max-width: 100%;
   display: flex;
   align-items: center;
   justify-content: center;
-  overflow: hidden;
   padding: 2rem 1rem;
+  overflow-y: auto;
+  overflow-x: hidden;
+  box-sizing: border-box;
 }
 
 
@@ -182,10 +186,10 @@
 
 @media (max-width: 1024px) {
   .verification-containerbg {
-    margin-left: 3rem;
-    margin-right: 3rem;
-    flex-direction: column;
-    min-width: auto;
+  margin: 0 auto;       
+  padding: 1rem;        
+  width: 100%;          
+  max-width: 500px;     
   }
 
   .verification-container {
@@ -198,6 +202,12 @@
 
   .verification-subtitle {
     font-size: 0.95rem;
+  }
+
+    .verification-digit {
+    width: 45px;
+    height: 55px;
+    font-size: 18px;
   }
 }
 
@@ -215,6 +225,10 @@
 
   .verification-container {
     padding: 1rem;
+    width: 100%;
+    height: auto;
+    min-width: 300px;
+    min-height: 100px;
   }
 
   .verification-title {
@@ -234,26 +248,30 @@
 
 @media (max-width: 576px) {
   .verification-background {
-    padding: 0.5rem 0;
+    padding: 0.5rem 0.5rem;
   }
 
   .verification-containerbg {
     flex-direction: column;
-    margin: 0.5rem;
+    padding-top: 1rem;
     min-width: auto;
+    margin: 1rem;
   }
 
   .verification-container {
     padding: 1rem;
     width: 100%;
+    height: auto;
+    min-width: 200px;
+    min-height: 100px;
   }
 
   .verification-title {
-    font-size: 1.6rem;
+    font-size: 1.3rem;
   }
 
   .verification-subtitle {
-    font-size: 0.85rem;
+    font-size: 0.7rem;
   }
 
   .verification-digit {
@@ -263,10 +281,10 @@
   }
 
   .verification-button {
-    font-size: 0.95rem;
+    font-size: 0.8rem;
   }
 
   .verification-footer {
-    font-size: 13px;
+    font-size: 11px;
   }
 }
