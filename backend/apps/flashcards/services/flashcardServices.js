@@ -120,6 +120,16 @@ async extractTextFromPDF(pdfBuffer) {
         await Flashcard.deleteMany({ group: groupId });
         return;
     }
+
+    async editGroupName(groupId, newName) {
+        if (!groupId) throw new Error("Group ID is required to edit group name.");
+        if (!newName || !newName.trim()) throw new Error("New group name cannot be empty.");
+
+        const group = await FlashcardGroup.findByIdAndUpdate(groupId, 
+            { name: newName.trim()}, {new: true, runValidators: true});
+        if (!group) throw new Error("Flashcard group not found.");
+        return;
+    }
 }
 
 export default new flashcardServices();

@@ -19,7 +19,7 @@ class flashcardController {
         options.pdfBuffer = req.file.buffer;
       }
 
-      console.log(options)
+      console.log(options);
       const flashcards = await flashcardServices.createFlashcards(options);
 
       res.status(200).json({
@@ -29,12 +29,10 @@ class flashcardController {
       });
     } catch (error) {
       console.error("Error generating flashcards:", error);
-      res
-        .status(500)
-        .json({
-          message: "Failed to generate flashcards.",
-          error: error.message,
-        });
+      res.status(500).json({
+        message: "Failed to generate flashcards.",
+        error: error.message,
+      });
     }
   }
 
@@ -59,12 +57,10 @@ class flashcardController {
         data: flashcardsList,
       });
     } catch (error) {
-      res
-        .status(500)
-        .json({
-          message: "Failed to retrieve flashcards.",
-          error: error.message,
-        });
+      res.status(500).json({
+        message: "Failed to retrieve flashcards.",
+        error: error.message,
+      });
     }
   }
 
@@ -72,45 +68,59 @@ class flashcardController {
     const groupId = req.params.groupId;
 
     try {
-        const listOfFlashcards = await flashcardServices.listGroupFlashcards(groupId);
-        if (!listOfFlashcards || listOfFlashcards.length === 0) {
-            return res.status(200).json({
-                success: true,
-                message: "No flashcards found for this group.",
-                count: 0,
-                data: [],
-            });
-        }
-
-        res.status(200).json({
-            message: "Flashcards retrieved successfully.",
-            count: listOfFlashcards.length,
-            data: listOfFlashcards,
+      const listOfFlashcards = await flashcardServices.listGroupFlashcards(
+        groupId
+      );
+      if (!listOfFlashcards || listOfFlashcards.length === 0) {
+        return res.status(200).json({
+          success: true,
+          message: "No flashcards found for this group.",
+          count: 0,
+          data: [],
         });
+      }
 
-    }catch (error) {
-        res.status(500).json({
-            message: "Failed to retrieve flashcards.",
-            error: error.message,
-        });
+      res.status(200).json({
+        message: "Flashcards retrieved successfully.",
+        count: listOfFlashcards.length,
+        data: listOfFlashcards,
+      });
+    } catch (error) {
+      res.status(500).json({
+        message: "Failed to retrieve flashcards.",
+        error: error.message,
+      });
     }
-}
-    async deleteGroupAndFlashcards(req, res) {
+  }
+  async deleteGroupAndFlashcards(req, res) {
     const groupId = req.params.groupId;
 
-    try{
-        await flashcardServices.deleteGroupAndFlashcards(groupId);
-        res.status(200).json({
-            message: "Flashcard group and associated flashcards deleted successfully."
-        });
-    }catch(error){
-        console.error("Error deleting flashcard group:", error);
-        res.status(500).json({
-            message: "Failed to delete flashcard group.",
-            error: error.message,
-        });
+    try {
+      await flashcardServices.deleteGroupAndFlashcards(groupId);
+      res.status(200).json({
+        message:
+          "Flashcard group and associated flashcards deleted successfully.",
+      });
+    } catch (error) {
+      console.error("Error deleting flashcard group:", error);
+      res.status(500).json({
+        message: "Failed to delete flashcard group.",
+        error: error.message,
+      });
     }
-}
+  }
+
+  async editGroupName(req,res) {
+    const groupId = req.params.groupId;
+    const { newName } = req.body;
+
+    try {
+      await flashcardServices.editGroupName(groupId, newName);
+      res.status(200).json({message: "Group name updated successfully."});
+    } catch (error) {
+      res.status(400).json({message: "Failed to update group name.", error: error.message});
+    }
+  }
 }
 
 export default new flashcardController();
