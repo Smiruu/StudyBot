@@ -113,7 +113,7 @@ const LoginScreen = () => {
                     className="toggle-password-btn"
                     onClick={() => setShowPassword((prev) => !prev)}
                   >
-                    {showPassword ? <BsEyeSlash /> : <BsEyeFill />}
+                    {showPassword ? <BsEyeFill /> : <BsEyeSlash />}
                   </button>
                 </div>
                   <div className="forgot-password-container">
