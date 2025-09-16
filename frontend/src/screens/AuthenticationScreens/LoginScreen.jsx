@@ -113,22 +113,27 @@ const LoginScreen = () => {
                     className="toggle-password-btn"
                     onClick={() => setShowPassword((prev) => !prev)}
                   >
-                    {showPassword ? <BsEyeSlash /> : <BsEyeFill />}
+                    {showPassword ? <BsEyeFill /> : <BsEyeSlash />}
                   </button>
+                </div>
+                  <div className="forgot-password-container">
+                  <Link to="/forgotpassword" className="forgot-link">
+                    Forgot password?
+                  </Link>
                 </div>
               </div>
 
               <button className="login-button" disabled={isLoading}>
               {isLoading ? 'Logging in...' : 'Login'}
             </button>
-                          <p p className="login-footer">
+              <p p className="login-footer">
               Don't have an account?{" "}
               <Link to="/register" className="login-link">
                 Register here
               </Link>
             </p>
             </form>
-           <div className="login-line2"></div>
+           <div className="login-line2 mt-20"></div>
 
           </div>
           </div>

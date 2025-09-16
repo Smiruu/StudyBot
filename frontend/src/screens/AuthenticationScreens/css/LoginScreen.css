@@ -160,7 +160,7 @@ padding: .2rem;
 .login-line2{
   height: 1px;
   background-color: #cccccc34;
-  margin-top: 5rem;
+  /* margin-top: 1.5rem; */
 }
 
 .login-container {
@@ -210,7 +210,9 @@ padding: .2rem;
   color: #9a92bb; 
   text-decoration: none;
   transition: ease-in-out 0.3s;
-
+  font-weight: 500;
+  font-family: "Ubuntu", sans-serif;
+  font-style: bold;
 }
 
 .login-link:hover {
@@ -294,6 +296,30 @@ padding: .2rem;
 }
 
 .toggle-password-btn:hover {
+  color: rgb(102, 222, 252);
+  transition: ease-in-out 0.2s;
+}
+
+.forgot-password-container {
+  text-align: right;
+  margin-top: 0.3rem;
+  padding-right: 0.5rem;
+}
+
+.forgot-link {
+  font-size: 0.85rem;
+  color: #9a92bb;
+  text-decoration: none;
+  transition: color 0.2s ease;
+  font-weight: 500;
+  font-family: "Ubuntu", sans-serif;
+  font-style: bold;
+  transition: ease-in-out 0.2s;
+
+}
+
+.forgot-link:hover {
+  text-decoration: underline;
   color: rgb(102, 222, 252);
   transition: ease-in-out 0.2s;
 }

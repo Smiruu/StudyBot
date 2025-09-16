@@ -182,7 +182,7 @@ const RegisterScreen = () => {
                   className="toggle-password-btn"
                   onClick={() => setShowPassword((prev) => !prev)}
                 >
-                  {showPassword ? <BsEyeSlash /> : <BsEyeFill />}
+                  {showPassword ? <BsEyeFill /> : <BsEyeSlash />}
                 </button>
               </div>
               {validationError.password && (
@@ -206,7 +206,7 @@ const RegisterScreen = () => {
                   className="toggle-password-btn"
                   onClick={() => setShowPassword((prev) => !prev)}
                 >
-                  {showPassword ? <BsEyeSlash /> : <BsEyeFill />}
+                  {showPassword ? <BsEyeFill /> : <BsEyeSlash />}
                 </button>
               </div>
               {validationError.confirmPassword && (
@@ -225,6 +225,8 @@ const RegisterScreen = () => {
                 Login here
               </Link>
             </p>
+
+        <div className="login-line2 mt-6"></div>
 
           </div>
         </div>
