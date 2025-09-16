@@ -13,5 +13,6 @@ router.post("/create", upload.single("pdf"), flashcardLimiter, flashcardControll
 router.get("/userFlashcards",  flashcardController.listUserFlashcards);
 router.get("/userFlashcards/:groupId",  flashcardController.listGroupFlashcards);
 
+router.put("/userFlashcards/:groupId", flashcardController.updateFlashcardGroup);
 router.delete("/userFlashcards/:groupId", flashcardController.deleteGroupAndFlashcards);
 export default router;
