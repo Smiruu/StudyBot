@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { BsEyeSlash, BsEyeFill } from 'react-icons/bs';
 import "./css/LoginScreen.css";
@@ -14,7 +14,7 @@ const RegisterScreen = () => {
   const { register, error, isLoading } = useAuth();
   const [showPassword, setShowPassword] = useState(false);
   const navigate = useNavigate();
-
+  const regButtonRef = useRef(null);
   const [formData, setFormData] = useState({
     name: "",
     email: "",
@@ -214,7 +214,26 @@ const RegisterScreen = () => {
               )}
             </div>
 
-              <button type="submit" disabled={isLoading} className="login-button">
+              <button
+              ref={regButtonRef}
+              className="login-button"
+              disabled={isLoading}
+              onClick={(e) => {
+                e.preventDefault();
+                if (!isLoading) {
+                  const btn = regButtonRef.current;
+                  btn.classList.remove("reset");
+                  void btn.offsetWidth; 
+                  btn.classList.add("animate");
+
+                  setTimeout(() => {
+                    btn.classList.remove("animate");
+                    btn.classList.add("reset");
+                  }, 300);
+                }
+
+                handleSubmit(e);
+              }}>
                 <span>{isLoading ? 'Creating account...' : 'Register'}</span>
               </button>
             </form>

@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { Link, useNavigate } from 'react-router-dom'
 import "./css/LoginScreen.css";
 import { BsEyeSlash, BsEyeFill } from 'react-icons/bs';
@@ -15,7 +15,7 @@ const LoginScreen = () => {
   const [password,setPassword] = useState("");
   const {login, isLoading, error, isAuthenticated} = useAuth();
   const [showPassword, setShowPassword] = useState(false);
-  
+  const loginButtonRef = useRef(null);
   const navigate = useNavigate();
 
   const handleSubmit = (e) => {
@@ -27,13 +27,12 @@ const LoginScreen = () => {
     navigate('/dashboard')
   };
   
-  // This for the carousel ahihi
   const [current, setCurrent] = useState(0);
 
   useEffect(() => {
     const interval = setInterval(() => {
       setCurrent((prev) => (prev + 1) % images.length);
-    }, 4000); // change pictures every 4 seconds
+    }, 4000); 
     return () => clearInterval(interval);
   }, []);
   
@@ -75,7 +74,7 @@ const LoginScreen = () => {
         <div className="login-right-container">
 
           <div className="login-container">
-               <div className="login-line1 mb-28"></div>
+            <div className="login-line1 mb-28"></div>
             <h2 className="login-title">Welcome Back</h2>
             <p className="login-subtitle">Login to your account</p>
 
@@ -123,10 +122,28 @@ const LoginScreen = () => {
                   </Link>
                 </div>
               </div>
+              <button
+              ref={loginButtonRef}
+              className="login-button"
+              disabled={isLoading}
+              onClick={(e) => {
+                e.preventDefault();
+                if (!isLoading) {
+                  const btn = loginButtonRef.current;
+                  btn.classList.remove("reset");
+                  void btn.offsetWidth; 
+                  btn.classList.add("animate");
 
-              <button className="login-button" disabled={isLoading}>
+                  setTimeout(() => {
+                    btn.classList.remove("animate");
+                    btn.classList.add("reset");
+                  }, 300);
+                }
+
+                handleSubmit(e);
+              }}>
               <span>{isLoading ? 'Logging in...' : 'Login'}</span>
-            </button>
+              </button>
               <p p className="login-footer">
               Don't have an account?{" "}
               <Link to="/register" className="login-link">
