@@ -15,7 +15,7 @@ const LoginScreen = () => {
   const [password,setPassword] = useState("");
   const {login, isLoading, error, isAuthenticated} = useAuth();
   const [showPassword, setShowPassword] = useState(false);
-      
+  
   const navigate = useNavigate();
 
   const handleSubmit = (e) => {
@@ -26,7 +26,7 @@ const LoginScreen = () => {
   if (isAuthenticated) {
     navigate('/dashboard')
   };
-
+  
   // This for the carousel ahihi
   const [current, setCurrent] = useState(0);
 
@@ -36,6 +36,7 @@ const LoginScreen = () => {
     }, 4000); // change pictures every 4 seconds
     return () => clearInterval(interval);
   }, []);
+  
 
   return (
     <div className="login-background">
@@ -124,7 +125,7 @@ const LoginScreen = () => {
               </div>
 
               <button className="login-button" disabled={isLoading}>
-              {isLoading ? 'Logging in...' : 'Login'}
+              <span>{isLoading ? 'Logging in...' : 'Login'}</span>
             </button>
               <p p className="login-footer">
               Don't have an account?{" "}

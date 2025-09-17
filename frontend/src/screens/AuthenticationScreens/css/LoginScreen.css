@@ -325,6 +325,8 @@ padding: .2rem;
 }
 
 .login-button {
+  position: relative;
+  overflow: hidden;
   padding: 0.75rem;
   background-color: #6e54b5; 
   border: none;
@@ -332,18 +334,72 @@ padding: .2rem;
   font-size: 1.1rem;
   cursor: pointer;
   margin-top: 1rem;
-  transition: ease-in-out 0.3s;
+  transition: background-color 0.3s ease-in-out, color 0.3s ease-in-out;
   font-weight: 700;
-  font-family: "ubuntu", sans-serif;
-  font-style: bold;
+  font-family: "Ubuntu", sans-serif;
+  color: white;
+  z-index: 1;
+}
+
+.login-button {
+  position: relative;
+  overflow: hidden;
+  padding: 0.75rem;
+  background-color: #6e54b5; 
+  border: none;
+  border-radius: .7rem;
+  font-size: 1.1rem;
+  cursor: pointer;
+  margin-top: 1rem;
+  transition: background-color 0.3s ease-in-out, color 0.3s ease-in-out;
+  font-weight: 700;
+  font-family: "Ubuntu", sans-serif;
+  color: white;
+  z-index: 1;
 }
 
 .login-button:hover {
   background-color: rgb(102, 222, 252);
   color: black;
-    transition: ease-in-out 0.3s;
-
 }
+
+.login-button::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  aspect-ratio: 1;
+  width: 0;
+  height: auto;
+  background: #2d8fff;
+  border-radius: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 0;
+  pointer-events: none;
+  transition-property: width, height;
+  transition-duration: 0.15s, 0.15s;
+  transition-timing-function: ease-out;
+}
+
+.login-button:active::after {
+  width: 300%;
+  height: 300%;
+  transition-duration: 0.15s;
+  transition-timing-function: ease-out;
+}
+
+.login-button:not(:active)::after {
+  width: 0;
+  height: auto;
+  transition-duration: 0.6s;
+  transition-timing-function: ease-in;
+}
+
+.login-button span {
+  position: relative;
+  z-index: 2;
+}
+
 
 .login-error-text {
   color: #ff3333;
@@ -351,12 +407,11 @@ padding: .2rem;
   margin-top: 0.25rem;
 }
 
-/* Responsive Layouts */
 @media (max-width: 1024px) {
   .login-image-container {
     display: block !important;
     height: 300px;
-    background: black; /* for visibility */
+    background: black; 
   }
 
   .split-screen {
