@@ -1,5 +1,5 @@
-import { useParams } from "react-router-dom";
-import React, { useEffect } from "react";
+import { useParams, useNavigate } from "react-router-dom";
+import React, { useEffect, } from "react";
 import { useQuizzes } from "../../hooks/QuizHooks/useQuizzes";
 import Flashcard from "../../component/QuizComponents/Flashcard";
 import "./css/FlashcardScreen.css";
@@ -9,6 +9,7 @@ const FlashcardScreen = () => {
   const { groupId } = useParams();
   const { flashcards, fetchFlashcards, loading, error } = useQuizzes();
   const { accessToken } = useAuth();
+  const navigate = useNavigate();
   useEffect(() => {
     const fetchData = async () => {
       if (groupId) {
@@ -39,10 +40,15 @@ const FlashcardScreen = () => {
     flashcards.length > 0 ? flashcards[0].group.name : "Unknown Group";
   return (
     <div className="flashcard-page-container">
+      <div className="flex flex-row gap-64">
+        <button onClick={() => navigate('/dashboard')}>
+        <h1><span>Back</span></h1> 
+      </button>
       <h1>
         Flashcards for Group:{" "}
-        <span className="flashcard-group-id">{groupName}</span>
+        <span>{groupName}</span>
       </h1>
+      </div>
       {flashcards.length > 0 ? (
         <div className="flashcard-grid">
           {flashcards.map((card) => (
