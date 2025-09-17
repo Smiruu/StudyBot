@@ -1,7 +1,7 @@
 import { useParams } from "react-router-dom";
 import React, { useEffect } from "react";
 import { useQuizzes } from "../../hooks/QuizHooks/useQuizzes";
-import Flashcard from "../../component/QuizComponents/Flashcard"; // This is your individual card component
+import Flashcard from "../../component/QuizComponents/Flashcard";
 import "./css/FlashcardScreen.css";
 import { useAuth } from "../../hooks/AuthHooks/userAuth";
 
@@ -16,7 +16,7 @@ const FlashcardScreen = () => {
       }
     };
     fetchData();
-  }, [groupId, fetchFlashcards]); // Include fetchFlashcards in dependencies for stability
+  }, [groupId, fetchFlashcards]);
 
   if (loading) {
     return (
@@ -26,39 +26,34 @@ const FlashcardScreen = () => {
     );
   }
 
-  // You might also want an error state here, similar to loading
   if (error) {
     return (
-      // Apply the error-container class for styling
       <div className="error-container">
         <p>Error: {error}</p>
       </div>
     );
   }
 
-  console.log(flashcards); // Keep this for debugging if needed
+  console.log(flashcards);
   const groupName =
     flashcards.length > 0 ? flashcards[0].group.name : "Unknown Group";
   return (
-    // Apply the main page container class
     <div className="flashcard-page-container">
       <h1>
         Flashcards for Group:{" "}
         <span className="flashcard-group-id">{groupName}</span>
       </h1>
       {flashcards.length > 0 ? (
-        // Use a <div> with flashcard-grid class for the grid layout
         <div className="flashcard-grid">
           {flashcards.map((card) => (
             <Flashcard
-              key={card.id} // Ensure each card has a unique key
-              question={card.question} // Assuming 'question' is the front
-              answer={card.answer} // Assuming 'answer' is the back
+              key={card.id}
+              question={card.question}
+              answer={card.answer}
             />
           ))}
         </div>
       ) : (
-        // Apply the no-flashcards-message class
         <p className="no-flashcards-message">
           No flashcards found for this group.
         </p>
