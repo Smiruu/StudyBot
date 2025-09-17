@@ -226,6 +226,9 @@ padding: .2rem;
   font-size: 14px;
   text-align: center;
   margin-bottom: 1rem;
+  font-weight: 500;
+  font-family: "Ubuntu", sans-serif;
+  font-style: bold;
 }
 
 .login-form {
@@ -379,6 +382,9 @@ padding: .2rem;
   color: #ff3333;
   font-size: 0.8rem;
   margin-top: 0.25rem;
+  font-weight: 500;
+  font-family: "Ubuntu", sans-serif;
+  font-style: bold;
 }
 
 @media (max-width: 1024px) {
