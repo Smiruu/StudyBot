@@ -7,6 +7,7 @@ const HomeScreen = () => {
   useEffect(() => {
     const applyWaveAnimation = (id) => {
       const element = document.getElementById(id);
+      if (!element) return;
       const text = element.textContent;
       element.textContent = "";
       element.classList.add("wave");
@@ -25,30 +26,37 @@ const HomeScreen = () => {
   return (
     <>
       <Navbar />
-      <div>
-        <section className="section1">
-          <div>
-            <h1 className="section1-text" id="waveText">
-              Welcome to StudyBot
-            </h1>
-            <p className="section1-text2">
-              Study smarter with AI tools that simplify learning and keep you on track.
-            </p>
-            <div className="section1-carousel">
-              <h1>feature1</h1>
-              <h1>feature2</h1>
-              <h1>feature3</h1>
-              <h1>feature4</h1>
-            </div>
-          </div>
-        </section>
-        <section className="section2">
-          <h1 className="h1">reviews from imaginary students/users</h1>
-        </section>
-        <section className="section3">
-          <h1 className="h1">tbh idk</h1>
-        </section>
-      </div>
+
+      <section className="two-column">
+        <aside className="left">
+          <h1 id="waveText" className="hero-title">
+            Welcome to StudyBot
+          </h1>
+          <p className="hero-subtitle">
+            Study smarter with AI tools that simplify learning and keep you on track.
+          </p>
+          <Link to="/login" className="hs-button">
+            Get Started
+          </Link>
+        </aside>
+
+        {/* Right (scrolling content) */}
+        <main className="right">
+          <div className="block">Feature 1</div>
+          <div className="block">Feature 2</div>
+          <div className="block">Feature 3</div>
+          <div className="block">Feature 4</div>
+        </main>
+      </section>
+
+      {/* Next sections */}
+      <section className="reviews">
+        <h1>Reviews from imaginary students/users</h1>
+      </section>
+
+      <section className="misc">
+        <h1>tbh idk</h1>
+      </section>
     </>
   );
 };
