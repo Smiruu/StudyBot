@@ -26,30 +26,32 @@ const HomeScreen = () => {
   return (
     <>
       <Navbar />
-
       <section className="two-column">
-        <aside className="left">
+        <div className="left">
           <h1 id="waveText" className="hero-title">
             Welcome to StudyBot
           </h1>
           <p className="hero-subtitle">
             Study smarter with AI tools that simplify learning and keep you on track.
           </p>
-          <Link to="/login" className="hs-button">
+          <Link to="/signup" className="hs-button">
             Get Started
           </Link>
-        </aside>
+        </div>
 
-        {/* Right (scrolling content) */}
         <main className="right">
-          <div className="block">Feature 1</div>
-          <div className="block">Feature 2</div>
-          <div className="block">Feature 3</div>
-          <div className="block">Feature 4</div>
+          {/* <h2 className="features-title">Features</h2> */}
+          <div className="features-grid">
+            <div className="div1 feature-card">Personalized Study Plans</div>
+            <div className="div2 feature-card">Smart Summaries</div>
+            <div className="div3 feature-card">AI-powered Q&amp;A</div>
+            <div className="div4 feature-card">random</div>
+            <div className="div5 feature-card">random</div>
+            <div className="div6 feature-card">random</div>
+          </div>
         </main>
       </section>
 
-      {/* Next sections */}
       <section className="reviews">
         <h1>Reviews from imaginary students/users</h1>
       </section>
