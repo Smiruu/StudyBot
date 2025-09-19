@@ -57,6 +57,10 @@
     transition: ease-in-out 0.3s;
 }
 
+.navbar-register:hover{
+    color: rgb(102, 222, 252);
+}
+
 /* When scrolled */
 .navbar-scrolled .navbar-register {
     background-color: #6e54b5;
