@@ -29,7 +29,7 @@ const HomeScreen = () => {
       <section className="two-column">
         <div className="left">
           <h1 id="waveText" className="hero-title">
-            The easiest way to turn notes into knowledge.
+            Your AI partner for effortless learning.
           </h1>
           <p className="hero-subtitle">
             Study smarter with AI tools that simplify learning and keep you on track.
@@ -42,12 +42,12 @@ const HomeScreen = () => {
         <main className="right">
           {/* <h2 className="features-title">Features</h2> */}
           <div className="features-grid">
-            <div className="div1 feature-card">Personalized Study Plans</div>
-            <div className="div2 feature-card">Smart Summaries</div>
-            <div className="div3 feature-card">AI-powered Q&amp;A</div>
-            <div className="div4 feature-card">random</div>
-            <div className="div5 feature-card">random</div>
-            <div className="div6 feature-card">random</div>
+            <Link to="/login" className="div1 feature-card"></Link>
+            <Link to="/login" className="div2 feature-card"></Link>
+            <Link to="/login" className="div3 feature-card"></Link>
+            <Link to="/login" className="div4 feature-card"></Link>
+            <Link to="/login" className="div5 feature-card"></Link>
+            <Link to="/login" className="div6 feature-card"></Link>
           </div>
         </main>
       </section>
