@@ -30,7 +30,8 @@ const QuizComponent = () => {
       {/* Modal Backdrop */}
       {showModal && (
         <div className="modal-backdrop">
-          <div className="modal-content">
+          {/* <div className="modal-content"> removed for responsiveness sake*/}
+          <div>
             <CreateQuiz onClose={closeModal} />
           </div>
         </div>
