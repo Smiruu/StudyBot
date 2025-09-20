@@ -20,7 +20,7 @@ const QuizComponent = () => {
     <div className="quiz-container">
       <div className="quiz-header">
         <h1 className="quiz-title">My Quizzes</h1>
-        <button className="create-button" onClick={handleCreateQuiz}>
+        <button className="hs-button bg-green-600 hover:bg-green-700" onClick={handleCreateQuiz}>
           Create Quiz
         </button>
       </div>
