@@ -21,7 +21,7 @@ const DashboardScreen = () => {
   }
 
   if (!isAuthenticated || !user) {
-    return null; // don’t render until navigate kicks in
+    return null; 
   }
 
   return (
