@@ -50,7 +50,7 @@ const TopicForm = ({ formData, handleInputChange, handleSubmit, loading,error })
        <div className="form-actions">
         <button 
           type="submit" 
-          className="submit-button"
+          className="hs-button bg-green-500 hover:bg-green-600"
           disabled={loading}
         >
           {loading ? 'Creating Flashcards...' : 'Create Quiz'}
