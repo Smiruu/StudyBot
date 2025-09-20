@@ -33,10 +33,10 @@ const DashboardScreen = () => {
         <div className="dashboard-stats"></div>
 
         <div className="buttons-group">
-          <Link to="/courses" className="button btn-green">
+          <Link to="/courses" className="bg-green-600 hover:bg-green-700 hs-button">
             Go to Courses
           </Link>
-          <Link to="/profile" className="button btn-gray">
+          <Link to="/profile" className="bg-gray-700 hover:bg-gray-800 hs-button">
             Edit Profile
           </Link>
           <button onClick={handleLogout}>Logout</button>
