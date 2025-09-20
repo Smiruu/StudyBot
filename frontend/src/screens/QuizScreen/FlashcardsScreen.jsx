@@ -40,14 +40,13 @@ const FlashcardScreen = () => {
     flashcards.length > 0 ? flashcards[0].group.name : "Unknown Group";
   return (
     <div className="flashcard-page-container">
-      <div className="flex flex-row gap-64">
+      <div className="flex flex-col sm:flex-row justify-between w-full max-w-6xl px-4 mx-auto">
         <button onClick={() => navigate('/dashboard')}>
-        <h1><span>Back</span></h1> 
-      </button>
-      <h1>
-        Flashcards for Group:{" "}
-        <span>{groupName}</span>
-      </h1>
+          <h1><span>Back</span></h1>
+        </button>
+        <h1>
+          Flashcards for Group: <span>{groupName}</span>
+        </h1>
       </div>
       {flashcards.length > 0 ? (
         <div className="flashcard-grid">
