@@ -29,13 +29,13 @@ const HomeScreen = () => {
       <section className="two-column">
         <div className="left">
           <h1 id="waveText" className="hero-title">
-            Welcome to StudyBot
+            The easiest way to turn notes into knowledge.
           </h1>
           <p className="hero-subtitle">
             Study smarter with AI tools that simplify learning and keep you on track.
           </p>
           <Link to="/login" className="hs-button bg-blue-600 hover:bg-blue-700">
-            Get Started
+            Get Started Now!
           </Link>
         </div>
 

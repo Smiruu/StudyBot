@@ -5,11 +5,10 @@ body {
   color: #222;
 }
 
-
 .two-column {
   display: flex;
   gap: 32px;
-  max-width: 1400px;
+  max-width: 1550px;
   margin: 0 auto;
   padding: 60px 16px;
   align-items: flex-start;
@@ -19,21 +18,21 @@ body {
 .left {
   flex: 0 0 500px;
   position: sticky;
-  top: 100px; 
+  top: 120px; 
   justify-content: left;
   background: rgba(103, 98, 120, 0.9); 
   color: #fff;
 }
 
 .hero-title {
-  font-size: 2.5rem;
+  font-size: 5rem;
   font-weight: 700;
   margin-bottom: 16px;
 }
 
 .hero-subtitle {
-  font-size: 1.1rem;
-  font-weight: 300;
+  font-size: 1.5rem;
+  font-weight: 500;
   margin-bottom: 24px;
 }
 
@@ -41,16 +40,25 @@ body {
   display: inline-block;
   padding: 12px 20px;
   color: #fff;
-  font-weight: 600;
+  font-weight: 700;
   border-radius: 8px;
   text-decoration: none;
   transition: background 0.2s ease;
+  background-color: #2d2638;
+  border-radius: 2rem;
+}
+
+.hs-button:hover{
+  color: black;
+  background-color: rgb(102, 222, 252);
+  transition: ease-in-out 0.2s;
 }
 
 
 .right {
   flex: 1;
   min-width: 0;
+  margin: 3rem 2rem 0rem;
 }
 
 /* .features-title {
