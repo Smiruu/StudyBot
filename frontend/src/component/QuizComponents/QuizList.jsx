@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import "./css/QuizList.css";
 import { useQuizzes } from "../../hooks/QuizHooks/useQuizzes";
 import { useAuth } from "../../hooks/AuthHooks/userAuth.js";
+import 'bootstrap-icons/font/bootstrap-icons.css';
 
 function QuizList() {
   const { quizzes, isLoading, error, fetchQuizzesByGroup, deleteFlashcards } = useQuizzes();
@@ -34,14 +35,17 @@ function QuizList() {
             className="quiz-card"
             onClick={() => handleQuizClick(quiz._id)}
           >
-            <h2 className="quiz-name">{quiz.name}</h2>
-           
-          </div>
-           <button
-            onClick={() => deleteFlashcards(quiz._id)}
+            <button
+              className="delete-icon"
+              onClick={(e) => {
+                e.stopPropagation(); 
+                deleteFlashcards(quiz._id);
+              }}
             >
-              delete
+              <i className="bi bi-trash"></i>
             </button>
+            <h2 className="quiz-name">{quiz.name}</h2>
+          </div>
           </>
         ))
       )}
