@@ -29,8 +29,36 @@ body {
   margin-bottom: 30px;
   color: white ;
   padding-right: 1rem;
-
+  -webkit-animation: text-shadow-pop-bl 0.9s both;
+	animation: text-shadow-pop-bl 0.9s both;
 }
+
+@-webkit-keyframes text-shadow-pop-bl {
+  0% {
+    text-shadow: 0 0 #1a1a1a, 0 0 #1a1a1a, 0 0 #1a1a1a, 0 0 #1a1a1a, 0 0 #1a1a1a, 0 0 #1a1a1a, 0 0 #1a1a1a, 0 0 #1a1a1a;
+    -webkit-transform: translateX(0) translateY(0);
+            transform: translateX(0) translateY(0);
+  }
+  100% {
+    text-shadow: -1px 1px #1a1a1a, -2px 2px #1a1a1a, -3px 3px #1a1a1a, -4px 4px #1a1a1a, -5px 5px #1a1a1a, -6px 6px #1a1a1a, -7px 7px #1a1a1a, -8px 8px #1a1a1a;
+    -webkit-transform: translateX(8px) translateY(-8px);
+            transform: translateX(8px) translateY(-8px);
+  }
+}
+
+@keyframes text-shadow-pop-bl {
+  0% {
+    text-shadow: 0 0 #1a1a1a, 0 0 #1a1a1a, 0 0 #1a1a1a, 0 0 #1a1a1a, 0 0 #1a1a1a, 0 0 #1a1a1a, 0 0 #1a1a1a, 0 0 #1a1a1a;
+    -webkit-transform: translateX(0) translateY(0);
+            transform: translateX(0) translateY(0);
+  }
+  100% {
+    text-shadow: -1px 1px #1a1a1a, -2px 2px #1a1a1a, -3px 3px #1a1a1a, -4px 4px #1a1a1a, -5px 5px #1a1a1a, -6px 6px #1a1a1a, -7px 7px #1a1a1a, -8px 8px #1a1a1a;
+    -webkit-transform: translateX(8px) translateY(-8px);
+            transform: translateX(8px) translateY(-8px);
+  }
+}
+
 
 .hero-subtitle {
   font-size: 1.5rem;
