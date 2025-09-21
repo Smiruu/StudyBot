@@ -4,31 +4,13 @@ import "./css/HomeScreen.css";
 import Navbar from "../../component/NavbarComponents/Navbar.jsx";
 
 const HomeScreen = () => {
-  useEffect(() => {
-    const applyWaveAnimation = (id) => {
-      const element = document.getElementById(id);
-      if (!element) return;
-      const text = element.textContent;
-      element.textContent = "";
-      element.classList.add("wave");
-
-      text.split("").forEach((char, i) => {
-        const span = document.createElement("span");
-        span.textContent = char;
-        span.style.animationDelay = `${i * 0.025}s`;
-        element.appendChild(span);
-      });
-    };
-
-    applyWaveAnimation("waveText");
-  }, []);
 
   return (
     <>
       <Navbar />
       <section className="two-column">
         <div className="left">
-          <h1 id="waveText" className="hero-title">
+          <h1 className="hero-title">
             Your AI partner for effortless learning.
           </h1>
           <p className="hero-subtitle">
