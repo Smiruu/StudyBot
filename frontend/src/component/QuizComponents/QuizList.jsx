@@ -44,10 +44,10 @@ function QuizList() {
         quizzes.map((quiz) => (
           <div
             key={quiz._id}
-            className="quiz-card"
+            className={`quiz-card ${openMenuId === quiz._id ? "menu-open" : ""}`}
             onClick={() => handleQuizClick(quiz._id)}
           >
-            <div className="menu-container">
+            <div>
               <button
                 className="menu-icon"
                 onClick={(e) => toggleMenu(quiz._id, e)}
@@ -58,9 +58,7 @@ function QuizList() {
                 <div className="menu-dropdown" onClick={(e) => e.stopPropagation()}>
                   <div className="menu-item">Edit</div>
                   <div className="menu-item">Share</div>
-                  <div className="menu-item delete" onClick={(e) => handleDelete(quiz._id, e)}>
-                    Delete
-                  </div>
+                  <div className="menu-item delete" onClick={(e) => handleDelete(quiz._id, e)}>Delete</div>
                 </div>
               )}
             </div>
