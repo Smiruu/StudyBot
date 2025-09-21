@@ -9,6 +9,10 @@ const Flashcard= ({ question, answer }) => {
         setIsFlipped(!isFlipped);
     };
 
+    function Counter() {
+        const [count, counter] = useState(0);
+    }
+
     return (
         <div className="flashcard-container" onClick={handleFlip}>
             <div className={`flashcard-inner ${isFlipped ? 'is-flipped' : ''}`}>
