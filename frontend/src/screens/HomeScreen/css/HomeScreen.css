@@ -75,16 +75,8 @@ body {
   border-radius: 8px;
   text-decoration: none;
   transition: background 0.2s ease;
-  background-color: #2d2638;
   border-radius: 2rem;
 }
-
-.hs-button:hover{
-  color: black;
-  background-color: rgb(102, 222, 252);
-  transition: ease-in-out 0.2s;
-}
-
 
 .right {
   flex: 1;

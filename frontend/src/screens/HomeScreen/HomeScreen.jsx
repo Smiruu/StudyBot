@@ -16,7 +16,7 @@ const HomeScreen = () => {
           <p className="hero-subtitle">
             Study smarter with AI tools that simplify learning and keep you on track.
           </p>
-          <Link to="/login" className="hs-button bg-blue-600 hover:bg-blue-700">
+          <Link to="/login" className="hs-button bg-dark-purple hover:bg-violet-500 get-started">
             Get Started Now!
           </Link>
         </div>
