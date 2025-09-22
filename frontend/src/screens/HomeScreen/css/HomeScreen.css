@@ -101,25 +101,25 @@ body {
 .div1 { 
   grid-area: 1 / 1 / 3 / 6; 
   animation-delay: 0.1s;
-}
-
-.featurecard1{
-  width: 100%;
-  height: 100%;
-  object-fit: cover;   
-  border-radius: 2rem;
+  background-image: url("https://cdn.discordapp.com/attachments/360412196913807360/1419738053353668829/image.png?ex=68d2d999&is=68d18819&hm=1509f470df6df8ff023b24177741d2f05ad8d7cf187482ed8e9251a5c3a6fab0");
+  background-size: cover;
+  background-position: center;
 }
 
 .div2 { 
   grid-area: 3 / 1 / 6 / 3; 
   animation-delay: 0.2s;
-  background-color: white;
+  background-image: url("https://cdn.discordapp.com/attachments/360412196913807360/1419751201842397234/image.png?ex=68d2e5d8&is=68d19458&hm=0fca53510edb6f65dfdd76421a86615f55511feabdaa2294c96e2ed7b3553758");
+  background-size: cover;
+  background-position: center;
 }
 
 .div3 { 
   grid-area: 3 / 3 / 6 / 6; 
   animation-delay: 0.3s;
-  background-color: white;
+  background-image: url("https://cdn.discordapp.com/attachments/360412196913807360/1419750089810903231/image.png?ex=68d2e4cf&is=68d1934f&hm=b4ec657c5a66a4ad606869f6632d01b8bdb9c884587fe8e04ca44fca80e75b6a");
+  background-size: cover;
+  background-position: center;
 }
 
 .div4 { 
@@ -148,15 +148,17 @@ body {
   /* padding: 20px; */
   font-weight: 500;
   text-align: center;
-  transition: transform 0.2s ease, background 0.2s ease !important;
+  transition: transform 0.5s ease, background 0.5s ease !important;
   -webkit-animation: fade-in 3s cubic-bezier(0.390, 0.575, 0.565, 1.000) both;
 	animation: fade-in 3s cubic-bezier(0.390, 0.575, 0.565, 1.000) both;
 }
 
 .feature-card:hover {
   transform: translateY(-6px) !important;
-  transition: transform 0.2s ease, background 0.2s ease !important;
-  box-shadow: 0 0 #1a1a1a, 0 0 #1a1a1a, 0 0 #1a1a1a, 0 0 #1a1a1a, 0 0 #1a1a1a, 0 0 #1a1a1a, 0 0 #1a1a1a, 0 0 #1a1a1a;
+  transition: transform 0.5s ease, background 0.5s ease !important;
+  box-shadow: -8px 10px 12px -3px rgba(0,0,0,0.75);
+  -webkit-box-shadow: -8px 10px 12px -3px rgba(0,0,0,0.75);
+  -moz-box-shadow: -8px 10px 12px -3px rgba(0,0,0,0.75);
 }
 
 @-webkit-keyframes fade-in {
