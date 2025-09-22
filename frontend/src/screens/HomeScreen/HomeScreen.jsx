@@ -4,6 +4,10 @@ import "./css/HomeScreen.css";
 import Navbar from "../../component/NavbarComponents/Navbar.jsx";
 
 const HomeScreen = () => {
+    useEffect(() => {
+    window.history.scrollRestoration = "manual"; 
+    window.scrollTo(0, 0);
+  }, []);
 
   return (
     <>
