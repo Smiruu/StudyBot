@@ -106,34 +106,34 @@ body {
 }
 .div2 { 
   grid-area: 3 / 1 / 6 / 3; 
-  background-image: url("https://media.idownloadblog.com/wp-content/uploads/2024/08/Scheduled-Summary-on-iPhone.jpg");
+  background-image: url("");
   background-size: cover;
   background-position: center;
 }
 
 .div3 { 
   grid-area: 3 / 3 / 6 / 6; 
-  background-image: url("https://geekflare.com/wp-content/uploads/2023/02/What-are-Flashcard-Apps.jpg");
+  background-image: url("");
   background-size: cover;
   background-position: center;
 }
 
 .div4 { 
   grid-area: 6 / 1 / 8 / 4; 
-  background-image: url("https://geekflare.com/wp-content/uploads/2023/02/What-are-Flashcard-Apps.jpg");
+  background-image: url("");
   background-size: cover;
   background-position: center;
 }
 
 .div5 { 
   grid-area: 6 / 4 / 8 / 6; 
-  background-image: url("https://geekflare.com/wp-content/uploads/2023/02/What-are-Flashcard-Apps.jpg");
+  background-image: url("");
   background-size: cover;
   background-position: center;
 }
 .div6 { 
   grid-area: 8 / 1 / 10 / 6; 
-  background-image: url("https://geekflare.com/wp-content/uploads/2023/02/What-are-Flashcard-Apps.jpg");
+  background-image: url("");
   background-size: cover;
   background-position: center;
 }
