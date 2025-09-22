@@ -34,11 +34,11 @@ const HomeScreen = () => {
         </main>
       </section>
 
-      <section className="reviews">
-        <h1>Reviews from imaginary students/users</h1>
+      <section className="section2">
+        <h1 className="section2-title">One tool. Better learning.</h1>
       </section>
 
-      <section className="misc">
+      <section className="section3">
         <h1>tbh idk</h1>
       </section>
     </>

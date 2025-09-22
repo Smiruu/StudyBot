@@ -184,7 +184,23 @@ body {
   }
 }
 
-.reviews, .misc {
+.section2{
+  padding-top: 9rem;
+  text-align: center;
+  height: 20vh;
+}
+
+.section2-title{
+  font-size: 4rem;
+  font-weight: 700;
+  color: white ;
+  -webkit-animation: text-shadow-pop-bl 0.9s both;
+	animation: text-shadow-pop-bl 0.9s both;
+  margin-right: 1rem;
+}
+
+
+.section3 {
   padding: 100px 16px;
   text-align: center;
   height: 80vh;
