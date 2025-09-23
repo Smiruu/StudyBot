@@ -2,6 +2,12 @@ import React, { useEffect } from "react";
 import { Link } from "react-router-dom";
 import "./css/HomeScreen.css";
 import Navbar from "../../component/NavbarComponents/Navbar.jsx";
+import Feature1 from "./images/Feature1.png";
+import Feature2 from "./images/Feature2.png";
+import Feature3 from "./images/Feature3.png";
+import Feature4 from "./images/Feature4.png";
+import Feature5 from "./images/Feature5.png";
+import Feature6 from "./images/Feature6.png";
 
 const HomeScreen = () => {
     useEffect(() => {
