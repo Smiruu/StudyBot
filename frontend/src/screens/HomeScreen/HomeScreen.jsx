@@ -34,12 +34,29 @@ const HomeScreen = () => {
         <main className="right">
           {/* <h2 className="features-title">Features</h2> */}
           <div className="features-grid">
-            <Link to="/login" className="div1 feature-card "></Link>
-            <Link to="/login" className="div2 feature-card"></Link>
-            <Link to="/login" className="div3 feature-card"></Link>
-            <Link to="/login" className="div4 feature-card"></Link>
-            <Link to="/login" className="div5 feature-card"></Link>
-            <Link to="/login" className="div6 feature-card"></Link>
+            <Link to="/login" className="div1 feature-card ">
+            <div className="features" style={{ backgroundImage: `url(${Feature1})` }}></div>
+            </Link>
+
+            <Link to="/login" className="div2 feature-card">
+            <div className="features" style={{ backgroundImage: `url(${Feature2})` }}></div>
+            </Link>
+
+            <Link to="/login" className="div3 feature-card">
+            <div className="features" style={{ backgroundImage: `url(${Feature3})` }}></div>
+            </Link>
+
+            <Link to="/login" className="div4 feature-card">
+            <div className="features" style={{ backgroundImage: `url(${Feature4})` }}></div>
+            </Link>
+
+            <Link to="/login" className="div5 feature-card">
+            <div className="features" style={{ backgroundImage: `url(${Feature5})` }}></div>
+            </Link>
+            
+            <Link to="/login" className="div6 feature-card">
+            <div className="features" style={{ backgroundImage: `url(${Feature6})` }}></div>
+            </Link>
           </div>
         </main>
       </section>
