@@ -8,6 +8,8 @@ import Feature3 from "./images/Feature3.png";
 import Feature4 from "./images/Feature4.png";
 import Feature5 from "./images/Feature5.png";
 import Feature6 from "./images/Feature6.png";
+import Section3img from "./images/Section3img.jpg"
+import { BsCheckCircleFill } from 'react-icons/bs';
 
 const HomeScreen = () => {
     useEffect(() => {
@@ -65,8 +67,27 @@ const HomeScreen = () => {
       </section>
 
       <section className="section3">
-        <h1>tbh idk</h1>
-      </section>
+        <div className="section3-container">
+          <div className="section3-left">
+          <div className="section3-image" style={{ backgroundImage: `url(${Section3img})` }}></div>
+          </div>
+
+          <div className="section3-right">
+            <h1 className="section3-title">Learn Smarter, Not Harder</h1>
+            <ul className="section3-list">
+              <li><BsCheckCircleFill className="s3icon"/>Generate AI-powered flashcards instantly</li>
+              <li><BsCheckCircleFill className="s3icon"/>Summarize notes into bite-sized points</li>
+              <li><BsCheckCircleFill className="s3icon"/>Get help from our very own Chatbot</li>
+            </ul>
+            <Link
+              to="/login"
+              className="hs-button bg-dark-purple hover:bg-[rgb(102,222,252)] get-started hover:text-black"
+            >
+              Start Studying
+            </Link>
+          </div>
+        </div>
+    </section>
     </>
   );
 };

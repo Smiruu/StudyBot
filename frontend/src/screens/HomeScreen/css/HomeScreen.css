@@ -186,7 +186,7 @@ body {
 .section2{
   padding-top: 9rem;
   text-align: center;
-  height: 20vh;
+  height: 20vh
 }
 
 .section2-title{
@@ -200,9 +200,68 @@ body {
 
 
 .section3 {
-  padding: 100px 16px;
+  padding: 100px 0px;
   text-align: center;
   height: 80vh;
+  justify-content: center;
+}
+
+.section3-container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 50px;
+  width: 100%;
+  max-width: 2000px;
+  margin: 0 auto;   
+}
+
+.section3-left {
+  flex: 1;
+}
+
+.section3-image {
+  width: 100%;
+  max-width: 1400px;
+  height: 40rem;
+  margin: 0;
+  background-size: cover;
+  background-position: center;
+  display: block;
+  border-top-right-radius: 2rem;
+  border-bottom-right-radius: 2rem;
+}
+
+.section3-right {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.section3-title {
+  font-size: 2rem;
+  font-weight: 700;
+  font-family: "Ubuntu", sans-serif;
+  margin-bottom: 20px;
+  color: white;
+}
+
+.section3-list {
+  list-style: none;
+  padding: 0;
+  margin-bottom: 20px;
+}
+
+.section3-list li {
+  font-size: 1.1rem;
+  font-weight: 500;
+  font-family: "Ubuntu", sans-serif;
+  color: white;
+  margin-bottom: 12px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
 }
 
 /* Responsive */
