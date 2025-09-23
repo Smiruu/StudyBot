@@ -184,9 +184,9 @@ body {
 
 
 .section2{
-  padding-top: 9rem;
+  padding-top: 5.5rem;
   text-align: center;
-  height: 20vh
+  height: 18vh
 }
 
 .section2-title{
@@ -236,7 +236,7 @@ body {
   flex: 1;
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  /* justify-content: center; */
 }
 
 .section3-title {
