@@ -32,7 +32,6 @@ const HomeScreen = () => {
         </div>
 
         <main className="right">
-          {/* <h2 className="features-title">Features</h2> */}
           <div className="features-grid">
             <Link to="/login" className="div1 feature-card ">
             <div className="features" style={{ backgroundImage: `url(${Feature1})` }}></div>
