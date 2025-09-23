@@ -26,7 +26,7 @@ function QuizList() {
 
   const handleDelete = (quizId, e) => {
     e.stopPropagation();
-    deleteFlashcards(quizId);
+    deleteFlashcards(quizId, accessToken);
     setOpenMenuId(null); // Close the menu after deleting
   };
 

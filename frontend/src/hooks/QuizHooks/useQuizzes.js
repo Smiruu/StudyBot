@@ -111,15 +111,15 @@ export const useQuizzes = () => {
     [setIsLoading, setError, setFlashcards]
   );
 
-  const deleteFlashcards = async (groupId) => {
+  const deleteFlashcards = async (groupId, accessToken) => {
     setIsLoading(true);
 
     try {
-      const token = localStorage.getItem("accessToken");
-      console.log(token);
+
+      
       await API.delete(`/userFlashcards/${groupId}`, {
         headers: {
-          Authorization: `Bearer ${token}`,
+          Authorization: `Bearer ${accessToken}`,
         },
       });
 

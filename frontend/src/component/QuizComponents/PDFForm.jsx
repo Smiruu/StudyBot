@@ -38,7 +38,6 @@ error }) => {
               <option value="easy">Easy</option>
               <option value="medium">Medium</option>
               <option value="hard">Hard</option>
-              <option value="very hard">Very Hard</option>
             </select>
           </div>
           
