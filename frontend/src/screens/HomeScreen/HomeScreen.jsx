@@ -2,6 +2,12 @@ import React, { useEffect } from "react";
 import { Link } from "react-router-dom";
 import "./css/HomeScreen.css";
 import Navbar from "../../component/NavbarComponents/Navbar.jsx";
+import Feature1 from "./images/Feature1.png";
+import Feature2 from "./images/Feature2.png";
+import Feature3 from "./images/Feature3.png";
+import Feature4 from "./images/Feature4.png";
+import Feature5 from "./images/Feature5.png";
+import Feature6 from "./images/Feature6.png";
 
 const HomeScreen = () => {
     useEffect(() => {
@@ -26,14 +32,30 @@ const HomeScreen = () => {
         </div>
 
         <main className="right">
-          {/* <h2 className="features-title">Features</h2> */}
           <div className="features-grid">
-            <Link to="/login" className="div1 feature-card "></Link>
-            <Link to="/login" className="div2 feature-card"></Link>
-            <Link to="/login" className="div3 feature-card"></Link>
-            <Link to="/login" className="div4 feature-card"></Link>
-            <Link to="/login" className="div5 feature-card"></Link>
-            <Link to="/login" className="div6 feature-card"></Link>
+            <Link to="/login" className="div1 feature-card ">
+            <div className="features" style={{ backgroundImage: `url(${Feature1})` }}></div>
+            </Link>
+
+            <Link to="/login" className="div2 feature-card">
+            <div className="features" style={{ backgroundImage: `url(${Feature2})` }}></div>
+            </Link>
+
+            <Link to="/login" className="div3 feature-card">
+            <div className="features" style={{ backgroundImage: `url(${Feature3})` }}></div>
+            </Link>
+
+            <Link to="/login" className="div4 feature-card">
+            <div className="features" style={{ backgroundImage: `url(${Feature4})` }}></div>
+            </Link>
+
+            <Link to="/login" className="div5 feature-card">
+            <div className="features" style={{ backgroundImage: `url(${Feature5})` }}></div>
+            </Link>
+            
+            <Link to="/login" className="div6 feature-card">
+            <div className="features" style={{ backgroundImage: `url(${Feature6})` }}></div>
+            </Link>
           </div>
         </main>
       </section>

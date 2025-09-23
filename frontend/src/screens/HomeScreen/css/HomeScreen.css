@@ -101,48 +101,38 @@ body {
 .div1 { 
   grid-area: 1 / 1 / 3 / 6; 
   animation-delay: 0.1s;
-  background-image: url("https://cdn.discordapp.com/attachments/360412196913807360/1419761841487216810/image.png?ex=68d2efc0&is=68d19e40&hm=e197de6e4af88c3ac36f3ed89bef27ddccb374f44af7a432f811930832ba16a1");
-  background-size: cover;
-  background-position: center;
 }
 
 .div2 { 
   grid-area: 3 / 1 / 6 / 3; 
   animation-delay: 0.2s;
-  background-image: url("https://cdn.discordapp.com/attachments/360412196913807360/1419751201842397234/image.png?ex=68d2e5d8&is=68d19458&hm=0fca53510edb6f65dfdd76421a86615f55511feabdaa2294c96e2ed7b3553758");
-  background-size: cover;
-  background-position: center;
 }
 
 .div3 { 
   grid-area: 3 / 3 / 6 / 6; 
   animation-delay: 0.3s;
-  background-image: url("https://cdn.discordapp.com/attachments/360412196913807360/1419750089810903231/image.png?ex=68d2e4cf&is=68d1934f&hm=b4ec657c5a66a4ad606869f6632d01b8bdb9c884587fe8e04ca44fca80e75b6a");
-  background-size: cover;
-  background-position: center;
 }
 
 .div4 { 
   grid-area: 6 / 1 / 8 / 4; 
   animation-delay: 0.4s;
-  background-image: url("https://cdn.discordapp.com/attachments/360412196913807360/1419755790801178644/image.png?ex=68d2ea1e&is=68d1989e&hm=b55476b0581b5ca013a3efc7f893673dd7461c8fff07365ff378e38650739a12");
-  background-size: cover;
-  background-position: center;
 }
 
 .div5 { 
   grid-area: 6 / 4 / 8 / 6; 
   animation-delay: 0.5s;
-  background-image: url("https://cdn.discordapp.com/attachments/360412196913807360/1419760076041883700/image.png?ex=68d2ee1b&is=68d19c9b&hm=98a5b17bd33f71a973e34355e52ba731e53b7ef8ab36382e90a4c09faead9ed9");
-  background-size: cover;
-  background-position: center;
 }
 .div6 { 
   grid-area: 8 / 1 / 10 / 6; 
   animation-delay: 0.6s;
-  background-image: url("https://cdn.discordapp.com/attachments/360412196913807360/1419758835140132935/image.png?ex=68d2ecf4&is=68d19b74&hm=c4e193f944927202b3e88a90ea78a9e448bdeb4475114fdbdb4a3c4b105e0b91");
+}
+
+.features{
+  width: 100%;
+  height: 100%;
   background-size: cover;
-  background-position: center; 
+  background-position: center;
+  border-radius: 2rem;
 }
 
 .feature-card {
@@ -154,9 +144,9 @@ body {
   /* padding: 20px; */
   font-weight: 500;
   text-align: center;
-  transition: transform 0.5s ease, background 0.5s ease !important;
-  -webkit-animation: fade-in 3s cubic-bezier(0.390, 0.575, 0.565, 1.000) both;
-	animation: fade-in 3s cubic-bezier(0.390, 0.575, 0.565, 1.000) both;
+  transition: transform 0.5s ease in, background 0.5s ease !important;
+	-webkit-animation: slide-in-fwd-right 1s cubic-bezier(0.250, 0.460, 0.450, 0.940) both;
+	animation: slide-in-fwd-right 1s cubic-bezier(0.250, 0.460, 0.450, 0.940) both;
 }
 
 .feature-card:hover {
@@ -167,22 +157,31 @@ body {
   -moz-box-shadow: -8px 10px 12px -3px rgba(0,0,0,0.75);
 }
 
-@-webkit-keyframes fade-in {
+@-webkit-keyframes slide-in-fwd-right {
   0% {
+    -webkit-transform: translateZ(-1400px) translateX(1000px);
+            transform: translateZ(-1400px) translateX(1000px);
     opacity: 0;
   }
   100% {
+    -webkit-transform: translateZ(0) translateX(0);
+            transform: translateZ(0) translateX(0);
     opacity: 1;
   }
 }
-@keyframes fade-in {
+@keyframes slide-in-fwd-right {
   0% {
+    -webkit-transform: translateZ(-1400px) translateX(1000px);
+            transform: translateZ(-1400px) translateX(1000px);
     opacity: 0;
   }
   100% {
+    -webkit-transform: translateZ(0) translateX(0);
+            transform: translateZ(0) translateX(0);
     opacity: 1;
   }
 }
+
 
 .section2{
   padding-top: 9rem;
@@ -204,17 +203,6 @@ body {
   padding: 100px 16px;
   text-align: center;
   height: 80vh;
-}
-
-.wave span {
-  display: inline-block;
-  animation: waveUpDown 0.6s ease-in-out forwards;
-  white-space: pre;
-}
-
-@keyframes waveUpDown {
-  0%, 100% { transform: translateY(0); }
-  50% { transform: translateY(-20px); }
 }
 
 /* Responsive */
