@@ -79,7 +79,7 @@ const HomeScreen = () => {
               <li><BsCheckCircleFill className="s3icon"/>Summarize notes into bite-sized points</li>
               <li><BsCheckCircleFill className="s3icon"/>Get help from our very own Chatbot</li>
             </ul>
-            <Link to="/login" className="hs-button bg-dark-purple hover:bg-[rgb(102,222,252)] get-started hover:text-black">
+            <Link to="/login" className="section3-button">
               Start Studying
             </Link>
           </div>
