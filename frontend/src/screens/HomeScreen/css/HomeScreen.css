@@ -12,6 +12,7 @@ body {
   margin: 0 auto;
   padding: 60px 16px;
   align-items: flex-start;
+  overflow-y: hidden;
 }
 
 
@@ -144,17 +145,20 @@ body {
   /* padding: 20px; */
   font-weight: 500;
   text-align: center;
-  transition: transform 0.5s ease in, background 0.5s ease !important;
+  transition: all 0.5s ease-in, background 0.5s ease !important;
 	-webkit-animation: slide-in-fwd-right 1s cubic-bezier(0.250, 0.460, 0.450, 0.940) both;
 	animation: slide-in-fwd-right 1s cubic-bezier(0.250, 0.460, 0.450, 0.940) both;
+    box-shadow: -8px 10px 12px -3px rgba(0,0,0,0.75);
+  -webkit-box-shadow: -8px 10px 12px -3px rgba(0,0,0,0.75);
+  -moz-box-shadow: -8px 10px 12px -3px rgba(0,0,0,0.75);
 }
 
 .feature-card:hover {
   transform: translateY(-6px) !important;
-  transition: transform 0.5s ease, background 0.5s ease !important;
-  box-shadow: -8px 10px 12px -3px rgba(0,0,0,0.75);
+  transition: all 0.5s ease-in-out;
+  /* box-shadow: -8px 10px 12px -3px rgba(0,0,0,0.75);
   -webkit-box-shadow: -8px 10px 12px -3px rgba(0,0,0,0.75);
-  -moz-box-shadow: -8px 10px 12px -3px rgba(0,0,0,0.75);
+  -moz-box-shadow: -8px 10px 12px -3px rgba(0,0,0,0.75); */
 }
 
 @-webkit-keyframes slide-in-fwd-right {
