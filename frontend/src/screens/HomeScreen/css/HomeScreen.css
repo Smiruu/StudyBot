@@ -236,7 +236,6 @@ body {
   flex: 1;
   display: flex;
   flex-direction: column;
-  /* justify-content: center; */
 }
 
 .section3-title {
@@ -251,6 +250,8 @@ body {
   list-style: none;
   padding: 0;
   margin-bottom: 20px;
+  /* background-color: red; */
+  padding-left: 18rem;
 }
 
 .section3-list li {
