@@ -63,7 +63,7 @@ const LoginScreen = () => {
                     <span
                       key={index}
                       className={`indicator ${index === current ? "active" : ""}`}
-                      onClick={() => setCurrent(index)}  // clickable to jump to that image
+                      onClick={() => setCurrent(index)}
                     ></span>
                   ))}
                 </div>
