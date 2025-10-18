@@ -84,12 +84,6 @@ body {
   margin: 3rem 1rem 0rem;
 }
 
-/* .features-title {
-  font-size: 1.8rem;
-  margin-bottom: 20px;
-  font-weight: 600;
-} */
-
 .features-grid {
   display: grid;
   grid-template-columns: repeat(5, 1fr);
@@ -141,20 +135,19 @@ body {
   display: flex;
   align-items: center;
   justify-content: center;
-  /* padding: 20px; */
   font-weight: 500;
   text-align: center;
-  transition: transform 0.5s ease in, background 0.5s ease !important;
+  transition: all 0.5s ease-in, background 0.5s ease !important;
 	-webkit-animation: slide-in-fwd-right 1s cubic-bezier(0.250, 0.460, 0.450, 0.940) both;
 	animation: slide-in-fwd-right 1s cubic-bezier(0.250, 0.460, 0.450, 0.940) both;
+    box-shadow: -8px 10px 12px -3px rgba(0,0,0,0.75);
+  -webkit-box-shadow: -8px 10px 12px -3px rgba(0,0,0,0.75);
+  -moz-box-shadow: -8px 10px 12px -3px rgba(0,0,0,0.75);
 }
 
 .feature-card:hover {
   transform: translateY(-6px) !important;
-  transition: transform 0.5s ease, background 0.5s ease !important;
-  box-shadow: -8px 10px 12px -3px rgba(0,0,0,0.75);
-  -webkit-box-shadow: -8px 10px 12px -3px rgba(0,0,0,0.75);
-  -moz-box-shadow: -8px 10px 12px -3px rgba(0,0,0,0.75);
+  transition: all 0.5s ease-in-out;
 }
 
 @-webkit-keyframes slide-in-fwd-right {
@@ -184,9 +177,9 @@ body {
 
 
 .section2{
-  padding-top: 9rem;
+  padding-top: 5.5rem;
   text-align: center;
-  height: 20vh;
+  height: 18vh
 }
 
 .section2-title{
@@ -200,12 +193,77 @@ body {
 
 
 .section3 {
-  padding: 100px 16px;
+  padding: 80px 0px;
   text-align: center;
   height: 80vh;
+  justify-content: center;
 }
 
-/* Responsive */
+.section3-container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 50px;
+  width: 100%;
+  max-width: 2000px;
+  margin: 0 auto;   
+}
+
+.section3-left {
+  flex: 1;
+}
+
+.section3-image {
+  width: 100%;
+  max-width: 1400px;
+  height: 40rem;
+  margin: 0;
+  background-size: cover;
+  background-position: center;
+  display: block;
+  border-top-right-radius: 2rem;
+  border-bottom-right-radius: 2rem;
+}
+
+.section3-right {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.section3-title {
+  font-size: 3.5rem;
+  font-weight: 700;
+  font-family: "Ubuntu", sans-serif;
+  margin-bottom: 3rem;
+  color: white;
+  align-items: flex-start;
+  text-align: left;
+}
+
+.section3-list {
+  list-style: none;
+  padding: 0;
+  margin-bottom: 20px;
+}
+
+.s3icon{
+  color: #66b2b2;
+  width: 4%;
+  height: auto;
+}
+
+.section3-list li {
+  font-size: 1.5rem;
+  font-weight: 500;
+  font-family: "Ubuntu", sans-serif;
+  color: white;
+  margin-bottom: 2rem;
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
 @media (max-width: 900px) {
   .two-column {
     flex-direction: column;
@@ -215,4 +273,4 @@ body {
     width: 100%;
     margin-bottom: 24px;
   }
-}
+} 
