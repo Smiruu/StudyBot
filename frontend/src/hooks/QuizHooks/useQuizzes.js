@@ -130,12 +130,28 @@ export const useQuizzes = () => {
       setIsLoading(false);
     }
   };
+
+  const editFlashcard = async (groupId, newName, accessToken) => {
+    setIsLoading(true)
+    try {
+      await API.put(`/userFlashcards/${groupId}`, {newName},{
+        headers: {
+          Authorization: `Bearer ${accessToken}`
+        }
+      })
+    } catch (error) {
+      setError(err.response?.data?.message)
+    } finally {
+      setIsLoading(false)
+    }
+  }
   return {
     quizzes,
     flashcards,
     loading,
     error,
     deleteFlashcards,
+    editFlashcard,
     fetchQuizzesByGroup,
     createFlashcards,
     fetchFlashcards,
