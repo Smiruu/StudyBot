@@ -4,10 +4,9 @@ import { useEffect } from "react";
 import "./css/DashboardScreen.css";
 import {useAuth} from "../../hooks/AuthHooks/userAuth.js"
 import { useNavigate } from "react-router-dom";
-import QuizComponent from "../../component/QuizComponents/QuizComponent.jsx";
 
 const DashboardScreen = () => {
-  const { user, isAuthenticated, logout, isLoading } = useAuth();
+  const { user, accessToken, logout, isLoading } = useAuth();
   const navigate = useNavigate();
 
 
@@ -20,14 +19,14 @@ const DashboardScreen = () => {
     return <div className="loading">Loading...</div>; // or a spinner
   }
 
-  if (!isAuthenticated || !user) {
+  if (!accessToken || !user) {
     return null; 
   }
 
   return (
     <div className="dashboard-container">
       <div className="dashboard-box">
-        <h1 className="dashboard-title">Welcome back, {user.name}!</h1>
+        <h1 className="dashboard-title">Welcome back, {user?.username}!</h1>
         <p className="dashboard-subtitle">This is your StudyBot Dashboard</p>
 
         <div className="dashboard-stats"></div>
@@ -42,7 +41,6 @@ const DashboardScreen = () => {
           <button onClick={handleLogout}>Logout</button>
         </div>
       </div>
-      <QuizComponent />
     </div>
   );
 };

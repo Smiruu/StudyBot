@@ -1,34 +1,36 @@
 import axios from 'axios';
 import { createContext, useContext, useEffect, useState } from 'react';
 
-const API = axios.create({
-  baseURL: 'http://localhost:5000/api/users',
-  withCredentials: true,
-});
+import * as api from '../../api/authApi';
+
+const API = "hi"
 
 const AuthContext = createContext();
 
 export const AuthProvider = ({ children }) => {
   // States
   const [user, setUser] = useState(null);
+  const [email, setEmail] = useState(null)
   const [accessToken, setToken] = useState(null);
-  const [isAuthenticated, setIsAuthenticated] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState(null);
 
     useEffect(() => {
     const refreshUser = async () => {
       try {
-        const response = await API.get('/refresh-token'); // this should return { accessToken, user }
-        setToken(response.data.accessToken);
-        setUser(response.data.user);
-        setIsAuthenticated(true);
+        const response = await api.refresh(); 
+        setToken(response.access_token);
+        setUser({
+          email: response.email,
+          user_id: response.user_id,
+          username: response.username
+        });
 
       } catch (err) {
         console.error("Failed to refresh user:", err.response?.data || err.message);
         setToken(null);
         setUser(null);
-        setIsAuthenticated(false);
+        
       } finally {
         setIsLoading(false);
       }
@@ -41,10 +43,11 @@ export const AuthProvider = ({ children }) => {
     setIsLoading(true);
     setError(null);
     try {
-      const response = await API.post('/register', { name, email, password });
-
-      setUser(response.data.user);
+      
+      const response = await api.register(name, email, password)
+      setEmail(response.email);
     } catch (err) {
+      console.log(err)
       setError(err.response?.data?.message || 'Registration Failed');
     } finally {
       setIsLoading(false);
@@ -56,9 +59,13 @@ export const AuthProvider = ({ children }) => {
     setIsLoading(true);
     setError(null);
     try {
-      const {accessToken} = await API.post('/verify', { token });
-      setToken(accessToken)
-      setIsAuthenticated(true);
+      const response = await api.verify(email, token)
+      setToken(response.access_token)
+      setUser({
+        email: response.email,
+        user_id: response.user_id,
+        username: response.username
+      })
     } catch (err) {
       setError(err.response?.data?.error || 'Verification Failed');
     } finally {
@@ -71,11 +78,11 @@ export const AuthProvider = ({ children }) => {
     setIsLoading(true);
     setError(null);
     try {
-      const response = await API.post('/login', { email, password });
-      setToken(response.data.accessToken);
-      setUser(response.data.user);
-      setIsAuthenticated(true);
+      const response = await api.login(email, password);
+      setToken(response.access_token);
+      setUser(response.user);
     } catch (err) {
+      console.log(err)
       setError(err.response?.data?.message || 'Login Failed');
     } finally {
       setIsLoading(false);
@@ -85,10 +92,9 @@ export const AuthProvider = ({ children }) => {
   // Logout
   const logout = async () => {
     try {
-      await API.post('/logout');
+      await api.logout()
       setToken(null);
       setUser(null);
-      setIsAuthenticated(false);
     } catch (err) {
       setError(err.response?.data?.message || 'Logout Failed');
     }
@@ -123,7 +129,6 @@ export const AuthProvider = ({ children }) => {
   const value = {
     user,
     accessToken,
-    isAuthenticated,
     isLoading,
     error,
     register,

@@ -13,7 +13,7 @@ const images = [
 const LoginScreen = () => {
   const [email,setEmail] = useState("");
   const [password,setPassword] = useState("");
-  const {login, isLoading, error, isAuthenticated} = useAuth();
+  const {login, isLoading, error, accessToken} = useAuth();
   const [showPassword, setShowPassword] = useState(false);
   const loginButtonRef = useRef(null);
   const navigate = useNavigate();
@@ -23,9 +23,11 @@ const LoginScreen = () => {
     login(email, password);
   };
 
-  if (isAuthenticated) {
-    navigate('/dashboard')
-  };
+  useEffect(() => {
+    if (accessToken) {
+      navigate('/dashboard');
+    }
+  }, [accessToken, navigate]);
   
   const [current, setCurrent] = useState(0);
 

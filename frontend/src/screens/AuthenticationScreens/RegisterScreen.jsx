@@ -135,7 +135,7 @@ const RegisterScreen = () => {
 
             <form onSubmit={handleSubmit} className="login-form">
               <div className="login-form-group">
-                <label>Full Name</label>
+                <label>Username</label>
                 <input
                   type="text"
                   name="name"

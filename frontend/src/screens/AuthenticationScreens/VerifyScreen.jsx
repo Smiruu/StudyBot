@@ -1,13 +1,13 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useAuth } from "../../hooks/AuthHooks/userAuth.js";
 import { useNavigate } from "react-router-dom";
 import { MdSystemSecurityUpdateGood } from "react-icons/md";
 import './css/VerifyScreen.css';
 
 function VerifyScreen() {
-    const [digits, setDigits] = useState(['', '', '', '', '']);
+    const [digits, setDigits] = useState(['', '', '', '', '', '', '', '']);
     const [err, setError] = useState('');
-    const { verify, isLoading, error, isAuthenticated } = useAuth();
+    const { verify, isLoading, error, accessToken } = useAuth();
     const navigate = useNavigate();
 
     const handleDigitChange = (index, value) => {
@@ -18,7 +18,7 @@ function VerifyScreen() {
             setDigits(newDigits);
             setError('');
             
-            if (value && index < 4) {
+            if (value && index < 7) {
                 document.getElementById(`digit-${index + 1}`).focus();
             }
         }
@@ -35,8 +35,8 @@ function VerifyScreen() {
         e.preventDefault();
         const verificationCode = digits.join('');
         
-        if (verificationCode.length !== 5) {
-            setError('Please enter a 6-digit code');
+        if (verificationCode.length !== 8) {
+            setError('Please enter an 8-digit code');
             return;
         }
         try {
@@ -46,9 +46,11 @@ function VerifyScreen() {
         }
     };
 
-    if(isAuthenticated){
-        navigate("/login")
-    }
+    useEffect(() => {
+        if(accessToken){
+            navigate("/dashboard")
+        }
+    }, [accessToken, navigate]);
 
     const handleResendCode = () => {
         console.log('Resend code requested');
@@ -68,7 +70,7 @@ function VerifyScreen() {
                 </div>
                 <h2 className="verification-title">Verify Your Account</h2>
                 <p className="verification-subtitle">
-                    We've sent a 5-digit code to your email
+                    We've sent a 8-digit code to your email
                 </p>
                 
                 {error && <p className="verification-error">{error}</p>}
