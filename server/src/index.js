@@ -4,6 +4,7 @@ import dotenv from 'dotenv'
 import cookieParser from 'cookie-parser'
 
 import userRoutes from './apps/users/routes.js'
+import fileRoutes from './apps/studyMaterials/routes.js'
 
 dotenv.config()
 
@@ -34,6 +35,7 @@ app.get('/', (req, res) => {
 
 // APIs
 app.use('/api/auth', userRoutes)
+app.use('/api/files', fileRoutes)
 
 app.listen(PORT, ()=> {
     console.log(`Server is running on http://localhost:${PORT}`)

@@ -72,8 +72,8 @@ export const login = async (email, password) => {
     })
 
     if (error) {
-        console.error("Services Error: Login, ", error)
-        throw new Error(error)
+        console.error("Services Error: Login, ", error.message)
+        throw new Error(error.message)
     }
 
     return data
