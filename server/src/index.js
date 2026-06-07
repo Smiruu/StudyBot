@@ -5,7 +5,7 @@ import cookieParser from 'cookie-parser'
 
 import userRoutes from './apps/users/routes.js'
 import fileRoutes from './apps/studyMaterials/routes.js'
-
+import quizRoutes from './apps/quizzes/routes.js'
 dotenv.config()
 
 const app = express()
@@ -36,6 +36,7 @@ app.get('/', (req, res) => {
 // APIs
 app.use('/api/auth', userRoutes)
 app.use('/api/files', fileRoutes)
+app.use('/api/quiz', quizRoutes)
 
 app.listen(PORT, ()=> {
     console.log(`Server is running on http://localhost:${PORT}`)

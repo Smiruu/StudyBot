@@ -1,11 +1,11 @@
-import {supabase} from "../../config/supabase.js";
+import {supabaseAdmin} from "../../config/supabase.js";
 import crypto from 'crypto'
 
 export const fileUpload = async (file, userId) => {
 
     const fileHash = crypto.createHash('sha256').update(file.buffer).digest('hex')
 
-    const {data: existingFile, error: searchError} = await supabase
+    const {data: existingFile, error: searchError} = await supabaseAdmin
     .from('study_materials')
     .select('*')
     .eq('user_id', userId)
@@ -21,7 +21,7 @@ export const fileUpload = async (file, userId) => {
 
     const uniqueFileName = `${userId}/${Date.now()}_${file.originalname}`;
     
-    const { error: storageError} = await supabase.storage
+    const { error: storageError} = await supabaseAdmin.storage
     .from('study_files')
     .upload(uniqueFileName, file.buffer, {
         contentType: file.mimetype
@@ -32,12 +32,12 @@ export const fileUpload = async (file, userId) => {
         throw new Error(storageError.message)
     }
 
-    const {data: storageUrlData} = supabase.storage
+    const {data: storageUrlData} = supabaseAdmin.storage
     .from('study_files')
     .getPublicUrl(uniqueFileName)
     
   
-    const {data: dbData, error: dbError} = await supabase
+    const {data: dbData, error: dbError} = await supabaseAdmin
     .from('study_materials')
     .insert({
         user_id : userId,
@@ -62,7 +62,7 @@ export const getAllUserStudyMaterials = async (userId, page = 1, limit = 10) => 
     const from  = (page - 1) * limit;
     const to =  from + limit - 1;
 
-    const {data, count, error} = await supabase
+    const {data, count, error} = await supabaseAdmin
     .from('study_materials')
     .select("*", {count: 'exact'})
     .eq("user_id", userId)

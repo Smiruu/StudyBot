@@ -1,7 +1,7 @@
-import { supabase } from "../../config/supabase.js";
+import { supabaseAdmin } from "../../config/supabase.js";
 
 export const refresh = async (token) => {
-    const { data, error } = await supabase.auth.refreshSession({
+    const { data, error } = await supabaseAdmin.auth.refreshSession({
         refresh_token: token
     })
 
@@ -14,7 +14,7 @@ export const refresh = async (token) => {
 
 export const register = async (username, email, password) => {
 
-    const { data: existingUser } = supabase
+    const { data: existingUser } = supabaseAdmin
         .from("Profiles")
         .select("name")
         .eq("name", username)
@@ -24,7 +24,7 @@ export const register = async (username, email, password) => {
         console.error("Services error: Username already taken")
         throw new Error("Username is already taken.")
     }
-    const { data, error } = await supabase.auth.signUp({
+    const { data, error } = await supabaseAdmin.auth.signUp({
         email,
         password,
         options: {
@@ -40,14 +40,14 @@ export const register = async (username, email, password) => {
 
 export const verifyRegister = async (email, token) => {
 
-    const { data, error: verifyError } = await supabase.auth.verifyOtp({
+    const { data, error: verifyError } = await supabaseAdmin.auth.verifyOtp({
         email: email,
         token: token,
         type: 'email',
 
     })
     console.log(data)
-    const { error: ProfileError } = await supabase
+    const { error: ProfileError } = await supabaseAdmin
         .from("Profile")
         .insert({
             id: data?.user?.id,
@@ -67,7 +67,7 @@ export const verifyRegister = async (email, token) => {
 }
 
 export const login = async (email, password) => {
-    const { data, error } = await supabase.auth.signInWithPassword({
+    const { data, error } = await supabaseAdmin.auth.signInWithPassword({
         email, password
     })
 
