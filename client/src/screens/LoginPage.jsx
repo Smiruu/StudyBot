@@ -6,11 +6,11 @@ const LoginPage = () => {
     <div className="min-h-screen flex text-white font-sans selection:bg-[#FDCF11] selection:text-black">
       
       {/* Left Side: Presentation */}
-      <section className="hidden lg:flex lg:w-[60%] relative flex-col justify-center p-16 overflow-hidden bg-[#584D78]">
+      <section className="hidden lg:flex lg:w-[60%] relative flex-col justify-center p-16 overflow-hidden bg-[#584D78] anim-fade-in">
         {/* Animated Background */}
 
         {/* Hero Content */}
-        <div className="relative z-10 max-w-2xl">
+        <div className="relative z-10 max-w-2xl anim-slide-up">
           <h1 className="text-5xl lg:text-6xl font-extrabold leading-[1.15] mb-6">
             Welcome back to your <span className="text-[#FDCF11]">AI learning partner</span>
           </h1>
@@ -45,7 +45,7 @@ const LoginPage = () => {
 
       {/* Right Side: Form */}
       <div className="w-full lg:w-[45%] bg-[#121114] flex flex-col justify-center items-center px-8 md:px-16 lg:px-24 py-16 relative">
-        <div className="w-full max-w-sm">
+        <div className="w-full max-w-sm anim-slide-up-delayed">
           
           <h2 className="text-3xl font-extrabold mb-2 font-serif tracking-tight">Sign In</h2>
           <p className="text-sm text-gray-400 mb-8">Enter your details to continue your journey.</p>
