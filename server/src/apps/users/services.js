@@ -1,7 +1,7 @@
-import { supabaseAdmin } from "../../config/supabase.js";
+import { supabaseAdmin, supabase } from "../../config/supabase.js";
 
 export const refresh = async (token) => {
-    const { data, error } = await supabaseAdmin.auth.refreshSession({
+    const { data, error } = await supabase.auth.refreshSession({
         refresh_token: token
     })
 
@@ -24,7 +24,7 @@ export const register = async (username, email, password) => {
         console.error("Services error: Username already taken")
         throw new Error("Username is already taken.")
     }
-    const { data, error } = await supabaseAdmin.auth.signUp({
+    const { data, error } = await supabase.auth.signUp({
         email,
         password,
         options: {
@@ -40,7 +40,7 @@ export const register = async (username, email, password) => {
 
 export const verifyRegister = async (email, token) => {
 
-    const { data, error: verifyError } = await supabaseAdmin.auth.verifyOtp({
+    const { data, error: verifyError } = await supabase.auth.verifyOtp({
         email: email,
         token: token,
         type: 'email',
@@ -67,7 +67,7 @@ export const verifyRegister = async (email, token) => {
 }
 
 export const login = async (email, password) => {
-    const { data, error } = await supabaseAdmin.auth.signInWithPassword({
+    const { data, error } = await supabase.auth.signInWithPassword({
         email, password
     })
 

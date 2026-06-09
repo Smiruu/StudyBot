@@ -27,7 +27,7 @@ export const uploadFiles = async (req, res) => {
 export const getAllUserStudyMaterials = async (req, res) => {
     try {
         const user_id = req.user.id
-        
+        console.log(user_id)
         const page = parseInt(req.query.page) || 1;
         const limit = parseInt(req.query.limit) || 10;
 

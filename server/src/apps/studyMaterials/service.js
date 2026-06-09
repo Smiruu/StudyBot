@@ -69,6 +69,7 @@ export const getAllUserStudyMaterials = async (userId, page = 1, limit = 10) => 
     .order('created_at', {ascending:false})
     .range(from, to);
 
+    console.log(`SERVICE DEBUG: ID: ${userId}, Page: ${page}, Limit: ${limit}`);
     if (error) {
         console.error('Error Fetching Study Materials:', error)
         throw new Error(error.message)

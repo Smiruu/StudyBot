@@ -55,6 +55,7 @@ export const generateQuizWithAI = async (rawText, questionCount, maxRetries = 3)
         Your task is to generate a ${questionCount}-question multiple-choice quiz based strictly on the provided text.
 
         You MUST return a pure JSON array of objects. Do not include any markdown formatting or introductory text.
+        Do not wrap the JSON schema in an array.
         Use this exact JSON schema for each question:
         {
             "title": "A descriptive title for the quiz",
@@ -77,9 +78,12 @@ export const generateQuizWithAI = async (rawText, questionCount, maxRetries = 3)
     for (let attempt = 1; attempt <= maxRetries; attempt++) {
         try {
             const result = await model.generateContent(prompt);
+
             const responseText = result.response.text();
 
-            const quizArray = JSON.parse(responseText);
+            const quizParse = JSON.parse(responseText);
+
+            const quizArray = Array.isArray(quizParse) ? quizParse[0] : quizParse;
             return quizArray
         } catch (error) {
             if (error.message.includes('503') || error.status === 503) {
@@ -134,4 +138,59 @@ export const saveQuizToDatabase = async (userId, materialId, title, questions) =
     }
 
     return quiz.id;
+}
+
+export const getQuizzesFromDatabase = async (userId, materialId) => {
+
+    const { data, error } = await supabaseAdmin
+        .from('quizzes')
+        .select('id, title, created_at, score')
+        .eq('material_id', materialId)
+        .eq('user_id', userId)
+        .order('created_at', { ascending: false })
+
+    if (error) throw new Error(error.message)
+    console.log(data)
+    return data
+
+}
+
+export const getQuizQuestions = async (quizId) => {
+    const {data, error} = await supabaseAdmin
+    .from('questions')
+    .select('id, question_text, options')
+    .eq('quiz_id', quizId)
+    
+    if(error) throw new Error(error.message);
+    return data;
+}
+
+export const scoreResults = async (quizId,userAnswers) => {
+    const {data: questions, error: questionError} = await supabaseAdmin
+    .from('questions')
+    .select('id, correct_answer')
+    .eq('quiz_id', quizId);
+
+    if(questionError) throw new Error(questionError.message);
+
+    let score = 0;
+
+    questions.forEach((data) => {
+        const matchingAnswerToQuestion = userAnswers.find((answer) => answer.question_id === data.id);
+        
+        if (matchingAnswerToQuestion.answer == data.correct_answer) {
+            score++
+        }
+    })
+
+    const {error: saveError} = await supabaseAdmin
+    .from('quizzes')
+    .update({
+        score:score
+    })
+    .eq('id', quizId)
+
+    if(saveError) throw new Error(saveError.message)
+    
+    return score
 }
