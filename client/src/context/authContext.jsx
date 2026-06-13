@@ -51,6 +51,41 @@ export const AuthProvider = ({ children }) => {
         await api.logout();
     }
 
+    const register = async (username, email, password) => {
+        setIsLoading(true)
+        setError(null)
+        try{
+            const response = await api.register(username,email,password)
+
+            setToken(response.access_token)
+            setUser(response.user)
+            setIsAuthenticated(true)
+            return { success: true };
+        }catch(err){
+            setError(err.response?.data?.error || "An error occured")
+            return { success: false };
+        }finally{
+            setIsLoading(false)
+        }
+    }
+
+    const verify = async (email, token) => {
+        setIsLoading(true)
+        setError(null)
+
+        try{
+            const response = await api.verify(email,token)
+
+            setToken(response.access_token)
+            setUser(response.user)
+            setIsAuthenticated(true)
+        }catch(err){
+            setError(err.response?.data?.error || "An error occured")
+        }finally{
+            setIsLoading(false)
+        }
+    }
+
     const value = {
         token,
         user,
@@ -58,7 +93,9 @@ export const AuthProvider = ({ children }) => {
         isLoading,
         error,
         login,
-        logout
+        logout,
+        register,
+        verify
     }
 
     return(<AuthContext.Provider value={value}>
