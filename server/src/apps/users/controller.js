@@ -7,7 +7,7 @@ export const refresh = async (req, res) => {
         if (!token) {
             return res.status(401).json({ error: "Unauthorized" })
         }
-        console.log("Hit")
+
         const response = await userService.refresh(token)
 
         res.cookie('refresh_token',
@@ -22,9 +22,12 @@ export const refresh = async (req, res) => {
 
         res.status(200).json({
             message: 'Refresh successful',
-            email: response.user.email,
-            user_id: response.user.id,
-            username: response.user.user_metadata.username,
+            user:
+            {
+                email: response.user.email,
+                user_id: response.user.id,
+                username: response.user.user_metadata.username,
+            },
             access_token: response.session.access_token,
         })
     } catch (error) {

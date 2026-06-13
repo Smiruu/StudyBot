@@ -1,7 +1,13 @@
 import React from 'react';
 import LoginForm from '../components/LoginForm';
-
+import { Navigate } from 'react-router-dom';
+import { useAuth } from '../context/authContext';
 const LoginPage = () => {
+  const {isAuthenticated} = useAuth();
+
+  if(isAuthenticated) {
+    return <Navigate to="/dashboard" />
+  }
   return (
     <div className="min-h-screen flex text-white font-sans selection:bg-[#FDCF11] selection:text-black">
       

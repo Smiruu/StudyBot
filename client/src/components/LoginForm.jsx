@@ -1,13 +1,30 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import { useAuth } from '../context/authContext';
+import { useNavigate } from 'react-router-dom';
 
 const LoginForm = () => {
   const [showPassword, setShowPassword] = useState(false);
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
+  const { login, isAuthenticated, isLoading, error } = useAuth();
+
+  let navigate = useNavigate();
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    await login(email, password);
+  }
+
+  useEffect(() => {
+    if (isAuthenticated) {
+      navigate('/dashboard');
+    }
+  }, [isAuthenticated]);
+
   return (
-    <form className="flex flex-col gap-5 w-full mt-8" onSubmit={(e) => e.preventDefault()}>
-      
+    <form className="flex flex-col gap-5 w-full mt-8" onSubmit={handleSubmit}>
+
       {/* Email Field */}
       <div className="flex flex-col gap-2">
         <label className="text-sm font-semibold text-white">Email Address</label>
@@ -17,8 +34,8 @@ const LoginForm = () => {
               <path strokeLinecap="round" strokeLinejoin="round" d="M21.75 6.75v10.5a2.25 2.25 0 0 1-2.25 2.25h-15a2.25 2.25 0 0 1-2.25-2.25V6.75m19.5 0A2.25 2.25 0 0 0 19.5 4.5h-15a2.25 2.25 0 0 0-2.25 2.25m19.5 0v.243a2.25 2.25 0 0 1-1.07 1.916l-7.5 4.615a2.25 2.25 0 0 1-2.36 0L3.32 8.909A2.25 2.25 0 0 1 2.25 6.993V6.75m19.5 0v.243m0 0a2.25 2.25 0 0 1-1.07 1.916l-7.5 4.615a2.25 2.25 0 0 1-2.36 0L3.32 8.909A2.25 2.25 0 0 1 2.25 6.993V6.75" />
             </svg>
           </div>
-          <input 
-            type="email" 
+          <input
+            type="email"
             placeholder="name@example.com"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
@@ -39,14 +56,14 @@ const LoginForm = () => {
               <path strokeLinecap="round" strokeLinejoin="round" d="M16.5 10.5V6.75a4.5 4.5 0 1 0-9 0v3.75m-.75 11.25h10.5a2.25 2.25 0 0 0 2.25-2.25v-6.75a2.25 2.25 0 0 0-2.25-2.25H6.75a2.25 2.25 0 0 0-2.25 2.25v6.75a2.25 2.25 0 0 0 2.25 2.25Z" />
             </svg>
           </div>
-          <input 
-            type={showPassword ? "text" : "password"} 
+          <input
+            type={showPassword ? "text" : "password"}
             placeholder="••••••••"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
             className="w-full bg-[#1A1821] border border-gray-700 text-white text-sm rounded-xl py-3 pl-11 pr-12 outline-none focus:border-gray-500 focus:ring-1 focus:ring-gray-500 transition-all placeholder:text-gray-500"
           />
-          <button 
+          <button
             type="button"
             onClick={() => setShowPassword(!showPassword)}
             className="absolute inset-y-0 right-0 flex items-center pr-4 text-gray-400 hover:text-white transition-colors cursor-pointer"
@@ -65,8 +82,17 @@ const LoginForm = () => {
         </div>
       </div>
 
-      <button className="w-full bg-[#FDCF11] text-black font-bold text-sm py-3 rounded-xl mt-4 hover:bg-[#e5bb0f] transition-colors shadow-[0px_0px_15px_rgba(253,207,17,0.3)]">
-        Sign In
+      {error && (
+        <div className="bg-red-500/10 border border-red-500/50 text-red-400 text-sm p-3 rounded-xl flex items-center gap-2 mt-2 animate-shake">
+          <svg fill="none" viewBox="0 0 24 24" strokeWidth="1.5" stroke="currentColor" className="w-5 h-5 shrink-0">
+            <path strokeLinecap="round" strokeLinejoin="round" d="M12 9v3.75m9-.75a9 9 0 1 1-18 0 9 9 0 0 1 18 0Zm-9 3.75h.008v.008H12v-.008Z" />
+          </svg>
+          <span>{error}</span>
+        </div>
+      )}
+      <button className="w-full bg-[#FDCF11] text-black font-bold text-sm py-3 rounded-xl mt-4 hover:bg-[#e5bb0f] transition-colors shadow-[0px_0px_15px_rgba(253,207,17,0.3)]"
+        disabled={isLoading}>
+        {isLoading ? 'Signing In... ' : 'Sign In'}
       </button>
 
       <p className="text-center text-sm text-gray-400 mt-10">
