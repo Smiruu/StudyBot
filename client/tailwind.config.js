@@ -4,6 +4,14 @@ export default {
     "./src/**/*.{js,ts,jsx,tsx}",],
   theme: {
     extend: {
+      colors: {
+        'dashboard-bg': '#5c5470',
+        'dashboard-card': '#403b54',
+        'dashboard-accent': '#fcc824',
+        'dashboard-icon-bg': '#2f2b40',
+        'dashboard-text-secondary': '#c3bfcf',
+        'dashboard-cyan': '#1ec198',
+      },
       fontFamily: {
         sans: ['"Plus Jakarta Sans"', 'sans-serif'],
       },

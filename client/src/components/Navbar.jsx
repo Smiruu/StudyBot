@@ -2,7 +2,7 @@ import React from 'react';
 import { Link, useLocation } from "react-router-dom";
 import { useAuth } from '../context/authContext';
 
-const Navbar = () => {
+const Navbar = ({ isOpen, setIsOpen }) => {
     const location = useLocation();
 
     const { user, logout } = useAuth();
@@ -13,7 +13,16 @@ const Navbar = () => {
     };
 
     return (
-        <nav className="hidden md:flex flex-col h-full py-8 bg-[#15131A] fixed left-0 top-0 w-[280px] border-r border-gray-800/60 z-10 text-white">
+        <>
+            {/* Mobile Backdrop */}
+            {isOpen && (
+                <div 
+                    className="fixed inset-0 bg-black/60 z-40 md:hidden backdrop-blur-sm transition-opacity"
+                    onClick={() => setIsOpen(false)}
+                />
+            )}
+
+            <nav className={`flex flex-col h-full py-8 bg-[#15131A] fixed left-0 top-0 w-[280px] border-r border-gray-800/60 z-50 text-white transform transition-transform duration-300 ease-in-out ${isOpen ? "translate-x-0" : "-translate-x-full"} md:translate-x-0`}>
 
             <div className="px-6 mb-8 flex items-center space-x-4">
                 <div className="w-10 h-10 rounded-2xl bg-[#FDCF11] text-[#15131A] flex items-center justify-center font-black text-xl">
@@ -68,7 +77,8 @@ const Navbar = () => {
                     Sign Out
                 </button>
             </div>
-        </nav>
+            </nav>
+        </>
     );
 };
 
