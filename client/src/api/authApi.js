@@ -1,29 +1,29 @@
 import axios from "axios";
 
-const API = axios.create({
+const authApi = axios.create({
   baseURL: 'http://localhost:8080/api/auth',
   withCredentials: true,
 });
 
 export const refresh = async() => {
-  const response = await API.get(`/refresh`)
+  const response = await authApi.get(`/refresh`)
   return response.data
 }
 export const register = async (username, email, password) => {
-    const response = await API.post(`/register`, { username, email, password })
+    const response = await authApi.post(`/register`, { username, email, password })
     return response.data
 }
 
 export const verify = async (email, token) => {
-    const response = await API.post(`/verify`, { email, token })
+    const response = await authApi.post(`/verify`, { email, token })
     return response.data
 }
 
 export const login = async (email, password) => {
-    const response = await API.post(`/login`, { email, password })
+    const response = await authApi.post(`/login`, { email, password })
     return response.data
 }
 
 export const logout = async () => {
-    await API.post(`/logout`)
+    await authApi.post(`/logout`)
 }

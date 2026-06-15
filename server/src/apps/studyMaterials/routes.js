@@ -8,4 +8,5 @@ const router = Router();
 
 router.post('/upload', verifyUser, upload.array('files', 10), fileController.uploadFiles);
 router.get('/', verifyUser, fileController.getAllUserStudyMaterials)
+router.get('/:id', verifyUser, fileController.getMaterialById)  
 export default router;

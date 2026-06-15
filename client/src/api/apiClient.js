@@ -1,19 +1,22 @@
 import axios from "axios";
 import {useAuth} from "../context/authContext"
 
-export const API = axios.create({
-  baseURL: 'http://localhost:8080/api/',
+export const api = axios.create({
+  baseURL: 'http://localhost:8080/api',
   withCredentials: true,
 });
 
+let authToken = null;
 
+export const injectInterceptorToken = (token) => {
+  authToken = token;
+};
 
-API.interceptors.request.use(
+api.interceptors.request.use(
     (config) => {
-        const {token} = useAuth();
 
-        if(token){
-            config.headers.Authorization = `Bearer ${token}`;
+        if(authToken){
+            config.headers.Authorization = `Bearer ${authToken}`;
         }
         return config;
     },
@@ -21,16 +24,16 @@ API.interceptors.request.use(
         return Promise.reject(error)
     }
 )
-
-API.interceptors.response.use(
+api.interceptors.response.use(
     (response) => {
         return response
     },
     async (error) => {
         const originalRequest = error.config;
+        console.log("ERROR HIT",originalRequest)
 
-        if(originalRequest.response.status === 401 && !originalRequest.retry){
-            originalRequest.retry = true;
+        if(error.response?.status === 401 && !originalRequest._retry){
+            originalRequest._retry = true;
 
             try{
                 const refreshTokenResponse = await axios.post('http://localhost:8080/api/auth/refresh', {withCredentials:true})
@@ -38,9 +41,10 @@ API.interceptors.response.use(
                 let {token} = refreshTokenResponse.data
 
                 if(token){
+                    injectInterceptorToken(token)
                     originalRequest.headers.Authorization = `Bearer ${token}`;
 
-                    return API(originalRequest)
+                    return api(originalRequest)
                 }
             }catch(err){
                 if(err.response?.status === 401){
@@ -49,6 +53,6 @@ API.interceptors.response.use(
                 return Promise.reject(err);
             }
         }
-        return Promise.reject(err);
+        return Promise.reject(error);
     }
 )

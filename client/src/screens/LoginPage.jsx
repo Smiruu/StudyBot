@@ -1,13 +1,16 @@
 import React from 'react';
 import LoginForm from '../components/LoginForm';
-import { Navigate, Link } from 'react-router-dom';
+import { Navigate, Link, useLocation } from 'react-router-dom';
 import { useAuth } from '../context/authContext';
 import { Brain, BookOpen, ArrowLeft } from 'lucide-react';
+
 const LoginPage = () => {
   const {isAuthenticated} = useAuth();
+  const location = useLocation();
+  const from = location.state?.from?.pathname || "/dashboard";
 
   if(isAuthenticated) {
-    return <Navigate to="/dashboard" />
+    return <Navigate to={from} replace />
   }
   return (
     <div className="min-h-screen flex text-white font-sans selection:bg-[#FDCF11] selection:text-black relative anim-full-page-slide overflow-hidden">

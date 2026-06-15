@@ -1,18 +1,19 @@
 import { useState } from "react";
-import { Outlet, Navigate } from "react-router-dom";
+import { Outlet, Navigate, useLocation } from "react-router-dom";
 import Navbar from "./Navbar";
 import { useAuth } from "../context/authContext";
 
 const DashboardLayout = () => {
   const { isAuthenticated, isLoading } = useAuth();
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const location = useLocation();
 
   if (isLoading) {
     return <div>Loading...</div>
   }
 
   if (!isAuthenticated) {
-    return <Navigate to="/login" /> 
+    return <Navigate to="/login" state={{ from: location }} replace /> 
   }
 
   return (

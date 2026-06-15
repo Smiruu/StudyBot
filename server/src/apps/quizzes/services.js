@@ -103,8 +103,7 @@ export const generateQuizWithAI = async (rawText, questionCount, maxRetries = 3)
 }
 
 export const saveQuizToDatabase = async (userId, materialId, title, questions) => {
-    console.log("Received Title:", title);
-    console.log("Received Questions:", questions);
+ 
     const { data: quiz, error: quizError } = await supabaseAdmin
         .from('quizzes')
         .insert({

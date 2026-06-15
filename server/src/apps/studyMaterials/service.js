@@ -69,11 +69,43 @@ export const getAllUserStudyMaterials = async (userId, page = 1, limit = 10) => 
     .order('created_at', {ascending:false})
     .range(from, to);
 
-    console.log(`SERVICE DEBUG: ID: ${userId}, Page: ${page}, Limit: ${limit}`);
+    
     if (error) {
         console.error('Error Fetching Study Materials:', error)
         throw new Error(error.message)
     }
 
     return { data, count }
+}
+
+export const fetchMaterialById = async (materialId) => {
+
+    const {data: fileData, error: fileError} = await supabaseAdmin
+    .from('study_materials')
+    .select('title, storage_url')
+    .eq('id', materialId)
+    .single()
+
+    if(fileError){
+        console.error('Service Error:', fileError)
+        throw new Error(fileError.message)
+    }
+
+    const urlParts = fileData.storage_url.split('/object/public/study_files/')
+    const relativePath = urlParts.length > 1 ? urlParts[1] : fileData.storage_url;
+
+    const { data: signedData, error: signedError } = await supabaseAdmin.storage
+        .from('study_files')
+        .createSignedUrl(relativePath, 900); 
+
+    if (signedError) {
+        console.error('Error creating signed URL:', signedError);
+        throw new Error(signedError.message);
+    }
+
+    return {
+        signedUrl: signedData.signedUrl,
+        title: fileData.title
+    };
+    
 }
