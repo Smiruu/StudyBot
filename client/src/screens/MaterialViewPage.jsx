@@ -4,33 +4,42 @@ import { useFiles } from '../hooks/useFiles';
 import FileViewer from '../components/FileViewer';
 import AIQuiz from '../components/AIQuiz';
 import StudyGuide from '../components/StudyGuide';
+import {useQuiz} from '../hooks/useQuiz';
+import LoadingScreen from '../components/LoadingScreen';
 
 const MaterialViewPage = () => {
     const [material, setMaterial] = useState(null);
     const [title, setTitle] = useState(null)
-    const [loading, setLoading] = useState(true);
+    
 
     const [activeTab, setActiveTab] = useState('quiz');
     const { id } = useParams();
-    const { fetchFileById } = useFiles();
+    const { fetchFileById, isLoading: fileLoading } = useFiles();
+    const { isLoading: quizLoading } = useQuiz();
+    const navigate = useNavigate();
+
     useEffect(() => {
         const fetchFile = async () => {
-            try {
+            
                 const response = await fetchFileById(id);
                 setTitle(response.title)
                 setMaterial(response.data);
-            } catch (error) {
-                console.error('Error fetching material:', error);
-            } finally {
-                setLoading(false);
-            }
+            
         };
         fetchFile();
     }, [id]);
 
+    if(fileLoading){
+        return <LoadingScreen title="Loading Material" subtitle="Studybot is loading your material..." />
+    }
+    if(quizLoading){
+        return <LoadingScreen title="Generating Knowledge Check" subtitle="Studybot is scanning your document to create a custom quiz..." />
+    }
 
 
-    const navigate = useNavigate();
+
+
+    
 
     return (
         <section className="min-h-full lg:h-full flex flex-col space-y-4 lg:space-y-6 p-4 md:p-6 lg:p-8 animate-in slide-in-from-right-10 duration-500" id="split-view">

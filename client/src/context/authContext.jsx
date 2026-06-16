@@ -18,11 +18,11 @@ export const AuthProvider = ({ children }) => {
         const refresh = async () => {
             try {
                 const response = await api.refresh();
-                setToken(response.access_token);
-                setUser(response.user);
-                setIsAuthenticated(true);
+                setToken(response?.access_token);
+                setUser(response?.user);
+                setIsAuthenticated(response?.authenticated);
             } catch (err) {
-                console.log("Token refresh failed", err);
+                setIsAuthenticated(false);
                 logout();
             } finally {
                 setIsLoading(false);

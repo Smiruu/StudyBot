@@ -8,6 +8,7 @@ import DashboardPage from './screens/DashboardPage';
 import RegisterPage from './screens/RegisterPage';
 import VerifyPage from './screens/VerifyPage';
 import MaterialViewPage from './screens/MaterialViewPage';
+import QuizPage from './screens/QuizPage';
 const App = () => {
 
   return (
@@ -22,6 +23,7 @@ const App = () => {
           <Route element={<DashboardLayout/>}>
             <Route path="/dashboard" element={<DashboardPage />} />
             <Route path="/dashboard/material/:id" element={<MaterialViewPage />} /> 
+            <Route path="/dashboard/quiz/:id" element={<QuizPage />} />
           </Route>
         </Routes>
       </Router>

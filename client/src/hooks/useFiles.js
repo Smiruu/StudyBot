@@ -17,7 +17,6 @@ export const useFiles = () => {
         setError(null)
         try {
             const response = await filesApi.getUserFiles(page, limit);
-            console.log(response)
             setFiles(response.data)
             setTotalItems(response.meta.total_items)
             setTotalPages(response.meta.total_pages)

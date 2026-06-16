@@ -84,3 +84,43 @@ body {
 .anim-full-page-slide-right {
   animation: fullPageSlideLeftToRight 0.6s cubic-bezier(0.16, 1, 0.3, 1) both;
 }
+
+/* Custom Waiting Room Animations */
+.pulse-glow {
+  animation: pulse-glow 3s infinite ease-in-out;
+}
+@keyframes pulse-glow {
+  0%, 100% { opacity: 0.3; transform: scale(1); }
+  50% { opacity: 0.6; transform: scale(1.1); }
+}
+
+.loader-ring {
+  border: 4px solid rgba(205, 191, 241, 0.1);
+  border-top: 4px solid #cdbff1;
+  border-radius: 50%;
+  width: 120px;
+  height: 120px;
+  animation: custom-spin 1.2s cubic-bezier(0.5, 0, 0.5, 1) infinite;
+}
+@keyframes custom-spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+.shimmer {
+  background: linear-gradient(90deg, transparent, rgba(205, 191, 241, 0.05), transparent);
+  background-size: 200% 100%;
+  animation: shimmer 2s infinite linear;
+}
+@keyframes shimmer {
+  0% { background-position: -200% 0; }
+  100% { background-position: 200% 0; }
+}
+
+.text-slide-up {
+  animation: text-slide-up 0.5s ease-out forwards;
+}
+@keyframes text-slide-up {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}

@@ -5,7 +5,7 @@ export const refresh = async (req, res) => {
     try {
         const token = req.cookies.refresh_token
         if (!token) {
-            return res.status(401).json({ error: "Unauthorized" })
+            return res.status(200).json({authenticated:false })
         }
 
         const response = await userService.refresh(token)
@@ -22,6 +22,7 @@ export const refresh = async (req, res) => {
 
         res.status(200).json({
             message: 'Refresh successful',
+            authenticated:true,
             user:
             {
                 email: response.user.email,
@@ -119,7 +120,7 @@ export const login = async (req, res) => {
         })
     } catch (error) {
         console.error("Controller Error:", error)
-        res.status(500).json({ error: error.message })
+        res.status(400).json({ error: error.message })
     }
 }
 
