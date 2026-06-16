@@ -3,7 +3,7 @@ import * as quizService from './services.js';
 export const generateQuiz = async (req, res) => {
 
     try {
-        const { material_id, question_count } = req.body;
+        const { material_id, question_count, difficulty } = req.body;
 
         if (!material_id || !question_count) {
             return res.status(400).json({ message: 'Material ID and Question Count are required' })

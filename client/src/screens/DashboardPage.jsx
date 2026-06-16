@@ -44,12 +44,12 @@ const DashboardPage = () =>{
             formData.append('files', file);
         });
 
-        try {
+        
             await uploadFiles(formData);
             setStagedFiles([]); // Clear on success
-        } catch (err) {
+        
             // Hook sets error state
-        }
+        
     };
 
     useEffect(() => {
