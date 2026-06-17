@@ -19,3 +19,12 @@ export const fetchQuizQuestions = async (quizId) => {
     const response = await api.get(`/quiz/${quizId}`)
     return response.data
 }
+
+export const submitQuiz = async (quizId, userAnswers, timeTaken) => {
+    const response = await api.post(`/quiz/${quizId}/submit`, {
+        quiz_id: quizId,
+        answers: userAnswers,
+        time_taken: timeTaken
+    })
+    return response.data
+}

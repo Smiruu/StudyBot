@@ -80,7 +80,7 @@ export const checkAnswers = async (req, res) => {
         const { quiz_id, answers, time_taken } = req.body;
         const userId = req.user.id;
 
-        const score = await quizService.scoreResults(quiz_id, answers, time_taken);
+        const score = await quizService.scoreResults(quiz_id, userId,answers, time_taken);
 
         res.status(200).json({
             message: "Score checked successfully",

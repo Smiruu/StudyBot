@@ -15,7 +15,7 @@ const QuizQuestionBlock = ({ questionData, selectedAnswer, onOptionSelect }) => 
 
             <div className="grid grid-cols-1 md:grid-cols-2 gap-5 pt-2">
                 {questionData.options.map((option, index) => {
-                    const isSelected = selectedAnswer === option;
+                    const isSelected = selectedAnswer?.answer === option;
                     const optionColors = [
                         { bg: 'bg-green-500/10', border: 'border-green-500', shadow: 'shadow-[0_0_15px_rgba(34,197,94,0.15)]', badgeBg: 'bg-green-500', text: 'text-green-400' },
                         { bg: 'bg-blue-500/10', border: 'border-blue-500', shadow: 'shadow-[0_0_15px_rgba(59,130,246,0.15)]', badgeBg: 'bg-blue-500', text: 'text-blue-400' },

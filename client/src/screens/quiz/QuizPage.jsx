@@ -18,7 +18,7 @@ const QuizPage = () => {
     const location = useLocation();
     const generatedQuiz = location.state?.quizData;
 
-    const { questions, quizTimeLimit, isLoading, error, fetchQuestions } = useQuiz();
+    const { questions, quizTimeLimit, isLoading, error, fetchQuestions, submitQuiz } = useQuiz();
 
     useEffect(() => {
         const sessionKey = `quiz_in_progress_${id}`;
@@ -56,21 +56,22 @@ const QuizPage = () => {
     const { formattedTime: totalTime } = useTimer();
     const { timeLeft, formattedTime: countdownTime, isTimeUp } = useCountdown(timeLimit);
 
-    useEffect(() => {
-        if (isTimeUp && activeQuestions && currentQuestion < activeQuestions.length - 1) {
-            setCurrentQuestion(prev => prev + 1);
-        }
-    }, [isTimeUp, activeQuestions, currentQuestion]);
-
+    
+ 
 
     const handleOptionSelect = (index) => {
         const selectedOption = activeQuestions[currentQuestion].options[index];
-
+        const questionId = activeQuestions[currentQuestion].question_id;
+    
         setAnswers(prev => {
             const newAnswers = [...prev];
-            newAnswers[currentQuestion] = selectedOption;
+            newAnswers[currentQuestion] = {
+                question_id: questionId,
+                answer: selectedOption
+            };
             return newAnswers;
         });
+        console.log(answers)
     };
     const handleQuestionNav = (val) => {
         if (val === 'prev' && currentQuestion > 0) {
@@ -79,6 +80,30 @@ const QuizPage = () => {
             setCurrentQuestion(currentQuestion + 1);
         }
     }
+
+    const handleQuizSubmit = async (isAutoSubmit = false) => {
+        if (!isAutoSubmit && answers.filter(a => a !== undefined).length !== activeQuestions.length) {
+            alert("Please answer all questions before submitting.");
+            return;
+        }
+        
+        const timeTaken = totalTime;
+        console.log(answers)
+        const result = await submitQuiz(id, answers, timeTaken);
+
+        if(result) {
+            alert(isAutoSubmit ? "Time is up! Quiz automatically submitted." : "Quiz submitted successfully!");
+            navigate("/dashboard");
+        }
+    }
+
+    useEffect(() => {
+        if (isTimeUp) {
+            handleQuizSubmit(true);
+        }
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [isTimeUp]);
+
     if (isLoading && !generatedQuiz) {
         return <div className="flex items-center justify-center min-h-[80vh]">
             <LoadingScreen title="Preparing your Quiz..." subtitle="Upping our brain juice..." />
@@ -122,6 +147,8 @@ const QuizPage = () => {
                         currentQuestion={currentQuestion} 
                         totalQuestions={activeQuestions.length} 
                         onNav={handleQuestionNav} 
+                        onSubmit={handleQuizSubmit}
+                        isSubmitDisabled={answers.filter(a => a !== undefined).length !== activeQuestions.length}
                     />
                 </div>
             </main>

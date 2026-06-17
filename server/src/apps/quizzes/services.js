@@ -178,31 +178,36 @@ export const getQuizQuestions = async (quizId) => {
     return { questions, time_limit };
 }
 
-export const scoreResults = async (quizId, userAnswers, time_taken) => {
+export const scoreResults = async (quizId, userId, userAnswers, time_taken) => {
+
+    const [minutes, seconds] = time_taken.split(':').map(Number);
+    const totalSeconds = minutes * 60 + seconds;
     const { data: questions, error: questionError } = await supabaseAdmin
         .from('questions')
         .select('id, correct_answer')
         .eq('quiz_id', quizId);
 
     if (questionError) throw new Error(questionError.message);
-
+    console.log(userAnswers)
     let score = 0;
 
     questions.forEach((data) => {
-        const matchingAnswerToQuestion = userAnswers.find((answer) => answer.question_id === data.id);
+        const matchingAnswerToQuestion = userAnswers.find((answer) => answer && answer.question_id === data.id);
 
-        if (matchingAnswerToQuestion.answer == data.correct_answer) {
+        if (matchingAnswerToQuestion && matchingAnswerToQuestion.answer == data.correct_answer) {
             score++
         }
     })
 
     const { error: saveError } = await supabaseAdmin
         .from('quiz_attempts')
-        .update({
+        .insert({
+            quiz_id: quizId,
+            user_id: userId,
             score: score,
-            time_taken: time_taken
+            time_taken: totalSeconds
         })
-        .eq('id', quizId)
+      
 
     if (saveError) throw new Error(saveError.message)
 

@@ -50,12 +50,26 @@ export const useQuiz = () => {
             setIsLoading(false)
         }
     },[])
+
+    const submitQuiz = async(quizId, userAnswers, timeTaken) => {
+        setIsLoading(true)
+        setError(null)
+        try {
+            const result = await quizApi.submitQuiz(quizId, userAnswers, timeTaken)
+            return result
+        } catch (error) {
+            setError(error.response?.data?.message || error.message || 'An error occurred')
+        } finally {
+            setIsLoading(false)
+        }
+    }
     return {
         quizzes,
         questions,
         quizTimeLimit,
         isLoading,
         error,
+        submitQuiz,
         fetchQuestions,
         generateQuiz,
         fetchQuizzes
