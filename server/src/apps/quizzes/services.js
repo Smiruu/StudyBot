@@ -62,7 +62,7 @@ export const generateQuizWithAI = async (rawText, questionCount, maxRetries = 3)
             "questions": [
                 {
                 "question": "The text of the question?",
-                "options": ["Option A", "Option B", "Option C", "Option D"],
+                "options": ["Option A", "Option B", "Option C", "Option D"], (STRICTLY 4 OPTIONS)
                 "correct_answer": "Option B",
                 "explanation": "A short, encouraging explanation of why Option B is correct based on the text."
                 }
@@ -102,14 +102,17 @@ export const generateQuizWithAI = async (rawText, questionCount, maxRetries = 3)
     }
 }
 
-export const saveQuizToDatabase = async (userId, materialId, title, questions) => {
- 
+export const saveQuizToDatabase = async (userId, materialId, title, questions, time_limit, question_count) => {
+
+    const finalTimeLimit = time_limit * question_count;
+
     const { data: quiz, error: quizError } = await supabaseAdmin
         .from('quizzes')
         .insert({
             user_id: userId,
             material_id: materialId,
             title: title,
+            time_limit: finalTimeLimit
         })
         .select('id')
         .single();
@@ -136,65 +139,72 @@ export const saveQuizToDatabase = async (userId, materialId, title, questions) =
         throw new Error(questionsError.message)
     }
 
-    return quiz.id;
+    return { quiz_id: quiz.id, time_limit: finalTimeLimit };
 }
 
 export const getQuizzesFromDatabase = async (userId, materialId) => {
 
     const { data, error } = await supabaseAdmin
         .from('quizzes')
-        .select('id, title, created_at, score, questions(count)')
+        .select('id, title, created_at, questions(count), quiz_attempts(score)')
         .eq('material_id', materialId)
         .eq('user_id', userId)
         .order('created_at', { ascending: false })
-        
+
 
     if (error) throw new Error(error.message)
-    console.log(data)
+
     return data
 
 }
 
 export const getQuizQuestions = async (quizId) => {
-    const {data, error} = await supabaseAdmin
-    .from('questions')
-    .select('id, question_text, options')
-    .eq('quiz_id', quizId)
-    
-    if(error) throw new Error(error.message);
-    return {
-        question: data.question_text,
-        options: data.options,
-        question_id: data.id
-    };
+    const { data, error } = await supabaseAdmin
+        .from('questions')
+        .select('id, question_text, options, quizzes(time_limit)')
+        .eq('quiz_id', quizId)
+
+
+    if (error) throw new Error(error.message);
+
+    const time_limit = data.length > 0 ? data[0].quizzes?.time_limit : 0;
+
+    const questions = data.map(item => ({
+        question_id: item.id,
+        question: item.question_text,
+        options: item.options
+    }));
+
+    return { questions, time_limit };
 }
 
-export const scoreResults = async (quizId,userAnswers) => {
-    const {data: questions, error: questionError} = await supabaseAdmin
-    .from('questions')
-    .select('id, correct_answer')
-    .eq('quiz_id', quizId);
+export const scoreResults = async (quizId, userAnswers, time_taken) => {
+    const { data: questions, error: questionError } = await supabaseAdmin
+        .from('questions')
+        .select('id, correct_answer')
+        .eq('quiz_id', quizId);
 
-    if(questionError) throw new Error(questionError.message);
+    if (questionError) throw new Error(questionError.message);
 
     let score = 0;
 
     questions.forEach((data) => {
         const matchingAnswerToQuestion = userAnswers.find((answer) => answer.question_id === data.id);
-        
+
         if (matchingAnswerToQuestion.answer == data.correct_answer) {
             score++
         }
     })
 
-    const {error: saveError} = await supabaseAdmin
-    .from('quizzes')
-    .update({
-        score:score
-    })
-    .eq('id', quizId)
+    const { error: saveError } = await supabaseAdmin
+        .from('quiz_attempts')
+        .update({
+            score: score,
+            time_taken: time_taken
+        })
+        .eq('id', quizId)
 
-    if(saveError) throw new Error(saveError.message)
-    
+    if (saveError) throw new Error(saveError.message)
+
     return score
 }

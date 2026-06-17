@@ -1,14 +1,14 @@
 import { useState } from 'react'
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-import LandingPage from './screens/LandingPage';
-import LoginPage from './screens/LoginPage';
+import LandingPage from './screens/public/LandingPage';
+import LoginPage from './screens/auth/LoginPage';
 import {AuthProvider} from './context/authContext';
-import DashboardLayout from './components/DashboardLayout';
-import DashboardPage from './screens/DashboardPage';
-import RegisterPage from './screens/RegisterPage';
-import VerifyPage from './screens/VerifyPage';
-import MaterialViewPage from './screens/MaterialViewPage';
-import QuizPage from './screens/QuizPage';
+import DashboardLayout from './components/layout/DashboardLayout';
+import DashboardPage from './screens/dashboard/DashboardPage';
+import RegisterPage from './screens/auth/RegisterPage';
+import VerifyPage from './screens/auth/VerifyPage';
+import MaterialViewPage from './screens/dashboard/MaterialViewPage';
+import QuizPage from './screens/quiz/QuizPage';
 const App = () => {
 
   return (

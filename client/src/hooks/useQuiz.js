@@ -4,15 +4,16 @@ import { useState, useCallback } from "react";
 export const useQuiz = () => {
     const [quizzes, setQuizzes] = useState([])
     const [questions, setQuestions] = useState([])
+    const [quizTimeLimit, setQuizTimeLimit] = useState(0)
     const [isLoading, setIsLoading] = useState(false)
     const [error, setError] = useState(null)
   
 
-    const generateQuiz = useCallback(async(materialId, count, difficulty) => {
+    const generateQuiz = useCallback(async(materialId, count, difficulty, timeLimit = 0) => {
         setIsLoading(true)
         setError(null)
         try {
-            const result = await quizApi.generateQuiz(materialId, count, difficulty)
+            const result = await quizApi.generateQuiz(materialId, count, difficulty, timeLimit)
             return result
         } catch (error) {
             setError(error.response?.data?.message || error.message || 'An error occurred')
@@ -40,7 +41,9 @@ export const useQuiz = () => {
         setError(null)
         try {
             const response = await quizApi.fetchQuizQuestions(quizId)
+            
             setQuestions(response.questions)
+            setQuizTimeLimit(response.time_limit || 0)
         } catch (error) {
             setError(error.response?.data?.message || error.message || 'An error occurred')
         } finally {
@@ -50,6 +53,7 @@ export const useQuiz = () => {
     return {
         quizzes,
         questions,
+        quizTimeLimit,
         isLoading,
         error,
         fetchQuestions,

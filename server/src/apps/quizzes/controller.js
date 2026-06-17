@@ -3,7 +3,7 @@ import * as quizService from './services.js';
 export const generateQuiz = async (req, res) => {
 
     try {
-        const { material_id, question_count, difficulty } = req.body;
+        const { material_id, question_count, difficulty, time_limit } = req.body;
 
         if (!material_id || !question_count) {
             return res.status(400).json({ message: 'Material ID and Question Count are required' })
@@ -21,7 +21,7 @@ export const generateQuiz = async (req, res) => {
 
         const generatedQuiz = await quizService.generateQuizWithAI(rawText, question_count);
 
-        const quizId = await quizService.saveQuizToDatabase(userId, material_id, generatedQuiz.title, generatedQuiz.questions);
+        const {quiz_id, time_limit:final_time_limit} = await quizService.saveQuizToDatabase(userId, material_id, generatedQuiz.title, generatedQuiz.questions, time_limit, question_count);
 
         const sanitizedQuestions = generatedQuiz.questions.map(q => ({
             question: q.question,
@@ -29,8 +29,9 @@ export const generateQuiz = async (req, res) => {
         }))
         return res.status(201).json({
             status: "success",
-            quiz_id: quizId,
-            questions: sanitizedQuestions
+            quiz_id: quiz_id,
+            questions: sanitizedQuestions,
+            time_limit: final_time_limit
         });
 
 
@@ -61,10 +62,12 @@ export const fetchQuiz = async (req, res) => {
     try {
         const { quiz_id } = req.params
 
-        const questions = await quizService.getQuizQuestions(quiz_id)
+        const { questions, time_limit } = await quizService.getQuizQuestions(quiz_id)
+        
         res.status(200).json({
             message: "Quiz fetched successfully",
-            questions
+            questions,
+            time_limit
         })
     } catch (error) {
         console.error("Controller Error:", error)
@@ -74,9 +77,10 @@ export const fetchQuiz = async (req, res) => {
 
 export const checkAnswers = async (req, res) => {
     try {
-        const { quiz_id, answers } = req.body;
+        const { quiz_id, answers, time_taken } = req.body;
+        const userId = req.user.id;
 
-        const score = await quizService.scoreResults(quiz_id, answers);
+        const score = await quizService.scoreResults(quiz_id, answers, time_taken);
 
         res.status(200).json({
             message: "Score checked successfully",
