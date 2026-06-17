@@ -60,7 +60,7 @@ const DashboardPage = () =>{
         <main className="flex-1  min-h-screen relative z-0 bg-dashboard-bg text-white font-sans p-6 md:p-12 pb-24">
             <div className="max-w-[1100px] mx-auto space-y-6">
                 {/* Page Header */}
-                <div>
+                <div className="anim-slide-up">
                     <h2 className="text-3xl md:text-4xl font-extrabold mb-2 tracking-tight">Welcome User!</h2>
                     <p className="text-base text-dashboard-text-secondary max-w-2xl">
                         Upload, organize, and manage your documents for AI analysis. Your centralized knowledge base is ready.
@@ -68,7 +68,7 @@ const DashboardPage = () =>{
                 </div>
 
                 {/* Section A: Upload Zone */}
-                <section className="space-y-4">
+                <section className="space-y-4 anim-slide-up-delay-1">
                     {/* Dropzone */}
                     <input 
                         type="file" 
@@ -131,7 +131,7 @@ const DashboardPage = () =>{
                 </section>
 
                 {/* Section B: Materials Library */}
-                <section className="space-y-4 pt-4">
+                <section className="space-y-4 pt-4 anim-slide-up-delay-2">
                     {/* Library Header & Controls */}
                     <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
                         <h3 className="text-2xl font-bold">Materials Library</h3>
@@ -171,7 +171,7 @@ const DashboardPage = () =>{
                                 <Link 
                                     key={file.id} 
                                     to={`/dashboard/material/${file.id}`}
-                                    className="bg-dashboard-card rounded-2xl p-5 hover:-translate-y-1 hover:shadow-2xl transition-all duration-300 flex flex-col h-full shadow-lg block"
+                                    className="bg-dashboard-card rounded-2xl p-5 hover:-translate-y-1 hover:shadow-2xl transition-all duration-300 flex flex-col h-full shadow-lg block anim-fade-in"
                                 >
                                     <div className="mb-4 flex items-center justify-center w-10 h-10 bg-dashboard-icon-bg rounded-lg">
                                         <span className="material-symbols-outlined text-dashboard-cyan text-xl">

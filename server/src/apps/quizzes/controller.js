@@ -61,10 +61,10 @@ export const fetchQuiz = async (req, res) => {
     try {
         const { quiz_id } = req.params
 
-        const quiz = await quizService.getQuizQuestions(quiz_id)
+        const questions = await quizService.getQuizQuestions(quiz_id)
         res.status(200).json({
             message: "Quiz fetched successfully",
-            quiz
+            questions
         })
     } catch (error) {
         console.error("Controller Error:", error)

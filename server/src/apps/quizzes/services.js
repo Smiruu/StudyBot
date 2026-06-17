@@ -143,10 +143,11 @@ export const getQuizzesFromDatabase = async (userId, materialId) => {
 
     const { data, error } = await supabaseAdmin
         .from('quizzes')
-        .select('id, title, created_at, score')
+        .select('id, title, created_at, score, questions(count)')
         .eq('material_id', materialId)
         .eq('user_id', userId)
         .order('created_at', { ascending: false })
+        
 
     if (error) throw new Error(error.message)
     console.log(data)
@@ -161,7 +162,11 @@ export const getQuizQuestions = async (quizId) => {
     .eq('quiz_id', quizId)
     
     if(error) throw new Error(error.message);
-    return data;
+    return {
+        question: data.question_text,
+        options: data.options,
+        question_id: data.id
+    };
 }
 
 export const scoreResults = async (quizId,userAnswers) => {

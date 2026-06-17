@@ -29,21 +29,24 @@ const MaterialViewPage = () => {
         fetchFile();
     }, [id]);
 
-    if(fileLoading){
-        return <LoadingScreen title="Loading Material" subtitle="Studybot is loading your material..." />
+    if(fileLoading || !material){
+        return (
+            <div className="flex items-center justify-center min-h-[80vh]">
+                <LoadingScreen title="Loading Material" subtitle="Studybot is loading your material..." />
+            </div>
+        );
     }
     if(quizLoading){
-        return <LoadingScreen title="Generating Knowledge Check" subtitle="Studybot is scanning your document to create a custom quiz..." />
+        return (
+            <div className="flex items-center justify-center min-h-[80vh]">
+                <LoadingScreen title="Generating Knowledge Check" subtitle="Studybot is scanning your document to create a custom quiz..." />
+            </div>
+        );
     }
-
-
-
-
-    
 
     return (
         <section className="min-h-full lg:h-full flex flex-col space-y-4 lg:space-y-6 p-4 md:p-6 lg:p-8 animate-in slide-in-from-right-10 duration-500" id="split-view">
-            <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 shrink-0">
+            <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 shrink-0 anim-slide-up">
                 <div className="flex items-center gap-2 sm:gap-4 overflow-hidden">
                     <button
                         className="flex items-center gap-1 sm:gap-2 text-primary hover:bg-primary/10 px-2 sm:px-3 py-1.5 rounded-lg transition-colors shrink-0"
@@ -62,11 +65,11 @@ const MaterialViewPage = () => {
             </div>
             <div className="flex-1 grid grid-cols-1 lg:grid-cols-2 gap-4 lg:gap-6 min-h-0 pb-6 lg:pb-0">
 
-                <div className="bg-surface-container-lowest rounded-2xl border border-outline-variant overflow-hidden flex flex-col relative">
+                <div className="bg-surface-container-lowest rounded-2xl border border-outline-variant overflow-hidden flex flex-col relative anim-slide-up-delay-1">
                     <FileViewer material={material} />
                 </div>
 
-                <div className="bg-surface-container-high rounded-2xl border border-outline-variant flex flex-col overflow-hidden h-full">
+                <div className="bg-surface-container-high rounded-2xl border border-outline-variant flex flex-col overflow-hidden h-full anim-slide-up-delay-2">
                     <div className="flex border-b border-outline-variant">
                         <button
                             className={`flex-1 py-4 font-bold transition-all ${activeTab === 'quiz' ? 'text-primary border-b-2 border-primary' : 'text-outline hover:text-on-surface'}`}
@@ -81,7 +84,7 @@ const MaterialViewPage = () => {
                             Study Guide
                         </button>
                     </div>
-                    <div className="flex-1 overflow-y-auto custom-scrollbar p-6">
+                    <div className="flex-1 overflow-y-auto custom-scrollbar p-6 anim-fade-in" key={activeTab}>
                         {activeTab === 'quiz' && <AIQuiz materialId={id} />}
                         {activeTab === 'guide' && <StudyGuide materialId={id} />}
                     </div>

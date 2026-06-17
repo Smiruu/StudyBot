@@ -8,3 +8,13 @@ export const generateQuiz = async (materialId, questionCount, difficulty) => {
     })
     return response.data
 }
+
+export const getQuizzesByMaterialId = async (materialId) => {
+    const response = await api.get(`/quiz/${materialId}/quizzes`)
+    return response.data
+}
+
+export const fetchQuizQuestions = async (quizId) => {
+    const response = await api.get(`/quiz/${quizId}`)
+    return response.data
+}

@@ -5,7 +5,8 @@ import { useAuth } from '../context/authContext';
 const Navbar = ({ isOpen, setIsOpen }) => {
     const location = useLocation();
 
-    const { user, logout } = useAuth();
+    const { user, logout } = useAuth();
+
     const isActive = (path) => {
         return location.pathname === path
             ? "bg-[#2A2635] text-[#FDCF11] font-bold"
@@ -38,11 +39,6 @@ const Navbar = ({ isOpen, setIsOpen }) => {
                 <li>
                     <Link to="/dashboard" className={`flex items-center py-3 px-4 rounded-2xl transition-colors ${isActive('/dashboard')}`}>
                         <span className="material-symbols-outlined mr-3 text-[22px]">book</span> Dashboard
-                    </Link>
-                </li>
-                <li>
-                    <Link to="/quizzes" className={`flex items-center py-3 px-4 rounded-2xl transition-colors ${isActive('/quizzes')}`}>
-                        <span className="material-symbols-outlined mr-3 text-[22px]">quiz</span> Quizzes
                     </Link>
                 </li>
                 <li>
