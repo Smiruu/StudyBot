@@ -9,4 +9,5 @@ router.post('/generate',verifyUser, quizController.generateQuiz)
 router.get('/:material_id/quizzes', verifyUser, quizController.fetchQuizzes)
 router.get('/:quiz_id', verifyUser, quizController.fetchQuiz)
 router.post('/:quiz_id/submit', verifyUser, quizController.checkAnswers)
+router.get('/:attemptId', verifyUser, quizController.getAttempt)
 export default router;

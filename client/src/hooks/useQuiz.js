@@ -63,12 +63,27 @@ export const useQuiz = () => {
             setIsLoading(false)
         }
     }
+
+    const fetchAttempt = useCallback(async(attemptId) => {
+        setIsLoading(true)
+        setError(null)
+        try {
+            const result = await quizApi.fetchAttempt(attemptId)
+            return result
+        } catch (error) {
+            setError(error.response?.data?.message || error.message || 'An error occurred')
+        } finally {
+            setIsLoading(false)
+        }
+    },[])
+    
     return {
         quizzes,
         questions,
         quizTimeLimit,
         isLoading,
         error,
+        fetchAttempt,
         submitQuiz,
         fetchQuestions,
         generateQuiz,

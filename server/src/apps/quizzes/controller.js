@@ -77,17 +77,35 @@ export const fetchQuiz = async (req, res) => {
 
 export const checkAnswers = async (req, res) => {
     try {
-        const { quiz_id, answers, time_taken } = req.body;
+        const quiz_id = req.params.quiz_id
+        const { answers, time_taken } = req.body;
         const userId = req.user.id;
 
-        const score = await quizService.scoreResults(quiz_id, userId,answers, time_taken);
+        const results = await quizService.scoreResults(quiz_id, userId,answers, time_taken);
 
         res.status(200).json({
             message: "Score checked successfully",
-            score
+            results
         })
 
 
+    } catch (error) {
+        console.error("Controller Error:", error)
+        res.status(500).json({ error: error.message })
+    }
+}
+
+export const getAttempt = async (req,res) => {
+    try {
+        const {attemptId} = req.params;
+        const userId = req.user.id;
+
+        const results = await quizService.getQuizAttempt(attemptId, userId);
+
+        res.status(200).json({
+            message: "Attempt fetched successfully",
+            results
+        })
     } catch (error) {
         console.error("Controller Error:", error)
         res.status(500).json({ error: error.message })

@@ -179,37 +179,105 @@ export const getQuizQuestions = async (quizId) => {
 }
 
 export const scoreResults = async (quizId, userId, userAnswers, time_taken) => {
-
+    //Parse time
     const [minutes, seconds] = time_taken.split(':').map(Number);
     const totalSeconds = minutes * 60 + seconds;
+
     const { data: questions, error: questionError } = await supabaseAdmin
         .from('questions')
-        .select('id, correct_answer')
+        .select('id, question_text, correct_answer, explanation') 
         .eq('quiz_id', quizId);
 
     if (questionError) throw new Error(questionError.message);
-    console.log(userAnswers)
+
     let score = 0;
 
-    questions.forEach((data) => {
-        const matchingAnswerToQuestion = userAnswers.find((answer) => answer && answer.question_id === data.id);
+    // Get score and match them
+    const gradedQuestions = questions.map((q) => {
+        
+        const userPick = userAnswers.find((answer) => answer && answer.question_id === q.id);
+        const userAnswerText = userPick ? userPick.answer : "No Answer";
+        
+        const isCorrect = userAnswerText === q.correct_answer;
+        if (isCorrect) score++;
 
-        if (matchingAnswerToQuestion && matchingAnswerToQuestion.answer == data.correct_answer) {
-            score++
-        }
-    })
+        
+        return {
+            id: q.id,
+            question_text: q.question_text,
+            correct_answer: q.correct_answer,
+            user_answer: userAnswerText,
+            explanation: q.explanation,
+            is_correct: isCorrect
+        };
+    });
 
-    const { error: saveError } = await supabaseAdmin
+    const finalPercentage = Math.round((score / questions.length) * 100);
+
+    const { data: quizAttempt, error: saveError } = await supabaseAdmin
         .from('quiz_attempts')
         .insert({
             quiz_id: quizId,
             user_id: userId,
-            score: score,
-            time_taken: totalSeconds
+            score: finalPercentage, 
+            time_taken: totalSeconds,
+            user_answers: userAnswers 
         })
-      
+        .select('id, time_taken, created_at')
+        .single();
 
-    if (saveError) throw new Error(saveError.message)
+    if (saveError) throw new Error(saveError.message);
 
-    return score
+    
+    return {
+        attempt_info: quizAttempt,
+        score: finalPercentage,
+        questions: gradedQuestions 
+    };
 }
+
+export const getQuizAttempt = async (attemptId, userId) => {
+   
+    const { data: attempt, error: attemptError } = await supabaseAdmin
+        .from('quiz_attempts')
+        .select('*')
+        .eq('id', attemptId)
+        .eq('user_id', userId)
+        .single();
+
+    if (attemptError) throw new Error(attemptError.message);
+    if (!attempt) throw new Error("Quiz attempt not found.");
+
+    
+    const { data: questions, error: questionError } = await supabaseAdmin
+        .from('questions')
+        .select('id, question_text, correct_answer, explanation')
+        .eq('quiz_id', attempt.quiz_id);
+
+    if (questionError) throw new Error(questionError.message);
+
+    const gradedQuestions = questions.map((q) => {
+        const userPick = attempt.user_answers.find((answer) => answer && answer.question_id === q.id);
+        const userAnswerText = userPick ? userPick.answer : "No Answer";
+        
+        return {
+            id: q.id,
+            question_text: q.question_text,
+            correct_answer: q.correct_answer,
+            user_answer: userAnswerText,
+            explanation: q.explanation,
+            is_correct: userAnswerText === q.correct_answer
+        };
+    });
+
+    
+    return {
+        attempt_info: {
+            id: attempt.id,
+            time_taken: attempt.time_taken,
+            created_at: attempt.created_at
+        },
+        score: attempt.score,
+        questions: gradedQuestions
+    };
+};

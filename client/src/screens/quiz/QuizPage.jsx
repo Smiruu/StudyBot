@@ -71,8 +71,9 @@ const QuizPage = () => {
             };
             return newAnswers;
         });
-        console.log(answers)
+        
     };
+
     const handleQuestionNav = (val) => {
         if (val === 'prev' && currentQuestion > 0) {
             setCurrentQuestion(currentQuestion - 1);
@@ -88,12 +89,12 @@ const QuizPage = () => {
         }
         
         const timeTaken = totalTime;
-        console.log(answers)
+        
         const result = await submitQuiz(id, answers, timeTaken);
 
         if(result) {
             alert(isAutoSubmit ? "Time is up! Quiz automatically submitted." : "Quiz submitted successfully!");
-            navigate("/dashboard");
+            navigate(`/dashboard/score/${result.results.attempt_info.id}`, { state: { results: result.results } });
         }
     }
 

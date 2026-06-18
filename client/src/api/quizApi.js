@@ -28,3 +28,8 @@ export const submitQuiz = async (quizId, userAnswers, timeTaken) => {
     })
     return response.data
 }
+
+export const fetchAttempt = async(attemptId) => {
+    const response = await api.get(`/quiz/${attemptId}`)
+    return response.data
+}
